@@ -117,7 +117,8 @@ class GFLocalization(Localization,GaussianFilter):
         xk_bar = x0
         zk = None
         zf, Rf = self.GetFeatures()  
-        xk_1, Pk_1 = self.AddNewFeatures(xk_1,Pk_1, zf, Rf)  # initialize the map with the first observation
+        if len(zf) > 0:
+            xk_1, Pk_1 = self.AddNewFeatures(xk_1,Pk_1, zf, Rf)  # initialize the map with the first observation
 
         xsk_1 = self.robot.xsk_1
         # self.kSteps +=1  # to include the last step in the loop
@@ -129,6 +130,8 @@ class GFLocalization(Localization,GaussianFilter):
             xk_1 = xk
             Pk_1 = Pk
             xk_bar = self.xk_bar
+
+            # self.Log(xsk, xk, Pk, xk_bar, zk)  # log the results
         
         self.PlotXY(estimation=True)  # plot the robot trajectory
         self.PlotState()  # plot the state estimation results

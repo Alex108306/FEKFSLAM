@@ -198,18 +198,21 @@ class FEKFSLAM(FEKFMBL):
         """
 
        ## To be completed by the student
+        self.uk = uk
+        self.Qk = Qk
+
         number_of_robot_states = self.xB_dim
-        number_of_feature_states = int((len(xk_1) - number_of_robot_states)/self.zfi_dim)
+        number_of_feature_states = int((len(xk_1) - number_of_robot_states)/self.xF_dim)
         xk_bar = xk_1.copy()
 
         x_robot_1 = self.GetRobotPose(xk_1)
         x_robot_pred = self.f(x_robot_1, uk)
-
+        
         xk_bar[0:number_of_robot_states, 0] = x_robot_pred[0:number_of_robot_states, 0]
         Jfx = self.Jfx(x_robot_1)
         Jfw = self.Jfw(x_robot_1)
-        F1k = block_diag(*[Jfx, np.eye(int(number_of_feature_states * 2))])
-        F2k = np.vstack((Jfw, *[np.zeros((self.zfi_dim, number_of_robot_states))] * number_of_feature_states))
+        F1k = block_diag(*[Jfx, *[np.eye(self.xF_dim)] * number_of_feature_states])
+        F2k = np.vstack((Jfw, *[np.zeros((self.xF_dim, number_of_robot_states))] * number_of_feature_states))
         Pk_bar = F1k @ Pk_1 @ F1k.T + F2k @ Qk @ F2k.T
         
         return xk_bar, Pk_bar

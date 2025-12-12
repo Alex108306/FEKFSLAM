@@ -290,7 +290,7 @@ class FEKFMBL(GFLocalization, MapFeature):
                 Rnp.append(Rf[i])
 
         if len(zp) == 0:
-            return [], [], [], [], [], []
+            return [], [], [], [], znp, Rnp
         zp = np.vstack(zp)
         Rp = block_diag(*Rp)
         Hp = np.vstack(Hp)

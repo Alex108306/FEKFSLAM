@@ -80,7 +80,6 @@ class EKF(GaussianFilter):
         self.xk_bar = self.f(self.xk_1, uk)
         Ak = self.Jfx(self.xk_1)
         Wk = self.Jfw(self.xk_1)
-
         self.Pk_bar = Ak @ self.Pk_1 @ Ak.T + Wk @ self.Qk @ Wk.T
 
         return self.xk_bar, self.Pk_bar
@@ -109,7 +108,8 @@ class EKF(GaussianFilter):
         I = np.eye(self.Pk_bar.shape[0])
         Kk = self.Pk_bar @ Hk.T @ np.linalg.inv(Hk @ self.Pk_bar @ Hk.T + Vk @ self.Rk @ Vk.T)
         self.xk = xk_bar + Kk @ (self.zk - self.h(xk_bar))
-        self.Pk = (I - Kk @ Hk) @ Pk_bar @ (I - Kk @ Hk).T
+        self.Pk = (I - Kk @ Hk) @ Pk_bar @ (I - Kk @ Hk).T + Kk @ (Vk @ Rk @ Vk.T) @ Kk.T
         
+        self.Pk = 0.5 * (self.Pk + self.Pk.T)
 
         return self.xk, self.Pk
