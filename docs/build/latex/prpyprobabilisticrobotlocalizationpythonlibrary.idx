@@ -1,0 +1,257 @@
+\indexentry{Pose (class in Pose)@\spxentry{Pose}\spxextra{class in Pose}|hyperpage}{3}
+\indexentry{oplus() (Pose.Pose method)@\spxentry{oplus()}\spxextra{Pose.Pose method}|hyperpage}{3}
+\indexentry{J\_1oplus() (Pose.Pose method)@\spxentry{J\_1oplus()}\spxextra{Pose.Pose method}|hyperpage}{3}
+\indexentry{J\_2oplus() (Pose.Pose method)@\spxentry{J\_2oplus()}\spxextra{Pose.Pose method}|hyperpage}{3}
+\indexentry{ominus() (Pose.Pose method)@\spxentry{ominus()}\spxextra{Pose.Pose method}|hyperpage}{5}
+\indexentry{J\_ominus() (Pose.Pose method)@\spxentry{J\_ominus()}\spxextra{Pose.Pose method}|hyperpage}{5}
+\indexentry{boxplus() (Pose.Pose method)@\spxentry{boxplus()}\spxextra{Pose.Pose method}|hyperpage}{5}
+\indexentry{J\_1boxplus() (Pose.Pose method)@\spxentry{J\_1boxplus()}\spxextra{Pose.Pose method}|hyperpage}{5}
+\indexentry{J\_2boxplus() (Pose.Pose method)@\spxentry{J\_2boxplus()}\spxextra{Pose.Pose method}|hyperpage}{5}
+\indexentry{Pose3D (class in Pose)@\spxentry{Pose3D}\spxextra{class in Pose}|hyperpage}{6}
+\indexentry{\_\_init\_\_() (Pose.Pose3D method)@\spxentry{\_\_init\_\_()}\spxextra{Pose.Pose3D method}|hyperpage}{6}
+\indexentry{oplus() (Pose.Pose3D method)@\spxentry{oplus()}\spxextra{Pose.Pose3D method}|hyperpage}{6}
+\indexentry{J\_1oplus() (Pose.Pose3D method)@\spxentry{J\_1oplus()}\spxextra{Pose.Pose3D method}|hyperpage}{6}
+\indexentry{J\_2oplus() (Pose.Pose3D method)@\spxentry{J\_2oplus()}\spxextra{Pose.Pose3D method}|hyperpage}{6}
+\indexentry{ominus() (Pose.Pose3D method)@\spxentry{ominus()}\spxextra{Pose.Pose3D method}|hyperpage}{8}
+\indexentry{J\_ominus() (Pose.Pose3D method)@\spxentry{J\_ominus()}\spxextra{Pose.Pose3D method}|hyperpage}{8}
+\indexentry{Pose4D (class in Pose)@\spxentry{Pose4D}\spxextra{class in Pose}|hyperpage}{8}
+\indexentry{\_\_init\_\_() (Pose.Pose4D method)@\spxentry{\_\_init\_\_()}\spxextra{Pose.Pose4D method}|hyperpage}{8}
+\indexentry{oplus() (Pose.Pose4D method)@\spxentry{oplus()}\spxextra{Pose.Pose4D method}|hyperpage}{8}
+\indexentry{J\_1oplus() (Pose.Pose4D method)@\spxentry{J\_1oplus()}\spxextra{Pose.Pose4D method}|hyperpage}{10}
+\indexentry{J\_2oplus() (Pose.Pose4D method)@\spxentry{J\_2oplus()}\spxextra{Pose.Pose4D method}|hyperpage}{10}
+\indexentry{ominus() (Pose.Pose4D method)@\spxentry{ominus()}\spxextra{Pose.Pose4D method}|hyperpage}{10}
+\indexentry{J\_ominus() (Pose.Pose4D method)@\spxentry{J\_ominus()}\spxextra{Pose.Pose4D method}|hyperpage}{10}
+\indexentry{Feature (class in Feature)@\spxentry{Feature}\spxextra{class in Feature}|hyperpage}{11}
+\indexentry{\_\_init\_\_() (Feature.Feature method)@\spxentry{\_\_init\_\_()}\spxextra{Feature.Feature method}|hyperpage}{11}
+\indexentry{boxplus() (Feature.Feature method)@\spxentry{boxplus()}\spxextra{Feature.Feature method}|hyperpage}{11}
+\indexentry{J\_1boxplus() (Feature.Feature method)@\spxentry{J\_1boxplus()}\spxextra{Feature.Feature method}|hyperpage}{11}
+\indexentry{J\_2boxplus() (Feature.Feature method)@\spxentry{J\_2boxplus()}\spxextra{Feature.Feature method}|hyperpage}{12}
+\indexentry{ToCartesian() (Feature.Feature method)@\spxentry{ToCartesian()}\spxextra{Feature.Feature method}|hyperpage}{12}
+\indexentry{J\_2c() (Feature.Feature method)@\spxentry{J\_2c()}\spxextra{Feature.Feature method}|hyperpage}{12}
+\indexentry{CartesianFeature (class in Feature)@\spxentry{CartesianFeature}\spxextra{class in Feature}|hyperpage}{12}
+\indexentry{boxplus() (Feature.CartesianFeature method)@\spxentry{boxplus()}\spxextra{Feature.CartesianFeature method}|hyperpage}{12}
+\indexentry{J\_1boxplus() (Feature.CartesianFeature method)@\spxentry{J\_1boxplus()}\spxextra{Feature.CartesianFeature method}|hyperpage}{14}
+\indexentry{J\_2boxplus() (Feature.CartesianFeature method)@\spxentry{J\_2boxplus()}\spxextra{Feature.CartesianFeature method}|hyperpage}{14}
+\indexentry{ToCartesian() (Feature.CartesianFeature method)@\spxentry{ToCartesian()}\spxextra{Feature.CartesianFeature method}|hyperpage}{14}
+\indexentry{J\_2c() (Feature.CartesianFeature method)@\spxentry{J\_2c()}\spxextra{Feature.CartesianFeature method}|hyperpage}{14}
+\indexentry{PolarFeature (class in Feature)@\spxentry{PolarFeature}\spxextra{class in Feature}|hyperpage}{14}
+\indexentry{boxplus() (Feature.PolarFeature method)@\spxentry{boxplus()}\spxextra{Feature.PolarFeature method}|hyperpage}{14}
+\indexentry{J\_1boxplus() (Feature.PolarFeature method)@\spxentry{J\_1boxplus()}\spxextra{Feature.PolarFeature method}|hyperpage}{16}
+\indexentry{J\_2boxplus() (Feature.PolarFeature method)@\spxentry{J\_2boxplus()}\spxextra{Feature.PolarFeature method}|hyperpage}{16}
+\indexentry{ToCartesian() (Feature.PolarFeature method)@\spxentry{ToCartesian()}\spxextra{Feature.PolarFeature method}|hyperpage}{16}
+\indexentry{J\_2c() (Feature.PolarFeature method)@\spxentry{J\_2c()}\spxextra{Feature.PolarFeature method}|hyperpage}{16}
+\indexentry{p2c() (in module conversions)@\spxentry{p2c()}\spxextra{in module conversions}|hyperpage}{17}
+\indexentry{J\_p2c() (in module conversions)@\spxentry{J\_p2c()}\spxextra{in module conversions}|hyperpage}{17}
+\indexentry{c2p() (in module conversions)@\spxentry{c2p()}\spxextra{in module conversions}|hyperpage}{17}
+\indexentry{J\_c2p() (in module conversions)@\spxentry{J\_c2p()}\spxextra{in module conversions}|hyperpage}{17}
+\indexentry{s2c() (in module conversions)@\spxentry{s2c()}\spxextra{in module conversions}|hyperpage}{18}
+\indexentry{J\_s2c() (in module conversions)@\spxentry{J\_s2c()}\spxextra{in module conversions}|hyperpage}{18}
+\indexentry{c2s() (in module conversions)@\spxentry{c2s()}\spxextra{in module conversions}|hyperpage}{19}
+\indexentry{J\_c2s() (in module conversions)@\spxentry{J\_c2s()}\spxextra{in module conversions}|hyperpage}{19}
+\indexentry{v2v() (in module conversions)@\spxentry{v2v()}\spxextra{in module conversions}|hyperpage}{19}
+\indexentry{J\_v2v() (in module conversions)@\spxentry{J\_v2v()}\spxextra{in module conversions}|hyperpage}{19}
+\indexentry{SimulatedRobot (class in SimulatedRobot)@\spxentry{SimulatedRobot}\spxextra{class in SimulatedRobot}|hyperpage}{20}
+\indexentry{dt (SimulatedRobot.SimulatedRobot attribute)@\spxentry{dt}\spxextra{SimulatedRobot.SimulatedRobot attribute}|hyperpage}{20}
+\indexentry{\_\_init\_\_() (SimulatedRobot.SimulatedRobot method)@\spxentry{\_\_init\_\_()}\spxextra{SimulatedRobot.SimulatedRobot method}|hyperpage}{20}
+\indexentry{PlotRobot() (SimulatedRobot.SimulatedRobot method)@\spxentry{PlotRobot()}\spxextra{SimulatedRobot.SimulatedRobot method}|hyperpage}{21}
+\indexentry{fs() (SimulatedRobot.SimulatedRobot method)@\spxentry{fs()}\spxextra{SimulatedRobot.SimulatedRobot method}|hyperpage}{21}
+\indexentry{SetMap() (SimulatedRobot.SimulatedRobot method)@\spxentry{SetMap()}\spxextra{SimulatedRobot.SimulatedRobot method}|hyperpage}{21}
+\indexentry{\_PlotSample() (SimulatedRobot.SimulatedRobot method)@\spxentry{\_PlotSample()}\spxextra{SimulatedRobot.SimulatedRobot method}|hyperpage}{21}
+\indexentry{DifferentialDriveSimulatedRobot (class in DifferentialDriveSimulatedRobot)@\spxentry{DifferentialDriveSimulatedRobot}\spxextra{class in DifferentialDriveSimulatedRobot}|hyperpage}{22}
+\indexentry{\_\_init\_\_() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{\_\_init\_\_()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{22}
+\indexentry{fs() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{fs()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{22}
+\indexentry{ReadEncoders() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{ReadEncoders()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{24}
+\indexentry{ReadCompass() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{ReadCompass()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{24}
+\indexentry{ReadCartesian2DFeature() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{ReadCartesian2DFeature()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{24}
+\indexentry{ReadPolar2DFeature() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{ReadPolar2DFeature()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{25}
+\indexentry{ReadRanges() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{ReadRanges()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{25}
+\indexentry{PlotRobot() (DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method)@\spxentry{PlotRobot()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}|hyperpage}{25}
+\indexentry{AUV4DOFSimulatedRobot (class in AUV4DOFSimulatedRobot)@\spxentry{AUV4DOFSimulatedRobot}\spxextra{class in AUV4DOFSimulatedRobot}|hyperpage}{25}
+\indexentry{dt (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot attribute)@\spxentry{dt}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot attribute}|hyperpage}{25}
+\indexentry{\_\_init\_\_() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{\_\_init\_\_()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{25}
+\indexentry{PlotRobot() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{PlotRobot()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{25}
+\indexentry{fs() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{fs()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{25}
+\indexentry{SetMap() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{SetMap()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{27}
+\indexentry{ReadGyro() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadGyro()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{27}
+\indexentry{ReadCompass() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadCompass()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{27}
+\indexentry{ReadDVL() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadDVL()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{27}
+\indexentry{ReadDepth() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadDepth()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{27}
+\indexentry{ReadUSBL() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadUSBL()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{28}
+\indexentry{ReadSpherical3DFeature() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadSpherical3DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{28}
+\indexentry{ReadCartesian2DFeature() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadCartesian2DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{28}
+\indexentry{ReadPolar2DFeature() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadPolar2DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{28}
+\indexentry{ReadRanges() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadRanges()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{28}
+\indexentry{ReadCartesian3DFeature() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{ReadCartesian3DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{28}
+\indexentry{\_PlotSample() (AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method)@\spxentry{\_PlotSample()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}|hyperpage}{29}
+\indexentry{HF (class in HF)@\spxentry{HF}\spxextra{class in HF}|hyperpage}{29}
+\indexentry{\_\_init\_\_() (HF.HF method)@\spxentry{\_\_init\_\_()}\spxextra{HF.HF method}|hyperpage}{29}
+\indexentry{ToCell() (HF.HF method)@\spxentry{ToCell()}\spxextra{HF.HF method}|hyperpage}{30}
+\indexentry{StateTransitionProbability() (HF.HF method)@\spxentry{StateTransitionProbability()}\spxextra{HF.HF method}|hyperpage}{30}
+\indexentry{StateTransitionProbability\_4\_uk() (HF.HF method)@\spxentry{StateTransitionProbability\_4\_uk()}\spxextra{HF.HF method}|hyperpage}{30}
+\indexentry{MeasurementProbability() (HF.HF method)@\spxentry{MeasurementProbability()}\spxextra{HF.HF method}|hyperpage}{30}
+\indexentry{uk2cell() (HF.HF method)@\spxentry{uk2cell()}\spxextra{HF.HF method}|hyperpage}{30}
+\indexentry{Prediction() (HF.HF method)@\spxentry{Prediction()}\spxextra{HF.HF method}|hyperpage}{30}
+\indexentry{Update() (HF.HF method)@\spxentry{Update()}\spxextra{HF.HF method}|hyperpage}{31}
+\indexentry{Histogram2D (class in Histogram)@\spxentry{Histogram2D}\spxextra{class in Histogram}|hyperpage}{31}
+\indexentry{\_\_init\_\_() (Histogram.Histogram2D method)@\spxentry{\_\_init\_\_()}\spxextra{Histogram.Histogram2D method}|hyperpage}{31}
+\indexentry{histogram\_2d (Histogram.Histogram2D property)@\spxentry{histogram\_2d}\spxextra{Histogram.Histogram2D property}|hyperpage}{31}
+\indexentry{histogram\_1d (Histogram.Histogram2D property)@\spxentry{histogram\_1d}\spxextra{Histogram.Histogram2D property}|hyperpage}{31}
+\indexentry{plot\_histogram() (Histogram.Histogram2D method)@\spxentry{plot\_histogram()}\spxextra{Histogram.Histogram2D method}|hyperpage}{31}
+\indexentry{element (Histogram.Histogram2D property)@\spxentry{element}\spxextra{Histogram.Histogram2D property}|hyperpage}{31}
+\indexentry{KF (class in KF)@\spxentry{KF}\spxextra{class in KF}|hyperpage}{32}
+\indexentry{\_\_init\_\_() (KF.KF method)@\spxentry{\_\_init\_\_()}\spxextra{KF.KF method}|hyperpage}{32}
+\indexentry{Prediction() (KF.KF method)@\spxentry{Prediction()}\spxextra{KF.KF method}|hyperpage}{32}
+\indexentry{Update() (KF.KF method)@\spxentry{Update()}\spxextra{KF.KF method}|hyperpage}{33}
+\indexentry{EKF (class in EKF)@\spxentry{EKF}\spxextra{class in EKF}|hyperpage}{33}
+\indexentry{\_\_init\_\_() (EKF.EKF method)@\spxentry{\_\_init\_\_()}\spxextra{EKF.EKF method}|hyperpage}{33}
+\indexentry{f() (EKF.EKF method)@\spxentry{f()}\spxextra{EKF.EKF method}|hyperpage}{33}
+\indexentry{Jfx() (EKF.EKF method)@\spxentry{Jfx()}\spxextra{EKF.EKF method}|hyperpage}{33}
+\indexentry{Jfw() (EKF.EKF method)@\spxentry{Jfw()}\spxextra{EKF.EKF method}|hyperpage}{35}
+\indexentry{h() (EKF.EKF method)@\spxentry{h()}\spxextra{EKF.EKF method}|hyperpage}{35}
+\indexentry{hm() (EKF.EKF method)@\spxentry{hm()}\spxextra{EKF.EKF method}|hyperpage}{35}
+\indexentry{Prediction() (EKF.EKF method)@\spxentry{Prediction()}\spxextra{EKF.EKF method}|hyperpage}{35}
+\indexentry{Update() (EKF.EKF method)@\spxentry{Update()}\spxextra{EKF.EKF method}|hyperpage}{36}
+\indexentry{Localization (class in Localization)@\spxentry{Localization}\spxextra{class in Localization}|hyperpage}{36}
+\indexentry{\_\_init\_\_() (Localization.Localization method)@\spxentry{\_\_init\_\_()}\spxextra{Localization.Localization method}|hyperpage}{36}
+\indexentry{GetInput() (Localization.Localization method)@\spxentry{GetInput()}\spxextra{Localization.Localization method}|hyperpage}{37}
+\indexentry{Localize() (Localization.Localization method)@\spxentry{Localize()}\spxextra{Localization.Localization method}|hyperpage}{37}
+\indexentry{LocalizationLoop() (Localization.Localization method)@\spxentry{LocalizationLoop()}\spxextra{Localization.Localization method}|hyperpage}{37}
+\indexentry{Log() (Localization.Localization method)@\spxentry{Log()}\spxextra{Localization.Localization method}|hyperpage}{37}
+\indexentry{PlotXY() (Localization.Localization method)@\spxentry{PlotXY()}\spxextra{Localization.Localization method}|hyperpage}{37}
+\indexentry{PlotTrajectory() (Localization.Localization method)@\spxentry{PlotTrajectory()}\spxextra{Localization.Localization method}|hyperpage}{37}
+\indexentry{DR\_4DOFAUV\_DVLGyro (class in DR\_4DOFAUV\_DVLGyro)@\spxentry{DR\_4DOFAUV\_DVLGyro}\spxextra{class in DR\_4DOFAUV\_DVLGyro}|hyperpage}{37}
+\indexentry{\_\_init\_\_() (DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method)@\spxentry{\_\_init\_\_()}\spxextra{DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method}|hyperpage}{37}
+\indexentry{Localize() (DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method)@\spxentry{Localize()}\spxextra{DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method}|hyperpage}{39}
+\indexentry{GetInput() (DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method)@\spxentry{GetInput()}\spxextra{DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method}|hyperpage}{39}
+\indexentry{DR\_3DOFDifferentialDrive (class in DR\_3DOFDifferentialDrive)@\spxentry{DR\_3DOFDifferentialDrive}\spxextra{class in DR\_3DOFDifferentialDrive}|hyperpage}{39}
+\indexentry{\_\_init\_\_() (DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method)@\spxentry{\_\_init\_\_()}\spxextra{DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method}|hyperpage}{39}
+\indexentry{Localize() (DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method)@\spxentry{Localize()}\spxextra{DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method}|hyperpage}{39}
+\indexentry{GetInput() (DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method)@\spxentry{GetInput()}\spxextra{DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method}|hyperpage}{39}
+\indexentry{GL (class in GL)@\spxentry{GL}\spxextra{class in GL}|hyperpage}{41}
+\indexentry{\_\_init\_\_() (GL.GL method)@\spxentry{\_\_init\_\_()}\spxextra{GL.GL method}|hyperpage}{42}
+\indexentry{GetMeasurements() (GL.GL method)@\spxentry{GetMeasurements()}\spxextra{GL.GL method}|hyperpage}{42}
+\indexentry{StateTransitionProbability\_4\_uk() (GL.GL method)@\spxentry{StateTransitionProbability\_4\_uk()}\spxextra{GL.GL method}|hyperpage}{42}
+\indexentry{StateTransitionProbability() (GL.GL method)@\spxentry{StateTransitionProbability()}\spxextra{GL.GL method}|hyperpage}{42}
+\indexentry{MeasurementProbability() (GL.GL method)@\spxentry{MeasurementProbability()}\spxextra{GL.GL method}|hyperpage}{42}
+\indexentry{GetInput() (GL.GL method)@\spxentry{GetInput()}\spxextra{GL.GL method}|hyperpage}{42}
+\indexentry{uk2cell() (GL.GL method)@\spxentry{uk2cell()}\spxextra{GL.GL method}|hyperpage}{43}
+\indexentry{LocalizationLoop() (GL.GL method)@\spxentry{LocalizationLoop()}\spxextra{GL.GL method}|hyperpage}{43}
+\indexentry{Localize() (GL.GL method)@\spxentry{Localize()}\spxextra{GL.GL method}|hyperpage}{43}
+\indexentry{GL\_4DOFAUV (class in GL\_4DOFAUV)@\spxentry{GL\_4DOFAUV}\spxextra{class in GL\_4DOFAUV}|hyperpage}{43}
+\indexentry{\_\_init\_\_() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{\_\_init\_\_()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{43}
+\indexentry{GetMeasurements() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{GetMeasurements()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{45}
+\indexentry{StateTransitionProbability\_4\_uk() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{StateTransitionProbability\_4\_uk()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{45}
+\indexentry{StateTransitionProbability\_4\_xk\_1\_uk() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{StateTransitionProbability\_4\_xk\_1\_uk()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{45}
+\indexentry{StateTransitionProbability() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{StateTransitionProbability()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{45}
+\indexentry{uk2cell() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{uk2cell()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{45}
+\indexentry{MeasurementProbability() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{MeasurementProbability()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{46}
+\indexentry{GetInput() (GL\_4DOFAUV.GL\_4DOFAUV method)@\spxentry{GetInput()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}|hyperpage}{46}
+\indexentry{GL\_3DOFDifferentialDrive (class in GL\_3DOFDifferentialDrive)@\spxentry{GL\_3DOFDifferentialDrive}\spxextra{class in GL\_3DOFDifferentialDrive}|hyperpage}{46}
+\indexentry{\_\_init\_\_() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{\_\_init\_\_()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{46}
+\indexentry{GetMeasurements() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{GetMeasurements()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{48}
+\indexentry{StateTransitionProbability\_4\_uk() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{StateTransitionProbability\_4\_uk()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{48}
+\indexentry{StateTransitionProbability\_4\_xk\_1\_uk() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{StateTransitionProbability\_4\_xk\_1\_uk()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{48}
+\indexentry{StateTransitionProbability() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{StateTransitionProbability()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{48}
+\indexentry{uk2cell() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{uk2cell()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{48}
+\indexentry{MeasurementProbability() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{MeasurementProbability()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{48}
+\indexentry{GetInput() (GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method)@\spxentry{GetInput()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}|hyperpage}{49}
+\indexentry{GFLocalization (class in GFLocalization)@\spxentry{GFLocalization}\spxextra{class in GFLocalization}|hyperpage}{49}
+\indexentry{\_\_init\_\_() (GFLocalization.GFLocalization method)@\spxentry{\_\_init\_\_()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{49}
+\indexentry{GetInput() (GFLocalization.GFLocalization method)@\spxentry{GetInput()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{49}
+\indexentry{GetMeasurements() (GFLocalization.GFLocalization method)@\spxentry{GetMeasurements()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{Localize() (GFLocalization.GFLocalization method)@\spxentry{Localize()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{LocalizationLoop() (GFLocalization.GFLocalization method)@\spxentry{LocalizationLoop()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{Log() (GFLocalization.GFLocalization method)@\spxentry{Log()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{PlotState() (GFLocalization.GFLocalization method)@\spxentry{PlotState()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{PlotXY() (GFLocalization.GFLocalization method)@\spxentry{PlotXY()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{PlotRobotUncertainty() (GFLocalization.GFLocalization method)@\spxentry{PlotRobotUncertainty()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{PlotUncertainty() (GFLocalization.GFLocalization method)@\spxentry{PlotUncertainty()}\spxextra{GFLocalization.GFLocalization method}|hyperpage}{51}
+\indexentry{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM (class in EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM)@\spxentry{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM}\spxextra{class in EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM}|hyperpage}{52}
+\indexentry{\_\_init\_\_() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{\_\_init\_\_()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{52}
+\indexentry{f() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{f()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{52}
+\indexentry{Jfx() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{Jfx()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{52}
+\indexentry{Jfw() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{Jfw()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{52}
+\indexentry{hm() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{hm()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{54}
+\indexentry{Jhmx() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{Jhmx()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{54}
+\indexentry{Jhmv() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{Jhmv()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{54}
+\indexentry{GetInput() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{GetInput()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{54}
+\indexentry{GetMeasurements() (EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method)@\spxentry{GetMeasurements()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}|hyperpage}{54}
+\indexentry{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM (class in EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM)@\spxentry{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM}\spxextra{class in EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM}|hyperpage}{55}
+\indexentry{\_\_init\_\_() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{\_\_init\_\_()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{55}
+\indexentry{f() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{f()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{55}
+\indexentry{Jfx() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{Jfx()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{55}
+\indexentry{Jfw() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{Jfw()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{55}
+\indexentry{hm() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{hm()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{57}
+\indexentry{Jhmx() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{Jhmx()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{57}
+\indexentry{Jhmv() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{Jhmv()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{57}
+\indexentry{GetInput() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{GetInput()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{57}
+\indexentry{GetMeasurements() (EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method)@\spxentry{GetMeasurements()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}|hyperpage}{57}
+\indexentry{EKF\_3DOFDifferentialDriveInputDisplacement (class in EKF\_3DOFDifferentialDriveInputDisplacement)@\spxentry{EKF\_3DOFDifferentialDriveInputDisplacement}\spxextra{class in EKF\_3DOFDifferentialDriveInputDisplacement}|hyperpage}{57}
+\indexentry{\_\_init\_\_() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{\_\_init\_\_()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{59}
+\indexentry{GetInput() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{GetInput()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{59}
+\indexentry{f() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{f()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{59}
+\indexentry{Jfx() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{Jfx()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{59}
+\indexentry{Jfw() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{Jfw()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{59}
+\indexentry{hm() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{hm()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{60}
+\indexentry{GetMeasurements() (EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method)@\spxentry{GetMeasurements()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}|hyperpage}{60}
+\indexentry{EKF\_3DOFDifferentialDriveCtVelocity (class in EKF\_3DOFDifferentialDriveCtVelocity)@\spxentry{EKF\_3DOFDifferentialDriveCtVelocity}\spxextra{class in EKF\_3DOFDifferentialDriveCtVelocity}|hyperpage}{60}
+\indexentry{\_\_init\_\_() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{\_\_init\_\_()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{60}
+\indexentry{f() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{f()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{60}
+\indexentry{Jfx() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{Jfx()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{60}
+\indexentry{Jfw() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{Jfw()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{62}
+\indexentry{hm() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{hm()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{62}
+\indexentry{GetInput() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{GetInput()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{62}
+\indexentry{GetMeasurements() (EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method)@\spxentry{GetMeasurements()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}|hyperpage}{62}
+\indexentry{MapFeature (class in MapFeature)@\spxentry{MapFeature}\spxextra{class in MapFeature}|hyperpage}{62}
+\indexentry{\_\_init\_\_() (MapFeature.MapFeature method)@\spxentry{\_\_init\_\_()}\spxextra{MapFeature.MapFeature method}|hyperpage}{63}
+\indexentry{GetFeatures() (MapFeature.MapFeature method)@\spxentry{GetFeatures()}\spxextra{MapFeature.MapFeature method}|hyperpage}{63}
+\indexentry{s2o() (MapFeature.MapFeature method)@\spxentry{s2o()}\spxextra{MapFeature.MapFeature method}|hyperpage}{64}
+\indexentry{o2s() (MapFeature.MapFeature method)@\spxentry{o2s()}\spxextra{MapFeature.MapFeature method}|hyperpage}{64}
+\indexentry{J\_s2o() (MapFeature.MapFeature method)@\spxentry{J\_s2o()}\spxextra{MapFeature.MapFeature method}|hyperpage}{64}
+\indexentry{J\_o2s() (MapFeature.MapFeature method)@\spxentry{J\_o2s()}\spxextra{MapFeature.MapFeature method}|hyperpage}{64}
+\indexentry{hf() (MapFeature.MapFeature method)@\spxentry{hf()}\spxextra{MapFeature.MapFeature method}|hyperpage}{64}
+\indexentry{Jhfx() (MapFeature.MapFeature method)@\spxentry{Jhfx()}\spxextra{MapFeature.MapFeature method}|hyperpage}{65}
+\indexentry{Jhfv() (MapFeature.MapFeature method)@\spxentry{Jhfv()}\spxextra{MapFeature.MapFeature method}|hyperpage}{65}
+\indexentry{hfj() (MapFeature.MapFeature method)@\spxentry{hfj()}\spxextra{MapFeature.MapFeature method}|hyperpage}{66}
+\indexentry{Jhfjx() (MapFeature.MapFeature method)@\spxentry{Jhfjx()}\spxextra{MapFeature.MapFeature method}|hyperpage}{66}
+\indexentry{g() (MapFeature.MapFeature method)@\spxentry{g()}\spxextra{MapFeature.MapFeature method}|hyperpage}{67}
+\indexentry{Jgx() (MapFeature.MapFeature method)@\spxentry{Jgx()}\spxextra{MapFeature.MapFeature method}|hyperpage}{67}
+\indexentry{Jgv() (MapFeature.MapFeature method)@\spxentry{Jgv()}\spxextra{MapFeature.MapFeature method}|hyperpage}{67}
+\indexentry{GetRobotPose() (MapFeature.MapFeature method)@\spxentry{GetRobotPose()}\spxextra{MapFeature.MapFeature method}|hyperpage}{68}
+\indexentry{Cartesian2DMapFeature (class in MapFeature)@\spxentry{Cartesian2DMapFeature}\spxextra{class in MapFeature}|hyperpage}{68}
+\indexentry{GetFeatures() (MapFeature.Cartesian2DMapFeature method)@\spxentry{GetFeatures()}\spxextra{MapFeature.Cartesian2DMapFeature method}|hyperpage}{68}
+\indexentry{Cartesian2DStoredPolarObservedMapFeature (class in MapFeature)@\spxentry{Cartesian2DStoredPolarObservedMapFeature}\spxextra{class in MapFeature}|hyperpage}{69}
+\indexentry{GetFeatures() (MapFeature.Cartesian2DStoredPolarObservedMapFeature method)@\spxentry{GetFeatures()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}|hyperpage}{69}
+\indexentry{o2s() (MapFeature.Cartesian2DStoredPolarObservedMapFeature method)@\spxentry{o2s()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}|hyperpage}{70}
+\indexentry{s2o() (MapFeature.Cartesian2DStoredPolarObservedMapFeature method)@\spxentry{s2o()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}|hyperpage}{70}
+\indexentry{J\_o2s() (MapFeature.Cartesian2DStoredPolarObservedMapFeature method)@\spxentry{J\_o2s()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}|hyperpage}{70}
+\indexentry{J\_s2o() (MapFeature.Cartesian2DStoredPolarObservedMapFeature method)@\spxentry{J\_s2o()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}|hyperpage}{70}
+\indexentry{FEKFMBL (class in FEKFMBL)@\spxentry{FEKFMBL}\spxextra{class in FEKFMBL}|hyperpage}{70}
+\indexentry{\_\_init\_\_() (FEKFMBL.FEKFMBL method)@\spxentry{\_\_init\_\_()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{70}
+\indexentry{h() (FEKFMBL.FEKFMBL method)@\spxentry{h()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{72}
+\indexentry{SquaredMahalanobisDistance() (FEKFMBL.FEKFMBL method)@\spxentry{SquaredMahalanobisDistance()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{72}
+\indexentry{IndividualCompatibility() (FEKFMBL.FEKFMBL method)@\spxentry{IndividualCompatibility()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{72}
+\indexentry{ICNN() (FEKFMBL.FEKFMBL method)@\spxentry{ICNN()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{72}
+\indexentry{DataAssociation() (FEKFMBL.FEKFMBL method)@\spxentry{DataAssociation()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{73}
+\indexentry{Localize() (FEKFMBL.FEKFMBL method)@\spxentry{Localize()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{73}
+\indexentry{StackMeasurementsAndFeatures() (FEKFMBL.FEKFMBL method)@\spxentry{StackMeasurementsAndFeatures()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{73}
+\indexentry{SplitFeatures() (FEKFMBL.FEKFMBL method)@\spxentry{SplitFeatures()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{74}
+\indexentry{PlotFeatureObservationUncertainty() (FEKFMBL.FEKFMBL method)@\spxentry{PlotFeatureObservationUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{74}
+\indexentry{PlotExpectedFeaturesObservationsUncertainty() (FEKFMBL.FEKFMBL method)@\spxentry{PlotExpectedFeaturesObservationsUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{74}
+\indexentry{PlotSampleObservationSpace() (FEKFMBL.FEKFMBL method)@\spxentry{PlotSampleObservationSpace()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{74}
+\indexentry{PlotSample() (FEKFMBL.FEKFMBL method)@\spxentry{PlotSample()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{74}
+\indexentry{PlotRobotUncertainty() (FEKFMBL.FEKFMBL method)@\spxentry{PlotRobotUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{75}
+\indexentry{PlotUncertainty() (FEKFMBL.FEKFMBL method)@\spxentry{PlotUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{75}
+\indexentry{GetRobotState() (FEKFMBL.FEKFMBL method)@\spxentry{GetRobotState()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{75}
+\indexentry{SetRobotState() (FEKFMBL.FEKFMBL method)@\spxentry{SetRobotState()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{75}
+\indexentry{GetRobotStateCovariance() (FEKFMBL.FEKFMBL method)@\spxentry{GetRobotStateCovariance()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{75}
+\indexentry{SetRobotStateCovariance() (FEKFMBL.FEKFMBL method)@\spxentry{SetRobotStateCovariance()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{75}
+\indexentry{SetRobotPose() (FEKFMBL.FEKFMBL method)@\spxentry{SetRobotPose()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{76}
+\indexentry{GetRobotPoseCovariance() (FEKFMBL.FEKFMBL method)@\spxentry{GetRobotPoseCovariance()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{76}
+\indexentry{SetRobotPoseCovariance() (FEKFMBL.FEKFMBL method)@\spxentry{SetRobotPoseCovariance()}\spxextra{FEKFMBL.FEKFMBL method}|hyperpage}{76}
+\indexentry{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM (class in MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM)@\spxentry{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM}\spxextra{class in MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM}|hyperpage}{76}
+\indexentry{\_\_init\_\_() (MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM method)@\spxentry{\_\_init\_\_()}\spxextra{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM method}|hyperpage}{79}
+\indexentry{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM (class in MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM)@\spxentry{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM}\spxextra{class in MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM}|hyperpage}{79}
+\indexentry{\_\_init\_\_() (MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM method)@\spxentry{\_\_init\_\_()}\spxextra{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM method}|hyperpage}{79}
+\indexentry{MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM (class in MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM)@\spxentry{MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM}\spxextra{class in MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM}|hyperpage}{81}
+\indexentry{\_\_init\_\_() (MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM method)@\spxentry{\_\_init\_\_()}\spxextra{MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM method}|hyperpage}{81}

@@ -1,0 +1,227 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Robot Localization &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4 DOF AUV Dead REckoning using DVL and Gyro" href="DRLocalization.html" />
+    <link rel="prev" title="Localization" href="Localization_index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="DRLocalization.html" title="4 DOF AUV Dead REckoning using DVL and Gyro"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Localization_index.html" title="Localization"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" accesskey="U">Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Robot Localization</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="robot-localization">
+<h1>Robot Localization<a class="headerlink" href="#robot-localization" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Localization.png"><img alt="Localization Class Diagram" src="_images/Localization.png" style="width: 168.75px; height: 303.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="Localization.Localization">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Localization.</span></span><span class="sig-name descname"><span class="pre">Localization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Localization base class. Implements the localization algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the DRLocalization class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> – Logging index structure (<code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code>)</p></li>
+<li><p><strong>kSteps</strong> – Number of time steps to simulate</p></li>
+<li><p><strong>robot</strong> – Simulation robot object (<code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code>)</p></li>
+<li><p><strong>args</strong> – Rest of arguments to be passed to the parent constructor</p></li>
+<li><p><strong>x0</strong> – Initial Robot pose in the N-Frame</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.GetInput">
+<span class="sig-name descname"><span class="pre">GetInput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.GetInput" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the input from the robot. To be overidden by the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>uk:</strong> input variable</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.Localize">
+<span class="sig-name descname"><span class="pre">Localize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.Localize" title="Link to this definition">¶</a></dt>
+<dd><p>Single Localization iteration invoked from <code class="xref py py-meth docutils literal notranslate"><span class="pre">DRLocalization.Localization()</span></code>. Given the previous robot pose, the function reads the inout and computes the current pose.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk_1</strong> – previous robot pose</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>xk</strong> current robot pose</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.LocalizationLoop">
+<span class="sig-name descname"><span class="pre">LocalizationLoop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.LocalizationLoop" title="Link to this definition">¶</a></dt>
+<dd><p>Given an initial robot pose <span class="math notranslate nohighlight">\(x_0\)</span> and the input to the <code class="xref py py-class docutils literal notranslate"><span class="pre">SimulatedRobot</span></code> this method calls iteratively <code class="xref py py-meth docutils literal notranslate"><span class="pre">DRLocalization.Localize()</span></code> for k steps, solving the robot localization problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x0</strong> – initial robot pose</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.Log">
+<span class="sig-name descname"><span class="pre">Log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xsk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.Log" title="Link to this definition">¶</a></dt>
+<dd><p>Logs the results for later plotting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xsk</strong> – ground truth robot pose from the simulation</p></li>
+<li><p><strong>xk</strong> – estimated robot pose</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.PlotXY">
+<span class="sig-name descname"><span class="pre">PlotXY</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.PlotXY" title="Link to this definition">¶</a></dt>
+<dd><p>Plots, in a new figure, the ground truth (orange) and estimated (blue) trajectory of the robot at the end of the Localization Loop.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Localization.Localization.PlotTrajectory">
+<span class="sig-name descname"><span class="pre">PlotTrajectory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Localization.Localization.PlotTrajectory" title="Link to this definition">¶</a></dt>
+<dd><p>Plots the estimated trajectory (blue) of the robot during the localization process.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Robot Localization</a><ul>
+<li><a class="reference internal" href="#Localization.Localization"><code class="docutils literal notranslate"><span class="pre">Localization</span></code></a><ul>
+<li><a class="reference internal" href="#Localization.Localization.__init__"><code class="docutils literal notranslate"><span class="pre">Localization.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#Localization.Localization.GetInput"><code class="docutils literal notranslate"><span class="pre">Localization.GetInput()</span></code></a></li>
+<li><a class="reference internal" href="#Localization.Localization.Localize"><code class="docutils literal notranslate"><span class="pre">Localization.Localize()</span></code></a></li>
+<li><a class="reference internal" href="#Localization.Localization.LocalizationLoop"><code class="docutils literal notranslate"><span class="pre">Localization.LocalizationLoop()</span></code></a></li>
+<li><a class="reference internal" href="#Localization.Localization.Log"><code class="docutils literal notranslate"><span class="pre">Localization.Log()</span></code></a></li>
+<li><a class="reference internal" href="#Localization.Localization.PlotXY"><code class="docutils literal notranslate"><span class="pre">Localization.PlotXY()</span></code></a></li>
+<li><a class="reference internal" href="#Localization.Localization.PlotTrajectory"><code class="docutils literal notranslate"><span class="pre">Localization.PlotTrajectory()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="Localization_index.html"
+                          title="previous chapter">Localization</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="DRLocalization.html"
+                          title="next chapter">4 DOF AUV Dead REckoning using DVL and Gyro</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Localization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="DRLocalization.html" title="4 DOF AUV Dead REckoning using DVL and Gyro"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Localization_index.html" title="Localization"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" >Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Robot Localization</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>

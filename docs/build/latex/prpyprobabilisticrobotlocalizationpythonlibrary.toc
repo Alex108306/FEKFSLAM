@@ -1,0 +1,67 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}API:}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Pose Representation}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Pose}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Pose 3DOF}{6}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Pose 4DOF}{8}{subsection.1.1.3}
+\contentsline {section}{\numberline {1.2}Feature Representation}{11}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Feature}{11}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Cartesian Feature}{12}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Polar Feature}{14}{subsection.1.2.3}
+\contentsline {section}{\numberline {1.3}Coordinate Conversion Functions}{17}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Polar To Cartesian}{17}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Cartesian To Polar}{17}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Spherical To Cartesian}{18}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Cartesian To Spherical}{19}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}Identity Conversion}{19}{subsection.1.3.5}
+\contentsline {section}{\numberline {1.4}Robot Simulation}{20}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}3 DOF Diferential Drive Robot Simulation}{22}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}4 DOF AUV Robot Simulation}{25}{subsection.1.4.2}
+\contentsline {section}{\numberline {1.5}Filters}{29}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}Histogram Filter}{29}{subsection.1.5.1}
+\contentsline {subsubsection}{Histogram Filter}{29}{subsubsection*.88}
+\contentsline {subsection}{\numberline {1.5.2}Particle Filter}{31}{subsection.1.5.2}
+\contentsline {subsubsection}{Particle Filter}{31}{subsubsection*.104}
+\contentsline {subsection}{\numberline {1.5.3}Kalman Filter}{32}{subsection.1.5.3}
+\contentsline {subsubsection}{Kalman Filter}{32}{subsubsection*.105}
+\contentsline {subsection}{\numberline {1.5.4}Extended Kalman Filter}{33}{subsection.1.5.4}
+\contentsline {subsubsection}{Extended Kalman Filter}{33}{subsubsection*.110}
+\contentsline {section}{\numberline {1.6}Localization}{36}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}Robot Localization}{36}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2}Dead Reckoning}{37}{subsection.1.6.2}
+\contentsline {subsubsection}{4 DOF AUV Dead REckoning using DVL and Gyro}{37}{subsubsection*.128}
+\contentsline {subsubsection}{3 DOF Differential Drive Mobile Robot Example}{39}{subsubsection*.133}
+\contentsline {subsection}{\numberline {1.6.3}Grid Localization}{41}{subsection.1.6.3}
+\contentsline {subsubsection}{Grid Localization}{41}{subsubsection*.138}
+\contentsline {subsubsection}{4 DOF AUV}{43}{subsubsection*.149}
+\contentsline {paragraph}{AUV Grid Localization Example}{43}{paragraph*.150}
+\contentsline {subsubsection}{3 DOF Differential Drive Mobile Robot}{46}{subsubsection*.160}
+\contentsline {paragraph}{Differential Drive Grid Localization Example}{46}{paragraph*.161}
+\contentsline {subsection}{\numberline {1.6.4}Montecarlo Localization}{49}{subsection.1.6.4}
+\contentsline {subsubsection}{Montecarlo Localization}{49}{subsubsection*.171}
+\contentsline {subsection}{\numberline {1.6.5}Gaussian Filter Localization}{49}{subsection.1.6.5}
+\contentsline {subsubsection}{Gaussian Filter Localization}{49}{subsubsection*.172}
+\contentsline {subsubsection}{4 DOF AUV}{52}{subsubsection*.184}
+\contentsline {paragraph}{4 DOF AUV EKF Localization using an Input Velocity Motion Model with Depht, Yaw and Linear Velocity Measurements}{52}{paragraph*.185}
+\contentsline {paragraph}{4 DOF AUV EKF Localization using a Constant Velocity Motion Model with Depht, Yaw and Linear Velocity Measurements}{55}{paragraph*.196}
+\contentsline {subsubsection}{3 DOF Differential Drive Mobile Robot}{57}{subsubsection*.207}
+\contentsline {paragraph}{Differential Drive Grid EKF Using an Input displacement Motion Model}{57}{paragraph*.208}
+\contentsline {paragraph}{Differential Drive Grid EKF Using a Constant Velocity Motion Model}{60}{paragraph*.217}
+\contentsline {subsection}{\numberline {1.6.6}Feature Map based EKF Localzation}{62}{subsection.1.6.6}
+\contentsline {subsubsection}{Feature Map based EKF LocalIzation}{62}{subsubsection*.226}
+\contentsline {subsubsection}{Map Feature}{62}{subsubsection*.227}
+\contentsline {subsubsection}{Cartesian Map Feature}{68}{subsubsection*.244}
+\contentsline {subsubsection}{Cartesian Map Feature Observed in Polar Coordinates}{69}{subsubsection*.247}
+\contentsline {subsubsection}{Feature Map based EKF Localization}{70}{subsubsection*.254}
+\contentsline {subsubsection}{4 DOF AUV}{76}{subsubsection*.278}
+\contentsline {paragraph}{4 DOF AUV Map based EKF Localization using an Input Velocity Motion Model with Depht, Yaw and Linear Velocity Measurements, and a 2D Cartesian Feature Observation Model}{76}{paragraph*.279}
+\contentsline {subsubsection}{3 DOF Differential Drive Mobile Robot}{76}{subsubsection*.280}
+\contentsline {paragraph}{Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Cartesian Feature Observation Model}{76}{paragraph*.281}
+\contentsline {paragraph}{Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Feature Store in Cartesina and Observed in Polar Coordinates}{79}{paragraph*.284}
+\contentsline {paragraph}{Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Polar Feature Observation Model}{81}{paragraph*.287}
+\contentsline {paragraph}{Differential Drive EKF Map Based Localization EKF Using a Ct Velocity Motion Model and 2D Cartesian Feature Observation Model}{81}{paragraph*.290}
+\contentsline {section}{\numberline {1.7}Simulatenous Localization And Mapping}{81}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}Feature based EKF Simultaneous Localization And Mapping}{81}{subsection.1.7.1}
+\contentsline {subsubsection}{Feature based EKF Simultaneous Localization And Mapping}{81}{subsubsection*.291}
+\contentsline {chapter}{\numberline {2}Indices and tables}{85}{chapter.2}
+\contentsline {chapter}{Index}{87}{section*.292}

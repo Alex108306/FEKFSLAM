@@ -1,0 +1,263 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Extended Kalman Filter &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Localization" href="Localization_index.html" />
+    <link rel="prev" title="Kalman Filter" href="KF.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Localization_index.html" title="Localization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="KF.html" title="Kalman Filter"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Filters.html" accesskey="U">Filters</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Extended Kalman  Filter</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="extended-kalman-filter">
+<h1>Extended Kalman  Filter<a class="headerlink" href="#extended-kalman-filter" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/EKF.png"><img alt="Extended Kalman Filter Class Diagram" src="_images/EKF.png" style="width: 245.25px; height: 464.25px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="EKF.EKF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">EKF.</span></span><span class="sig-name descname"><span class="pre">EKF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="GF.html#GaussianFilter.GaussianFilter" title="GaussianFilter.GaussianFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianFilter</span></code></a></p>
+<p>Extended Kalman Filter class. Implements the <code class="xref py py-class docutils literal notranslate"><span class="pre">GaussianFilter</span></code> interface for the particular case of the Extended Kalman Filter.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the EKF class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x0</strong> – initial mean state vector</p></li>
+<li><p><strong>P0</strong> – initial covariance matrix</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the parent class</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.f">
+<span class="sig-name descname"><span class="pre">f</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.f" title="Link to this definition">¶</a></dt>
+<dd><p>Motion model of the EKF <strong>to be overwritten by the child class</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk_1</strong> – previous mean state vector</p></li>
+<li><p><strong>uk</strong> – input vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return xk_bar, Pk_bar<span class="colon">:</span></dt>
+<dd class="field-even"><p>predicted mean state vector and its covariance matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.Jfx">
+<span class="sig-name descname"><span class="pre">Jfx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.Jfx" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the motion model with respect to the state vector. <strong>Method to be overwritten by the child class</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk_1</strong> – Linearization point. By default the linearization point is the previous state vector taken from a class attribute.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.Jfw">
+<span class="sig-name descname"><span class="pre">Jfw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.Jfw" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the motion model with respect to the noise vector. <strong>Method to be overwritten by the child class</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk_1</strong> – Linearization point. By default the linearization point is the previous state vector taken from a class attribute.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.h">
+<span class="sig-name descname"><span class="pre">h</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.h" title="Link to this definition">¶</a></dt>
+<dd><p>The observation model of the EKF is given by:</p>
+<div class="math notranslate nohighlight" id="equation-eq-ekf-observation-model">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-ekf-observation-model" title="Link to this equation">¶</a></span>\[z_k=h(x_k,v_k)\]</div>
+<p>This method computes the mean of this direct observation model. Therefore it does not depend on v_k since it is
+a zero mean Gaussian noise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk</strong> – mean of the predicted state vector. By default it is taken from the class attribute.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>expected observation vector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.Prediction">
+<span class="sig-name descname"><span class="pre">Prediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Qk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.Prediction" title="Link to this definition">¶</a></dt>
+<dd><p>Prediction step of the EKF. It calls the motion model and its Jacobians to predict the state vector and its covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uk</strong> – input vector</p></li>
+<li><p><strong>Qk</strong> – covariance matrix of the noise vector</p></li>
+<li><p><strong>xk_1</strong> – previous mean state vector. By default it is taken from the class attribute. Otherwise it updates the class attribute.</p></li>
+<li><p><strong>Pk_1</strong> – covariance matrix of the previous state vector. By default it is taken from the class attribute. Otherwise it updates the class attribute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return xk_bar, Pk_bar<span class="colon">:</span></dt>
+<dd class="field-even"><p>predicted mean state vector and its covariance matrix. Also updated in the class attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EKF.EKF.Update">
+<span class="sig-name descname"><span class="pre">Update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xk_bar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pk_bar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EKF.EKF.Update" title="Link to this definition">¶</a></dt>
+<dd><p>Update step of the EKF. It calls the observation model and its Jacobians to update the state vector and its covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zk</strong> – observation vector</p></li>
+<li><p><strong>Rk</strong> – covariance matrix of the noise vector</p></li>
+<li><p><strong>xk_bar</strong> – predicted mean state vector.</p></li>
+<li><p><strong>Pk_bar</strong> – covariance matrix of the predicted state vector.</p></li>
+<li><p><strong>Hk</strong> – Jacobian of the observation model with respect to the state vector.</p></li>
+<li><p><strong>Vk</strong> – Jacobian of the observation model with respect to the noise vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return xk,Pk<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated mean state vector and its covariance matrix. Also updated in the class attributes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Extended Kalman  Filter</a><ul>
+<li><a class="reference internal" href="#EKF.EKF"><code class="docutils literal notranslate"><span class="pre">EKF</span></code></a><ul>
+<li><a class="reference internal" href="#EKF.EKF.__init__"><code class="docutils literal notranslate"><span class="pre">EKF.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#EKF.EKF.f"><code class="docutils literal notranslate"><span class="pre">EKF.f()</span></code></a></li>
+<li><a class="reference internal" href="#EKF.EKF.Jfx"><code class="docutils literal notranslate"><span class="pre">EKF.Jfx()</span></code></a></li>
+<li><a class="reference internal" href="#EKF.EKF.Jfw"><code class="docutils literal notranslate"><span class="pre">EKF.Jfw()</span></code></a></li>
+<li><a class="reference internal" href="#EKF.EKF.h"><code class="docutils literal notranslate"><span class="pre">EKF.h()</span></code></a></li>
+<li><a class="reference internal" href="#EKF.EKF.Prediction"><code class="docutils literal notranslate"><span class="pre">EKF.Prediction()</span></code></a></li>
+<li><a class="reference internal" href="#EKF.EKF.Update"><code class="docutils literal notranslate"><span class="pre">EKF.Update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="KF.html"
+                          title="previous chapter">Kalman Filter</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="Localization_index.html"
+                          title="next chapter">Localization</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/EKF.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Localization_index.html" title="Localization"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="KF.html" title="Kalman Filter"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Filters.html" >Filters</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Extended Kalman  Filter</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>

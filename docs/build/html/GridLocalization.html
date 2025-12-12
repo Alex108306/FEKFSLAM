@@ -1,0 +1,609 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Grid Localization &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Montecarlo Localization" href="MCLLocalization.html" />
+    <link rel="prev" title="4 DOF AUV Dead REckoning using DVL and Gyro" href="DRLocalization.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="MCLLocalization.html" title="Montecarlo Localization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="DRLocalization.html" title="4 DOF AUV Dead REckoning using DVL and Gyro"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" accesskey="U">Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Grid Localization</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="grid-localization">
+<h1>Grid Localization<a class="headerlink" href="#grid-localization" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/GL.png"><img alt="Grid Localization Class Diagram" src="_images/GL.png" style="width: 222.75px; height: 621.0px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="GL.GL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GL.</span></span><span class="sig-name descname"><span class="pre">GL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="HF.html#HF.HF" title="HF.HF"><code class="xref py py-class docutils literal notranslate"><span class="pre">HF</span></code></a></p>
+<p>Grid Localization.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the <code class="xref py py-class docutils literal notranslate"><span class="pre">GL_4DOFAUV</span></code> class. Initializes the Dead reckoning localization algorithm as well as the histogram filter algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dx_max</strong> – maximum x displacement in meters</p></li>
+<li><p><strong>dy_max</strong> – maximum y displacement in meters</p></li>
+<li><p><strong>range_dx</strong> – range of x displacements in meters</p></li>
+<li><p><strong>range_dy</strong> – range of y displacements in meters</p></li>
+<li><p><strong>p0</strong> – initial probability histogram</p></li>
+<li><p><strong>index</strong> – index struture containing plotting information</p></li>
+<li><p><strong>kSteps</strong> – number of time steps to simulate the robot motion</p></li>
+<li><p><strong>robot</strong> – robot object</p></li>
+<li><p><strong>x0</strong> – initial robot pose</p></li>
+<li><p><strong>args</strong> – additional arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.GetMeasurements">
+<span class="sig-name descname"><span class="pre">GetMeasurements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.GetMeasurements" title="Link to this definition">¶</a></dt>
+<dd><p>Read the measurements from the robot.
+This is a pure virtual method that must be implemented by the derived class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.StateTransitionProbability_4_uk">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability_4_uk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.StateTransitionProbability_4_uk" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the state transition probability matrix for the given control input <em>uk</em>.
+This is a pure virtual method that must be implemented by the derived class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uk</strong> – control input. In localization, this is commonly the robot displacement. For example, in the case of a differential drive robot, this is the robot displacement in the robot frame commonly computed through the odometry.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Puk</em> state transition probability matrix for a given uk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.StateTransitionProbability">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.StateTransitionProbability" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the complete state transition probability matrix. The matrix is a <span class="math notranslate nohighlight">\(n_u   imes m_u        imes n^2\)</span> matrix,
+where <span class="math notranslate nohighlight">\(n_u\)</span> and <span class="math notranslate nohighlight">\(m_u\)</span> are the number of possible displacements in the x and y axis, respectively, and
+<span class="math notranslate nohighlight">\(n\)</span> is the number of cells in the map. For each possible displacement <span class="math notranslate nohighlight">\(u_k\)</span>, each previous robot pose
+<span class="math notranslate nohighlight">\({x_{k-1}}\)</span> and each current robot pose <span class="math notranslate nohighlight">\({x_k}\)</span>, the probability <span class="math notranslate nohighlight">\(p(x_k|x_{k-1},u_k)\)</span> is computed.
+This is a pure virtual method that must be implemented by the derived class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>state transition probability matrix <span class="math notranslate nohighlight">\(P_k=p{x_k|x_{k-1},uk}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.MeasurementProbability">
+<span class="sig-name descname"><span class="pre">MeasurementProbability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.MeasurementProbability" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the measurement probability histogram given the robot pose <span class="math notranslate nohighlight">\(\eta_k\)</span> and the measurement <span class="math notranslate nohighlight">\(z_k\)</span>.
+Method to be overriden by the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>zk</strong> – vector of measurements</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Measurement probability histogram <span class="math notranslate nohighlight">\(p_z=p(z_k | \eta_k)\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.GetInput">
+<span class="sig-name descname"><span class="pre">GetInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.GetInput" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the number of cells the robot has displaced along its DOFs in the world N-Frame.
+Method to be overriden by the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>usk</strong> – control input of the robot simulation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>uk: vector containing the number of cells the robot has displaced in all the axis of the world N-Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.uk2cell">
+<span class="sig-name descname"><span class="pre">uk2cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.uk2cell" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uk</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.LocalizationLoop">
+<span class="sig-name descname"><span class="pre">LocalizationLoop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.LocalizationLoop" title="Link to this definition">¶</a></dt>
+<dd><p>Given an initial robot pose <span class="math notranslate nohighlight">\(x_0\)</span> and the input to the <code class="xref py py-class docutils literal notranslate"><span class="pre">AUV4DOFSimulatedRobot.SimulatedRobot</span></code> this method calls iteratively <code class="xref py py-meth docutils literal notranslate"><span class="pre">GL_4DOFAUV.Localize()</span></code> for k steps, solving the robot localization problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p0</strong> – initial robot pose</p></li>
+<li><p><strong>usk</strong> – control input of the robot simulation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL.GL.Localize">
+<span class="sig-name descname"><span class="pre">Localize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pxk_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL.GL.Localize" title="Link to this definition">¶</a></dt>
+<dd><p>Overrides the parent method <code class="xref py py-meth docutils literal notranslate"><span class="pre">DR_4DOFAUV_DVLGyro.Localize()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pxk_1</strong> – histogram of the previous robot position</p></li>
+<li><p><strong>uk</strong> – robot displacement in number of cells in the world N-Frame</p></li>
+<li><p><strong>zk</strong> – vector containing the measurements of the robot position in the world N-Frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pk: histogram of the robot position after the prediction and the update steps</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dof-auv">
+<h1>4 DOF AUV<a class="headerlink" href="#dof-auv" title="Link to this heading">¶</a></h1>
+<section id="auv-grid-localization-example">
+<h2>AUV Grid Localization Example<a class="headerlink" href="#auv-grid-localization-example" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/GL_4DOFAUV.png"><img alt="Grid Localization Class Diagram" src="_images/GL_4DOFAUV.png" style="width: 561.75px; height: 896.25px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GL_4DOFAUV.</span></span><span class="sig-name descname"><span class="pre">GL_4DOFAUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#GL.GL" title="GL.GL"><code class="xref py py-class docutils literal notranslate"><span class="pre">GL</span></code></a>, <a class="reference internal" href="DRLocalization.html#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro" title="DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro"><code class="xref py py-class docutils literal notranslate"><span class="pre">DR_4DOFAUV_DVLGyro</span></code></a></p>
+<p>Grid Reckoning Localization for a 4 DOF AUV.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the <a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV" title="GL_4DOFAUV.GL_4DOFAUV"><code class="xref py py-class docutils literal notranslate"><span class="pre">GL_4DOFAUV</span></code></a> class. Initializes the Dead reckoning localization algorithm as well as the histogram filter algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dx_max</strong> – maximum x displacement in meters</p></li>
+<li><p><strong>dy_max</strong> – maximum y displacement in meters</p></li>
+<li><p><strong>range_dx</strong> – range of x displacements in meters</p></li>
+<li><p><strong>range_dy</strong> – range of y displacements in meters</p></li>
+<li><p><strong>p0</strong> – initial probability histogram</p></li>
+<li><p><strong>index</strong> – index struture containing plotting information</p></li>
+<li><p><strong>kSteps</strong> – number of time steps to simulate the robot motion</p></li>
+<li><p><strong>robot</strong> – robot object</p></li>
+<li><p><strong>x0</strong> – initial robot pose</p></li>
+<li><p><strong>args</strong> – additional arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.GetMeasurements">
+<span class="sig-name descname"><span class="pre">GetMeasurements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.GetMeasurements" title="Link to this definition">¶</a></dt>
+<dd><p>Read the measurements from the robot. Returns a vector of range distances to the map features.
+Only those features that are within the <code class="xref py py-attr docutils literal notranslate"><span class="pre">SimulatedRobot.SimulatedRobot.Distance_max_range</span></code> of the sensor are returned.
+The measurements arribe at a frequency defined in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">SimulatedRobot.SimulatedRobot.Distance_feature_reading_frequency</span></code> attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vector of distances to the map features</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability_4_uk">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability_4_uk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability_4_uk" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the state transition probability matrix for the given control input <em>uk</em>.
+This is a pure virtual method that must be implemented by the derived class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uk</strong> – control input. In localization, this is commonly the robot displacement. For example, in the case of a differential drive robot, this is the robot displacement in the robot frame commonly computed through the odometry.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Puk</em> state transition probability matrix for a given uk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability_4_xk_1_uk">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability_4_xk_1_uk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etak_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability_4_xk_1_uk" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the state transition probability histogram given the previous robot pose <span class="math notranslate nohighlight">\(\eta_{k-1}\)</span> and the input <span class="math notranslate nohighlight">\(u_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p(\eta_k | \eta_{k-1}, u_k)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etak_1</strong> – previous robot pose in cells</p></li>
+<li><p><strong>uk</strong> – input displacement in number of cells</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>state transition probability <span class="math notranslate nohighlight">\(p(\eta_k | \eta_{k-1}, u_k)\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the complete state transition probability matrix. The matrix is a <span class="math notranslate nohighlight">\(n_u   imes m_u        imes n^2\)</span> matrix,
+where <span class="math notranslate nohighlight">\(n_u\)</span> and <span class="math notranslate nohighlight">\(m_u\)</span> are the number of possible displacements in the x and y axis, respectively, and
+<span class="math notranslate nohighlight">\(n\)</span> is the number of cells in the map. For each possible displacement <span class="math notranslate nohighlight">\(u_k\)</span>, each previous robot pose
+<span class="math notranslate nohighlight">\({x_{k-1}}\)</span> and each current robot pose <span class="math notranslate nohighlight">\({x_k}\)</span>, the probability <span class="math notranslate nohighlight">\(p(x_k|x_{k-1},u_k)\)</span> is computed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>state transition probability matrix <span class="math notranslate nohighlight">\(P_k=p{x_k|x_{k-1},uk}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.uk2cell">
+<span class="sig-name descname"><span class="pre">uk2cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.uk2cell" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uk</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.MeasurementProbability">
+<span class="sig-name descname"><span class="pre">MeasurementProbability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.MeasurementProbability" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the measurement probability histogram given the robot pose <span class="math notranslate nohighlight">\(\eta_k\)</span> and the measurement <span class="math notranslate nohighlight">\(z_k\)</span>.
+In this case the the measurement is the vector of the distances to the landmarks in the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>zk</strong> – <span class="math notranslate nohighlight">\(z_k=[r_0~r_1~..r_k]\)</span> where <span class="math notranslate nohighlight">\(r_i\)</span> is the distance to the i-th landmark in the map.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Measurement probability histogram <span class="math notranslate nohighlight">\(p_z=p(z_k | \eta_k)\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_4DOFAUV.GL_4DOFAUV.GetInput">
+<span class="sig-name descname"><span class="pre">GetInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_4DOFAUV.GL_4DOFAUV.GetInput" title="Link to this definition">¶</a></dt>
+<dd><p>Provides an implementation for the virtual method <code class="xref py py-meth docutils literal notranslate"><span class="pre">GL.GetInput()</span></code>.
+Gets the number of cells the robot has displaced in the x and y directions in the world N-Frame. To do it, it
+calls several times the parent method <code class="xref py py-meth docutils literal notranslate"><span class="pre">super().GetInput()</span></code>, corresponding to the Dead Reckoning Localization
+of the robot, until it has displaced at least one cell in any direction.
+Note that an iteration of the robot simulation <code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatedRobot.fs()</span></code> is normally done in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">GL_4DOFAUV.LocalizationLoop()</span></code>
+method of the <code class="xref py py-class docutils literal notranslate"><span class="pre">GL_4DOFAUV.Localization</span></code> class, but in this case it is done here to simulate the robot motion
+between the consecutive calls to <code class="xref py py-meth docutils literal notranslate"><span class="pre">super().GetInput()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>usk</strong> – control input of the robot simulation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>uk: vector containing the number of cells the robot has displaced in the x and y directions in the world N-Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="dof-differential-drive-mobile-robot">
+<h1>3 DOF Differential Drive Mobile Robot<a class="headerlink" href="#dof-differential-drive-mobile-robot" title="Link to this heading">¶</a></h1>
+<section id="differential-drive-grid-localization-example">
+<h2>Differential Drive Grid Localization Example<a class="headerlink" href="#differential-drive-grid-localization-example" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/GL_3DOFDifferentialDrive.png"><img alt="Grid Localization Class Diagram" src="_images/GL_3DOFDifferentialDrive.png" style="width: 566.25px; height: 896.25px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GL_3DOFDifferentialDrive.</span></span><span class="sig-name descname"><span class="pre">GL_3DOFDifferentialDrive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#GL.GL" title="GL.GL"><code class="xref py py-class docutils literal notranslate"><span class="pre">GL</span></code></a>, <a class="reference internal" href="DRLocalization.html#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive" title="DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive"><code class="xref py py-class docutils literal notranslate"><span class="pre">DR_3DOFDifferentialDrive</span></code></a></p>
+<p>Grid Reckoning Localization for a 4 DOF AUV.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_dy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the <code class="xref py py-class docutils literal notranslate"><span class="pre">GL_4DOFAUV</span></code> class. Initializes the Dead reckoning localization algorithm as well as the histogram filter algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dx_max</strong> – maximum x displacement in meters</p></li>
+<li><p><strong>dy_max</strong> – maximum y displacement in meters</p></li>
+<li><p><strong>range_dx</strong> – range of x displacements in meters</p></li>
+<li><p><strong>range_dy</strong> – range of y displacements in meters</p></li>
+<li><p><strong>p0</strong> – initial probability histogram</p></li>
+<li><p><strong>index</strong> – index struture containing plotting information</p></li>
+<li><p><strong>kSteps</strong> – number of time steps to simulate the robot motion</p></li>
+<li><p><strong>robot</strong> – robot object</p></li>
+<li><p><strong>x0</strong> – initial robot pose</p></li>
+<li><p><strong>args</strong> – additional arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.GetMeasurements">
+<span class="sig-name descname"><span class="pre">GetMeasurements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.GetMeasurements" title="Link to this definition">¶</a></dt>
+<dd><p>Read the measurements from the robot. Returns a vector of range distances to the map features.
+Only those features that are within the <code class="xref py py-attr docutils literal notranslate"><span class="pre">SimulatedRobot.SimulatedRobot.Distance_max_range</span></code> of the sensor are returned.
+The measurements arribe at a frequency defined in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">SimulatedRobot.SimulatedRobot.Distance_feature_reading_frequency</span></code> attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vector of distances to the map features</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability_4_uk">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability_4_uk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability_4_uk" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the state transition probability matrix for the given control input <em>uk</em>.
+This is a pure virtual method that must be implemented by the derived class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uk</strong> – control input. In localization, this is commonly the robot displacement. For example, in the case of a differential drive robot, this is the robot displacement in the robot frame commonly computed through the odometry.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Puk</em> state transition probability matrix for a given uk</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability_4_xk_1_uk">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability_4_xk_1_uk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">etak_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability_4_xk_1_uk" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the state transition probability histogram given the previous robot pose <span class="math notranslate nohighlight">\(\eta_{k-1}\)</span> and the input <span class="math notranslate nohighlight">\(u_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p(\eta_k | \eta_{k-1}, u_k)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>etak_1</strong> – previous robot pose in cells</p></li>
+<li><p><strong>uk</strong> – input displacement in number of cells</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>state transition probability <span class="math notranslate nohighlight">\(p(\eta_k | \eta_{k-1}, u_k)\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability">
+<span class="sig-name descname"><span class="pre">StateTransitionProbability</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the complete state transition probability matrix. The matrix is a <span class="math notranslate nohighlight">\(n_u   imes m_u        imes n^2\)</span> matrix,
+where <span class="math notranslate nohighlight">\(n_u\)</span> and <span class="math notranslate nohighlight">\(m_u\)</span> are the number of possible displacements in the x and y axis, respectively, and
+<span class="math notranslate nohighlight">\(n\)</span> is the number of cells in the map. For each possible displacement <span class="math notranslate nohighlight">\(u_k\)</span>, each previous robot pose
+<span class="math notranslate nohighlight">\({x_{k-1}}\)</span> and each current robot pose <span class="math notranslate nohighlight">\({x_k}\)</span>, the probability <span class="math notranslate nohighlight">\(p(x_k|x_{k-1},u_k)\)</span> is computed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>state transition probability matrix <span class="math notranslate nohighlight">\(P_k=p{x_k|x_{k-1},uk}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.uk2cell">
+<span class="sig-name descname"><span class="pre">uk2cell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.uk2cell" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uk</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.MeasurementProbability">
+<span class="sig-name descname"><span class="pre">MeasurementProbability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.MeasurementProbability" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the measurement probability histogram given the robot pose <span class="math notranslate nohighlight">\(\eta_k\)</span> and the measurement <span class="math notranslate nohighlight">\(z_k\)</span>.
+In this case the the measurement is the vector of the distances to the landmarks in the map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>zk</strong> – <span class="math notranslate nohighlight">\(z_k=[r_0~r_1~..r_k]\)</span> where <span class="math notranslate nohighlight">\(r_i\)</span> is the distance to the i-th landmark in the map.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Measurement probability histogram <span class="math notranslate nohighlight">\(p_z=p(z_k | \eta_k)\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.GetInput">
+<span class="sig-name descname"><span class="pre">GetInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">usk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.GetInput" title="Link to this definition">¶</a></dt>
+<dd><p>Provides an implementation for the virtual method <code class="xref py py-meth docutils literal notranslate"><span class="pre">GL.GetInput()</span></code>.
+Gets the number of cells the robot has displaced in the x and y directions in the world N-Frame. To do it, it
+calls several times the parent method <code class="xref py py-meth docutils literal notranslate"><span class="pre">super().GetInput()</span></code>, corresponding to the Dead Reckoning Localization
+of the robot, until it has displaced at least one cell in any direction.
+Note that an iteration of the robot simulation <code class="xref py py-meth docutils literal notranslate"><span class="pre">SimulatedRobot.fs()</span></code> is normally done in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">GL_4DOFAUV.LocalizationLoop()</span></code>
+method of the <code class="xref py py-class docutils literal notranslate"><span class="pre">GL_4DOFAUV.Localization</span></code> class, but in this case it is done here to simulate the robot motion
+between the consecutive calls to <code class="xref py py-meth docutils literal notranslate"><span class="pre">super().GetInput()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>usk</strong> – control input of the robot simulation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>uk: vector containing the number of cells the robot has displaced in the x and y directions in the world N-Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Grid Localization</a><ul>
+<li><a class="reference internal" href="#GL.GL"><code class="docutils literal notranslate"><span class="pre">GL</span></code></a><ul>
+<li><a class="reference internal" href="#GL.GL.__init__"><code class="docutils literal notranslate"><span class="pre">GL.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.GetMeasurements"><code class="docutils literal notranslate"><span class="pre">GL.GetMeasurements()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.StateTransitionProbability_4_uk"><code class="docutils literal notranslate"><span class="pre">GL.StateTransitionProbability_4_uk()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.StateTransitionProbability"><code class="docutils literal notranslate"><span class="pre">GL.StateTransitionProbability()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.MeasurementProbability"><code class="docutils literal notranslate"><span class="pre">GL.MeasurementProbability()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.GetInput"><code class="docutils literal notranslate"><span class="pre">GL.GetInput()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.uk2cell"><code class="docutils literal notranslate"><span class="pre">GL.uk2cell()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.LocalizationLoop"><code class="docutils literal notranslate"><span class="pre">GL.LocalizationLoop()</span></code></a></li>
+<li><a class="reference internal" href="#GL.GL.Localize"><code class="docutils literal notranslate"><span class="pre">GL.Localize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dof-auv">4 DOF AUV</a><ul>
+<li><a class="reference internal" href="#auv-grid-localization-example">AUV Grid Localization Example</a><ul>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV</span></code></a><ul>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.__init__"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.GetMeasurements"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.GetMeasurements()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability_4_uk"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.StateTransitionProbability_4_uk()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability_4_xk_1_uk"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.StateTransitionProbability_4_xk_1_uk()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.StateTransitionProbability"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.StateTransitionProbability()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.uk2cell"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.uk2cell()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.MeasurementProbability"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.MeasurementProbability()</span></code></a></li>
+<li><a class="reference internal" href="#GL_4DOFAUV.GL_4DOFAUV.GetInput"><code class="docutils literal notranslate"><span class="pre">GL_4DOFAUV.GetInput()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dof-differential-drive-mobile-robot">3 DOF Differential Drive Mobile Robot</a><ul>
+<li><a class="reference internal" href="#differential-drive-grid-localization-example">Differential Drive Grid Localization Example</a><ul>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive</span></code></a><ul>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.__init__"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.GetMeasurements"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.GetMeasurements()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability_4_uk"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.StateTransitionProbability_4_uk()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability_4_xk_1_uk"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.StateTransitionProbability_4_xk_1_uk()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.StateTransitionProbability"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.StateTransitionProbability()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.uk2cell"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.uk2cell()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.MeasurementProbability"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.MeasurementProbability()</span></code></a></li>
+<li><a class="reference internal" href="#GL_3DOFDifferentialDrive.GL_3DOFDifferentialDrive.GetInput"><code class="docutils literal notranslate"><span class="pre">GL_3DOFDifferentialDrive.GetInput()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="DRLocalization.html"
+                          title="previous chapter">4 DOF AUV Dead REckoning using DVL and Gyro</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="MCLLocalization.html"
+                          title="next chapter">Montecarlo Localization</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/GridLocalization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="MCLLocalization.html" title="Montecarlo Localization"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="DRLocalization.html" title="4 DOF AUV Dead REckoning using DVL and Gyro"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" >Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Grid Localization</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>

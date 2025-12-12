@@ -1,0 +1,422 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter {\sphinxsymbolsname}
+  \item \spxentry{\_PlotSample()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{29}
+  \item \spxentry{\_PlotSample()}\spxextra{SimulatedRobot.SimulatedRobot method}, \hyperpage{21}
+  \item \spxentry{\_\_init\_\_()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{25}
+  \item \spxentry{\_\_init\_\_()}\spxextra{DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method}, 
+		\hyperpage{39}
+  \item \spxentry{\_\_init\_\_()}\spxextra{DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method}, 
+		\hyperpage{37}
+  \item \spxentry{\_\_init\_\_()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{22}
+  \item \spxentry{\_\_init\_\_()}\spxextra{EKF.EKF method}, \hyperpage{33}
+  \item \spxentry{\_\_init\_\_()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{60}
+  \item \spxentry{\_\_init\_\_()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{57}
+  \item \spxentry{\_\_init\_\_()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{55}
+  \item \spxentry{\_\_init\_\_()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{52}
+  \item \spxentry{\_\_init\_\_()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{72}
+  \item \spxentry{\_\_init\_\_()}\spxextra{Feature.Feature method}, \hyperpage{11}
+  \item \spxentry{\_\_init\_\_()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{49}
+  \item \spxentry{\_\_init\_\_()}\spxextra{GL.GL method}, \hyperpage{42}
+  \item \spxentry{\_\_init\_\_()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{46}
+  \item \spxentry{\_\_init\_\_()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, \hyperpage{43}
+  \item \spxentry{\_\_init\_\_()}\spxextra{HF.HF method}, \hyperpage{29}
+  \item \spxentry{\_\_init\_\_()}\spxextra{Histogram.Histogram2D method}, \hyperpage{31}
+  \item \spxentry{\_\_init\_\_()}\spxextra{KF.KF method}, \hyperpage{32}
+  \item \spxentry{\_\_init\_\_()}\spxextra{Localization.Localization method}, \hyperpage{36}
+  \item \spxentry{\_\_init\_\_()}\spxextra{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM method}, 
+		\hyperpage{78}, \hyperpage{81}
+  \item \spxentry{\_\_init\_\_()}\spxextra{MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM.MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM method}, 
+		\hyperpage{81}
+  \item \spxentry{\_\_init\_\_()}\spxextra{MapFeature.MapFeature method}, \hyperpage{64}
+  \item \spxentry{\_\_init\_\_()}\spxextra{Pose.Pose3D method}, \hyperpage{6}
+  \item \spxentry{\_\_init\_\_()}\spxextra{Pose.Pose4D method}, \hyperpage{8}
+  \item \spxentry{\_\_init\_\_()}\spxextra{SimulatedRobot.SimulatedRobot method}, \hyperpage{20}
+
+  \indexspace
+  \bigletter A
+  \item \spxentry{AUV4DOFSimulatedRobot}\spxextra{class in AUV4DOFSimulatedRobot}, \hyperpage{25}
+
+  \indexspace
+  \bigletter B
+  \item \spxentry{boxplus()}\spxextra{Feature.CartesianFeature method}, \hyperpage{12}
+  \item \spxentry{boxplus()}\spxextra{Feature.Feature method}, \hyperpage{11}
+  \item \spxentry{boxplus()}\spxextra{Feature.PolarFeature method}, \hyperpage{14}
+  \item \spxentry{boxplus()}\spxextra{Pose.Pose method}, \hyperpage{5}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{c2p()}\spxextra{in module conversions}, \hyperpage{17}
+  \item \spxentry{c2s()}\spxextra{in module conversions}, \hyperpage{19}
+  \item \spxentry{Cartesian2DMapFeature}\spxextra{class in MapFeature}, \hyperpage{68}
+  \item \spxentry{Cartesian2DStoredPolarObservedMapFeature}\spxextra{class in MapFeature}, 
+		\hyperpage{70}
+  \item \spxentry{CartesianFeature}\spxextra{class in Feature}, \hyperpage{12}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{DataAssociation()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{74}
+  \item \spxentry{DifferentialDriveSimulatedRobot}\spxextra{class in DifferentialDriveSimulatedRobot}, 
+		\hyperpage{22}
+  \item \spxentry{DR\_3DOFDifferentialDrive}\spxextra{class in DR\_3DOFDifferentialDrive}, 
+		\hyperpage{39}
+  \item \spxentry{DR\_4DOFAUV\_DVLGyro}\spxextra{class in DR\_4DOFAUV\_DVLGyro}, \hyperpage{37}
+  \item \spxentry{dt}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot attribute}, 
+		\hyperpage{25}
+  \item \spxentry{dt}\spxextra{SimulatedRobot.SimulatedRobot attribute}, \hyperpage{20}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{EKF}\spxextra{class in EKF}, \hyperpage{33}
+  \item \spxentry{EKF\_3DOFDifferentialDriveCtVelocity}\spxextra{class in EKF\_3DOFDifferentialDriveCtVelocity}, 
+		\hyperpage{60}
+  \item \spxentry{EKF\_3DOFDifferentialDriveInputDisplacement}\spxextra{class in EKF\_3DOFDifferentialDriveInputDisplacement}, 
+		\hyperpage{57}
+  \item \spxentry{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM}\spxextra{class in EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM}, 
+		\hyperpage{55}
+  \item \spxentry{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM}\spxextra{class in EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM}, 
+		\hyperpage{52}
+  \item \spxentry{element}\spxextra{Histogram.Histogram2D property}, \hyperpage{31}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{f()}\spxextra{EKF.EKF method}, \hyperpage{33}
+  \item \spxentry{f()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{60}
+  \item \spxentry{f()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{59}
+  \item \spxentry{f()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{55}
+  \item \spxentry{f()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{52}
+  \item \spxentry{Feature}\spxextra{class in Feature}, \hyperpage{11}
+  \item \spxentry{FeatureObservation()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{78}
+  \item \spxentry{FeatureObservationCovariance()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{78}
+  \item \spxentry{FeatureStoredInCartesian()}\spxextra{Feature.Feature method}, \hyperpage{12}
+  \item \spxentry{FEKFMBL}\spxextra{class in FEKFMBL}, \hyperpage{72}
+  \item \spxentry{fs()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{25}
+  \item \spxentry{fs()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{22}
+  \item \spxentry{fs()}\spxextra{SimulatedRobot.SimulatedRobot method}, \hyperpage{21}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{g()}\spxextra{MapFeature.MapFeature method}, \hyperpage{67}
+  \item \spxentry{GetFeatures()}\spxextra{MapFeature.Cartesian2DMapFeature method}, \hyperpage{68}
+  \item \spxentry{GetFeatures()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}, 
+		\hyperpage{70}
+  \item \spxentry{GetFeatures()}\spxextra{MapFeature.MapFeature method}, \hyperpage{64}
+  \item \spxentry{GetInput()}\spxextra{DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method}, 
+		\hyperpage{39}
+  \item \spxentry{GetInput()}\spxextra{DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method}, 
+		\hyperpage{39}
+  \item \spxentry{GetInput()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{62}
+  \item \spxentry{GetInput()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{59}
+  \item \spxentry{GetInput()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{57}
+  \item \spxentry{GetInput()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{54}
+  \item \spxentry{GetInput()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{49}
+  \item \spxentry{GetInput()}\spxextra{GL.GL method}, \hyperpage{42}
+  \item \spxentry{GetInput()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{49}
+  \item \spxentry{GetInput()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, \hyperpage{46}
+  \item \spxentry{GetInput()}\spxextra{Localization.Localization method}, \hyperpage{37}
+  \item \spxentry{GetMeasurements()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{62}
+  \item \spxentry{GetMeasurements()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{60}
+  \item \spxentry{GetMeasurements()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{57}
+  \item \spxentry{GetMeasurements()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{54}
+  \item \spxentry{GetMeasurements()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{51}
+  \item \spxentry{GetMeasurements()}\spxextra{GL.GL method}, \hyperpage{42}
+  \item \spxentry{GetMeasurements()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{48}
+  \item \spxentry{GetMeasurements()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, \hyperpage{45}
+  \item \spxentry{GetRobotPose()}\spxextra{MapFeature.MapFeature method}, \hyperpage{68}
+  \item \spxentry{GetRobotPoseCovariance()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{77}
+  \item \spxentry{GetRobotState()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{76}
+  \item \spxentry{GetRobotStateCovariance()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{77}
+  \item \spxentry{GFLocalization}\spxextra{class in GFLocalization}, \hyperpage{49}
+  \item \spxentry{GL}\spxextra{class in GL}, \hyperpage{41}
+  \item \spxentry{GL\_3DOFDifferentialDrive}\spxextra{class in GL\_3DOFDifferentialDrive}, 
+		\hyperpage{46}
+  \item \spxentry{GL\_4DOFAUV}\spxextra{class in GL\_4DOFAUV}, \hyperpage{43}
+
+  \indexspace
+  \bigletter H
+  \item \spxentry{h()}\spxextra{EKF.EKF method}, \hyperpage{35}
+  \item \spxentry{h()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{72}
+  \item \spxentry{HF}\spxextra{class in HF}, \hyperpage{29}
+  \item \spxentry{hf()}\spxextra{MapFeature.MapFeature method}, \hyperpage{65}
+  \item \spxentry{hfj()}\spxextra{MapFeature.MapFeature method}, \hyperpage{66}
+  \item \spxentry{Histogram2D}\spxextra{class in Histogram}, \hyperpage{31}
+  \item \spxentry{histogram\_1d}\spxextra{Histogram.Histogram2D property}, \hyperpage{31}
+  \item \spxentry{histogram\_2d}\spxextra{Histogram.Histogram2D property}, \hyperpage{31}
+  \item \spxentry{hm()}\spxextra{EKF.EKF method}, \hyperpage{35}
+  \item \spxentry{hm()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{62}
+  \item \spxentry{hm()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{59}
+  \item \spxentry{hm()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{57}
+  \item \spxentry{hm()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{54}
+
+  \indexspace
+  \bigletter I
+  \item \spxentry{ICNN()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{74}
+  \item \spxentry{IndividualCompatibility()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{72}
+
+  \indexspace
+  \bigletter J
+  \item \spxentry{J\_1boxplus()}\spxextra{Feature.CartesianFeature method}, \hyperpage{14}
+  \item \spxentry{J\_1boxplus()}\spxextra{Feature.Feature method}, \hyperpage{11}
+  \item \spxentry{J\_1boxplus()}\spxextra{Feature.PolarFeature method}, \hyperpage{16}
+  \item \spxentry{J\_1boxplus()}\spxextra{Pose.Pose method}, \hyperpage{5}
+  \item \spxentry{J\_1oplus()}\spxextra{Pose.Pose method}, \hyperpage{3}
+  \item \spxentry{J\_1oplus()}\spxextra{Pose.Pose3D method}, \hyperpage{6}
+  \item \spxentry{J\_1oplus()}\spxextra{Pose.Pose4D method}, \hyperpage{10}
+  \item \spxentry{J\_2boxplus()}\spxextra{Feature.CartesianFeature method}, \hyperpage{14}
+  \item \spxentry{J\_2boxplus()}\spxextra{Feature.Feature method}, \hyperpage{12}
+  \item \spxentry{J\_2boxplus()}\spxextra{Feature.PolarFeature method}, \hyperpage{16}
+  \item \spxentry{J\_2boxplus()}\spxextra{Pose.Pose method}, \hyperpage{5}
+  \item \spxentry{J\_2c()}\spxextra{Feature.CartesianFeature method}, \hyperpage{14}
+  \item \spxentry{J\_2c()}\spxextra{Feature.Feature method}, \hyperpage{12}
+  \item \spxentry{J\_2c()}\spxextra{Feature.PolarFeature method}, \hyperpage{16}
+  \item \spxentry{J\_2oplus()}\spxextra{Pose.Pose method}, \hyperpage{3}
+  \item \spxentry{J\_2oplus()}\spxextra{Pose.Pose3D method}, \hyperpage{6}
+  \item \spxentry{J\_2oplus()}\spxextra{Pose.Pose4D method}, \hyperpage{10}
+  \item \spxentry{J\_c2p()}\spxextra{in module conversions}, \hyperpage{17}
+  \item \spxentry{J\_c2s()}\spxextra{in module conversions}, \hyperpage{19}
+  \item \spxentry{J\_o2s()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}, 
+		\hyperpage{70}
+  \item \spxentry{J\_o2s()}\spxextra{MapFeature.MapFeature method}, \hyperpage{65}
+  \item \spxentry{J\_ominus()}\spxextra{Pose.Pose method}, \hyperpage{5}
+  \item \spxentry{J\_ominus()}\spxextra{Pose.Pose3D method}, \hyperpage{8}
+  \item \spxentry{J\_ominus()}\spxextra{Pose.Pose4D method}, \hyperpage{10}
+  \item \spxentry{J\_p2c()}\spxextra{in module conversions}, \hyperpage{17}
+  \item \spxentry{J\_s2c()}\spxextra{in module conversions}, \hyperpage{18}
+  \item \spxentry{J\_s2o()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}, 
+		\hyperpage{70}
+  \item \spxentry{J\_s2o()}\spxextra{MapFeature.MapFeature method}, \hyperpage{65}
+  \item \spxentry{J\_v2v()}\spxextra{in module conversions}, \hyperpage{19}
+  \item \spxentry{Jfw()}\spxextra{EKF.EKF method}, \hyperpage{35}
+  \item \spxentry{Jfw()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{62}
+  \item \spxentry{Jfw()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{59}
+  \item \spxentry{Jfw()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{55}
+  \item \spxentry{Jfw()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{52}
+  \item \spxentry{Jfx()}\spxextra{EKF.EKF method}, \hyperpage{33}
+  \item \spxentry{Jfx()}\spxextra{EKF\_3DOFDifferentialDriveCtVelocity.EKF\_3DOFDifferentialDriveCtVelocity method}, 
+		\hyperpage{60}
+  \item \spxentry{Jfx()}\spxextra{EKF\_3DOFDifferentialDriveInputDisplacement.EKF\_3DOFDifferentialDriveInputDisplacement method}, 
+		\hyperpage{59}
+  \item \spxentry{Jfx()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{55}
+  \item \spxentry{Jfx()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{52}
+  \item \spxentry{Jgv()}\spxextra{MapFeature.MapFeature method}, \hyperpage{68}
+  \item \spxentry{Jgx()}\spxextra{MapFeature.MapFeature method}, \hyperpage{67}
+  \item \spxentry{Jhfjx()}\spxextra{MapFeature.MapFeature method}, \hyperpage{67}
+  \item \spxentry{Jhfv()}\spxextra{MapFeature.MapFeature method}, \hyperpage{66}
+  \item \spxentry{Jhfx()}\spxextra{MapFeature.MapFeature method}, \hyperpage{65}
+  \item \spxentry{Jhmv()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{57}
+  \item \spxentry{Jhmv()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{54}
+  \item \spxentry{Jhmx()}\spxextra{EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_CtVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{57}
+  \item \spxentry{Jhmx()}\spxextra{EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM.EKF\_4DOFAUV\_InputVelocityMM\_DVLDepthYawOM method}, 
+		\hyperpage{54}
+
+  \indexspace
+  \bigletter K
+  \item \spxentry{KF}\spxextra{class in KF}, \hyperpage{32}
+
+  \indexspace
+  \bigletter L
+  \item \spxentry{Localization}\spxextra{class in Localization}, \hyperpage{36}
+  \item \spxentry{LocalizationLoop()}\spxextra{GFLocalization.GFLocalization method}, 
+		\hyperpage{51}
+  \item \spxentry{LocalizationLoop()}\spxextra{GL.GL method}, \hyperpage{43}
+  \item \spxentry{LocalizationLoop()}\spxextra{Localization.Localization method}, \hyperpage{37}
+  \item \spxentry{Localize()}\spxextra{DR\_3DOFDifferentialDrive.DR\_3DOFDifferentialDrive method}, 
+		\hyperpage{39}
+  \item \spxentry{Localize()}\spxextra{DR\_4DOFAUV\_DVLGyro.DR\_4DOFAUV\_DVLGyro method}, 
+		\hyperpage{39}
+  \item \spxentry{Localize()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{74}
+  \item \spxentry{Localize()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{51}
+  \item \spxentry{Localize()}\spxextra{GL.GL method}, \hyperpage{43}
+  \item \spxentry{Localize()}\spxextra{Localization.Localization method}, \hyperpage{37}
+  \item \spxentry{Log()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{51}
+  \item \spxentry{Log()}\spxextra{Localization.Localization method}, \hyperpage{37}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{MapFeature}\spxextra{class in MapFeature}, \hyperpage{62}
+  \item \spxentry{MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM}\spxextra{class in MBL\_3DOFDDInputDisplacementMM\_2DCartesianFeatureOM}, 
+		\hyperpage{78}, \hyperpage{81}
+  \item \spxentry{MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM}\spxextra{class in MBL\_3DOFDDInputDisplacementMM\_2DPolarFeatureOM}, 
+		\hyperpage{81}
+  \item \spxentry{MeasurementProbability()}\spxextra{GL.GL method}, \hyperpage{42}
+  \item \spxentry{MeasurementProbability()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{48}
+  \item \spxentry{MeasurementProbability()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, 
+		\hyperpage{46}
+  \item \spxentry{MeasurementProbability()}\spxextra{HF.HF method}, \hyperpage{30}
+
+  \indexspace
+  \bigletter O
+  \item \spxentry{o2s()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}, 
+		\hyperpage{70}
+  \item \spxentry{o2s()}\spxextra{MapFeature.MapFeature method}, \hyperpage{64}
+  \item \spxentry{ominus()}\spxextra{Pose.Pose method}, \hyperpage{5}
+  \item \spxentry{ominus()}\spxextra{Pose.Pose3D method}, \hyperpage{8}
+  \item \spxentry{ominus()}\spxextra{Pose.Pose4D method}, \hyperpage{10}
+  \item \spxentry{oplus()}\spxextra{Pose.Pose method}, \hyperpage{3}
+  \item \spxentry{oplus()}\spxextra{Pose.Pose3D method}, \hyperpage{6}
+  \item \spxentry{oplus()}\spxextra{Pose.Pose4D method}, \hyperpage{8}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{p2c()}\spxextra{in module conversions}, \hyperpage{17}
+  \item \spxentry{PairedAndNonPairedFeatures()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{75}
+  \item \spxentry{plot\_histogram()}\spxextra{Histogram.Histogram2D method}, \hyperpage{31}
+  \item \spxentry{PlotExpectedFeaturesObservationsUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}, 
+		\hyperpage{76}
+  \item \spxentry{PlotFeatureObservationUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}, 
+		\hyperpage{75}
+  \item \spxentry{PlotRobot()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{25}
+  \item \spxentry{PlotRobot()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{25}
+  \item \spxentry{PlotRobot()}\spxextra{SimulatedRobot.SimulatedRobot method}, \hyperpage{21}
+  \item \spxentry{PlotRobotUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{76}
+  \item \spxentry{PlotRobotUncertainty()}\spxextra{GFLocalization.GFLocalization method}, 
+		\hyperpage{51}
+  \item \spxentry{PlotSample()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{76}
+  \item \spxentry{PlotSampleObservationSpace()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{76}
+  \item \spxentry{PlotState()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{51}
+  \item \spxentry{PlotTrajectory()}\spxextra{Localization.Localization method}, \hyperpage{37}
+  \item \spxentry{PlotUncertainty()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{76}
+  \item \spxentry{PlotUncertainty()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{51}
+  \item \spxentry{PlotXY()}\spxextra{GFLocalization.GFLocalization method}, \hyperpage{51}
+  \item \spxentry{PlotXY()}\spxextra{Localization.Localization method}, \hyperpage{37}
+  \item \spxentry{PolarFeature}\spxextra{class in Feature}, \hyperpage{14}
+  \item \spxentry{Pose}\spxextra{class in Pose}, \hyperpage{3}
+  \item \spxentry{Pose3D}\spxextra{class in Pose}, \hyperpage{6}
+  \item \spxentry{Pose4D}\spxextra{class in Pose}, \hyperpage{8}
+  \item \spxentry{Prediction()}\spxextra{EKF.EKF method}, \hyperpage{35}
+  \item \spxentry{Prediction()}\spxextra{HF.HF method}, \hyperpage{30}
+  \item \spxentry{Prediction()}\spxextra{KF.KF method}, \hyperpage{32}
+
+  \indexspace
+  \bigletter R
+  \item \spxentry{ReadCartesian2DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{28}
+  \item \spxentry{ReadCartesian2DFeature()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{24}
+  \item \spxentry{ReadCartesian3DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{28}
+  \item \spxentry{ReadCompass()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{27}
+  \item \spxentry{ReadCompass()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{24}
+  \item \spxentry{ReadDepth()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{27}
+  \item \spxentry{ReadDVL()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{27}
+  \item \spxentry{ReadEncoders()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{24}
+  \item \spxentry{ReadGyro()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{27}
+  \item \spxentry{ReadPolar2DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{28}
+  \item \spxentry{ReadPolar2DFeature()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{25}
+  \item \spxentry{ReadRanges()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{28}
+  \item \spxentry{ReadRanges()}\spxextra{DifferentialDriveSimulatedRobot.DifferentialDriveSimulatedRobot method}, 
+		\hyperpage{25}
+  \item \spxentry{ReadSpherical3DFeature()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{28}
+  \item \spxentry{ReadUSBL()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{28}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{s2c()}\spxextra{in module conversions}, \hyperpage{18}
+  \item \spxentry{s2o()}\spxextra{MapFeature.Cartesian2DStoredPolarObservedMapFeature method}, 
+		\hyperpage{70}
+  \item \spxentry{s2o()}\spxextra{MapFeature.MapFeature method}, \hyperpage{64}
+  \item \spxentry{SetMap()}\spxextra{AUV4DOFSimulatedRobot.AUV4DOFSimulatedRobot method}, 
+		\hyperpage{27}
+  \item \spxentry{SetMap()}\spxextra{SimulatedRobot.SimulatedRobot method}, \hyperpage{21}
+  \item \spxentry{SetRobotPose()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{77}
+  \item \spxentry{SetRobotPoseCovariance()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{77}
+  \item \spxentry{SetRobotState()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{77}
+  \item \spxentry{SetRobotStateCovariance()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{77}
+  \item \spxentry{SimulatedRobot}\spxextra{class in SimulatedRobot}, \hyperpage{20}
+  \item \spxentry{SquaredMahalanobisDistance()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{72}
+  \item \spxentry{StackMeasurementsAndFeatures()}\spxextra{FEKFMBL.FEKFMBL method}, \hyperpage{75}
+  \item \spxentry{StateTransitionProbability()}\spxextra{GL.GL method}, \hyperpage{42}
+  \item \spxentry{StateTransitionProbability()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{48}
+  \item \spxentry{StateTransitionProbability()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, 
+		\hyperpage{45}
+  \item \spxentry{StateTransitionProbability()}\spxextra{HF.HF method}, \hyperpage{30}
+  \item \spxentry{StateTransitionProbability\_4\_uk()}\spxextra{GL.GL method}, \hyperpage{42}
+  \item \spxentry{StateTransitionProbability\_4\_uk()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{48}
+  \item \spxentry{StateTransitionProbability\_4\_uk()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, 
+		\hyperpage{45}
+  \item \spxentry{StateTransitionProbability\_4\_uk()}\spxextra{HF.HF method}, \hyperpage{30}
+  \item \spxentry{StateTransitionProbability\_4\_xk\_1\_uk()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{48}
+  \item \spxentry{StateTransitionProbability\_4\_xk\_1\_uk()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, 
+		\hyperpage{45}
+
+  \indexspace
+  \bigletter T
+  \item \spxentry{ToCartesian()}\spxextra{Feature.CartesianFeature method}, \hyperpage{14}
+  \item \spxentry{ToCartesian()}\spxextra{Feature.Feature method}, \hyperpage{12}
+  \item \spxentry{ToCartesian()}\spxextra{Feature.PolarFeature method}, \hyperpage{16}
+  \item \spxentry{ToCell()}\spxextra{HF.HF method}, \hyperpage{30}
+
+  \indexspace
+  \bigletter U
+  \item \spxentry{uk2cell()}\spxextra{GL.GL method}, \hyperpage{43}
+  \item \spxentry{uk2cell()}\spxextra{GL\_3DOFDifferentialDrive.GL\_3DOFDifferentialDrive method}, 
+		\hyperpage{48}
+  \item \spxentry{uk2cell()}\spxextra{GL\_4DOFAUV.GL\_4DOFAUV method}, \hyperpage{45}
+  \item \spxentry{uk2cell()}\spxextra{HF.HF method}, \hyperpage{30}
+  \item \spxentry{Update()}\spxextra{EKF.EKF method}, \hyperpage{36}
+  \item \spxentry{Update()}\spxextra{HF.HF method}, \hyperpage{31}
+  \item \spxentry{Update()}\spxextra{KF.KF method}, \hyperpage{33}
+
+  \indexspace
+  \bigletter V
+  \item \spxentry{v2v()}\spxextra{in module conversions}, \hyperpage{19}
+
+\end{sphinxtheindex}

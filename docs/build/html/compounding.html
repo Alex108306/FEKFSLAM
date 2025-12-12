@@ -1,0 +1,558 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pose Representation &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Robot Simulation" href="robot_simulation.html" />
+    <link rel="prev" title="Welcome to Probabilistic Robot Localization package documentation" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="robot_simulation.html" title="Robot Simulation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Probabilistic Robot Localization package documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pose Representation</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="pose-representation">
+<h1>Pose Representation<a class="headerlink" href="#pose-representation" title="Link to this heading">¶</a></h1>
+<section id="pose">
+<h2>Pose<a class="headerlink" href="#pose" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Pose.png"><img alt="Pose Class Diagram" src="_images/Pose.png" style="width: 252.0px; height: 1264.5px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="Pose.Pose">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Pose.</span></span><span class="sig-name descname"><span class="pre">Pose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Definition of a robot pose interface from where all the particular poses of different DOF inherit.
+This class defines a robot pose AxB as the pose of the B-Frame expressed in the A-Frame coordinates.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.oplus">
+<span class="sig-name descname"><span class="pre">oplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxC</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Given a Pose object <em>AxB</em> (the self object) and a Pose object <em>BxC</em>, it returns the compounded Pose object <em>AxC</em>.</p>
+<p>The operation is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-eq-oplus">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-oplus" title="Link to this equation">¶</a></span>\[\mathbf{{^A}x_C} = \mathbf{{^A}x_B} \oplus \mathbf{{^B}x_C}\]</div>
+<p><strong>This is a pure virtual method that must be implemented by a child class.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxC</strong> – C-Frame pose expressed in B-Frame coordinates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>C-Frame pose expressed in A-Frame coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.J_1oplus">
+<span class="sig-name descname"><span class="pre">J_1oplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxC</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.J_1oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose compounding operation (eq. <a class="reference internal" href="#equation-eq-oplus">(1)</a>) with respect to the first pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j1oplus">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-j1oplus" title="Link to this equation">¶</a></span>\[J_{1\oplus}=\frac{\partial  ^Ax_B \oplus ^Bx_C}{\partial ^Ax_B}\]</div>
+<p>The method returns a numerical matrix containing the evaluation of the Jacobian for the pose <em>AxB</em> (the self object) and the <span class="math notranslate nohighlight">\(2^{nd}\)</span> pose <em>BxC</em>.</p>
+<p><strong>This is a pure virtual method that must be implemented by a child class.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxC</strong> – 2nd pose</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Evaluation of the <span class="math notranslate nohighlight">\(J_{1\oplus}\)</span> Jacobian of the pose compounding operation with respect to the first pose (eq. <a class="reference internal" href="#equation-eq-j1oplus">(2)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.J_2oplus">
+<span class="sig-name descname"><span class="pre">J_2oplus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.J_2oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose compounding operation (<a class="reference internal" href="#equation-eq-oplus">(1)</a>) with respect to the second pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j2oplus">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-j2oplus" title="Link to this equation">¶</a></span>\[J_{2\oplus}=\frac{\partial  ^Ax_B \oplus ^Bx_C}{\partial ^Bx_C}\]</div>
+<p>The method returns a numerical matrix containing the evaluation of the Jacobian for the <span class="math notranslate nohighlight">\(1^{st}\)</span> pose <em>AxB</em> (the self object).</p>
+<p><strong>This is a pure virtual method that must be implemented by a child class.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Evaluation of the <span class="math notranslate nohighlight">\(J_{2\oplus}\)</span> Jacobian of the pose compounding operation with respect to the second pose (eq. <a class="reference internal" href="#equation-eq-j2oplus">(3)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.ominus">
+<span class="sig-name descname"><span class="pre">ominus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.ominus" title="Link to this definition">¶</a></dt>
+<dd><p>Inverse pose compounding of the <em>AxB</em> pose (the self object):</p>
+<div class="math notranslate nohighlight" id="equation-eq-ominus">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-ominus" title="Link to this equation">¶</a></span>\[^Bx_A = \ominus ^Ax_B\]</div>
+<p><strong>This is a pure virtual method that must be implemented by a child class.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A-Frame pose expressed in B-Frame coordinates (eq. <a class="reference internal" href="#equation-eq-ominus">(4)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.J_ominus">
+<span class="sig-name descname"><span class="pre">J_ominus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.J_ominus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the inverse pose compounding operation (<a class="reference internal" href="#equation-eq-oplus">(1)</a>) with respect the pose <em>AxB</em> (the self object):</p>
+<div class="math notranslate nohighlight" id="equation-eq-jominus">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-jominus" title="Link to this equation">¶</a></span>\[J_{\ominus}=\frac{\partial  \ominus ^Ax_B}{\partial ^Ax_B}\]</div>
+<p>Returns the numerical matrix containing the evaluation of the Jacobian for the pose <em>AxB</em> (the self object).
+<strong>This is a pure virtual method that must be implemented by a child class.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Evaluation of the <span class="math notranslate nohighlight">\(J_{\ominus}\)</span> Jacobian of the inverse pose compounding operation with respect to the pose (eq. <a class="reference internal" href="#equation-eq-jominus3dof">(12)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.boxplus">
+<span class="sig-name descname"><span class="pre">boxplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.boxplus" title="Link to this definition">¶</a></dt>
+<dd><p>Given a Pose object <em>NxB</em> (the self object) and a Feature object <em>BxF</em>, it returns the Feature object <em>NxF</em>
+providing the same feature but now expresend in the N-Frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxF</strong> – Feature object expressed in the B-Frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>NxF Feature object expressed in the N-Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.J_1boxplus">
+<span class="sig-name descname"><span class="pre">J_1boxplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.J_1boxplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose-feature compounding operation (eq. <a class="reference internal" href="FEKFMBLocalization.html#equation-eq-boxplus">(4)</a>) with respect to the robot pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j1boxplus">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-j1boxplus" title="Link to this equation">¶</a></span>\[J_{1\boxplus}=\frac{\partial  ^Nx_B \boxplus ^Bx_F}{\partial ^Nx_B}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxF</strong> – Feature object expressed in the B-Frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(J_{1\boxplus}\)</span> Jacobian of the feature compounding operation with respect to the robot pose (eq. <a class="reference internal" href="#equation-eq-j1boxplus">(6)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose.J_2boxplus">
+<span class="sig-name descname"><span class="pre">J_2boxplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose.J_2boxplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose-feature compounding operation (eq. <a class="reference internal" href="FEKFMBLocalization.html#equation-eq-boxplus">(4)</a>) with respect to the feature:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j2boxplus">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-j2boxplus" title="Link to this equation">¶</a></span>\[J_{2\boxplus}=\frac{\partial  ^Nx_B \boxplus ^Bx_F}{\partial ^Bx_F}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxF</strong> – Feature object expressed in the B-Frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(J_{2\boxplus}\)</span> Jacobian of the feature compounding operation with respect to the feature (eq. <a class="reference internal" href="#equation-eq-j2boxplus">(7)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pose-3dof">
+<h2>Pose 3DOF<a class="headerlink" href="#pose-3dof" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Pose3D.png"><img alt="Pose3D Class Diagram" src="_images/Pose3D.png" style="width: 252.0px; height: 1426.5px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="Pose.Pose3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Pose.</span></span><span class="sig-name descname"><span class="pre">Pose3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Pose.Pose" title="Pose.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a></p>
+<p>Definition of a robot pose in 3 DOF (x, y, yaw). The class inherits from a ndarray.
+This class extends the ndarray with the <span class="math notranslate nohighlight">\(oplus\)</span> and <span class="math notranslate nohighlight">\(ominus\)</span> operators and the corresponding Jacobians.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose3D.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose3D.oplus">
+<span class="sig-name descname"><span class="pre">oplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxC</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D.oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Given a Pose3D object <em>AxB</em> (the self object) and a Pose3D object <em>BxC</em>, it returns the Pose3D object <em>AxC</em>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{{^A}x_B} &amp;= \begin{bmatrix} ^Ax_B &amp; ^Ay_B &amp; ^A\psi_B \end{bmatrix}^T \\
+\mathbf{{^B}x_C} &amp;= \begin{bmatrix} ^Bx_C &amp; ^By_C &amp; &amp; ^B\psi_C \end{bmatrix}^T \\\end{split}\]</div>
+<p>The operation is defined as:</p>
+<div class="math notranslate nohighlight" id="equation-eq-oplus3dof">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-oplus3dof" title="Link to this equation">¶</a></span>\[\begin{split}\mathbf{{^A}x_C} &amp;= \mathbf{{^A}x_B} \oplus \mathbf{{^B}x_C} =
+\begin{bmatrix}
+    ^Ax_B + ^Bx_C  \cos(^A\psi_B) - ^By_C  \sin(^A\psi_B) \\
+    ^Ay_B + ^Bx_C  \sin(^A\psi_B) + ^By_C  \cos(^A\psi_B) \\
+    ^A\psi_B + ^B\psi_C
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxC</strong> – C-Frame pose expressed in B-Frame coordinates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>C-Frame pose expressed in A-Frame coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose3D.J_1oplus">
+<span class="sig-name descname"><span class="pre">J_1oplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxC</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D.J_1oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose compounding operation (eq. <a class="reference internal" href="#equation-eq-oplus3dof">(8)</a>) with respect to the first pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j1oplus3dof">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-j1oplus3dof" title="Link to this equation">¶</a></span>\[\begin{split}J_{1\oplus}=\frac{\partial  ^Ax_B \oplus ^Bx_C}{\partial ^Ax_B} =
+\begin{bmatrix}
+    1 &amp; 0 &amp;  -^Bx_C \sin(^A\psi_B) - ^By_C \cos(^A\psi_B) \\
+    0 &amp; 1 &amp;  ^Bx_C \cos(^A\psi_B) - ^By_C \sin(^A\psi_B) \\
+    0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>The method returns a numerical matrix containing the evaluation of the Jacobian for the pose <em>AxB</em> (the self object) and the <span class="math notranslate nohighlight">\(2^{nd}\)</span> posepose <em>BxC</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxC</strong> – 2nd pose</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Evaluation of the <span class="math notranslate nohighlight">\(J_{1\oplus}\)</span> Jacobian of the pose compounding operation with respect to the first pose (eq. <a class="reference internal" href="#equation-eq-j1oplus3dof">(9)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose3D.J_2oplus">
+<span class="sig-name descname"><span class="pre">J_2oplus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D.J_2oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose compounding operation (<a class="reference internal" href="#equation-eq-oplus3dof">(8)</a>) with respect to the second pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j2oplus3dof">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-j2oplus3dof" title="Link to this equation">¶</a></span>\[\begin{split}J_{2\oplus}=\frac{\partial  ^Ax_B \oplus ^Bx_C}{\partial ^Bx_C} =
+\begin{bmatrix}
+    \cos(^A\psi_B) &amp; -\sin(^A\psi_B) &amp; 0  \\
+    \sin(^A\psi_B) &amp; \cos(^A\psi_B) &amp; 0  \\
+    0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>The method returns a numerical matrix containing the evaluation of the Jacobian for the :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>1^{st} posepose <em>AxB</em> (the self object).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Evaluation of the <span class="math notranslate nohighlight">\(J_{2\oplus}\)</span> Jacobian of the pose compounding operation with respect to the second pose (eq. <a class="reference internal" href="#equation-eq-j2oplus3dof">(10)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose3D.ominus">
+<span class="sig-name descname"><span class="pre">ominus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D.ominus" title="Link to this definition">¶</a></dt>
+<dd><p>Inverse pose compounding of the <em>AxB</em> pose (the self objetc):</p>
+<div class="math notranslate nohighlight" id="equation-eq-ominus3dof">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-ominus3dof" title="Link to this equation">¶</a></span>\[\begin{split}^Bx_A = \ominus ^Ax_B =
+\begin{bmatrix}
+    -^Ax_B \cos(^A\psi_B) - ^Ay_B \sin(^A\psi_B) \\
+    ^Ax_B \sin(^A\psi_B) - ^Ay_B \cos(^A\psi_B) \\
+    -^A\psi_B
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A-Frame pose expressed in B-Frame coordinates (eq. <a class="reference internal" href="#equation-eq-ominus3dof">(11)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose3D.J_ominus">
+<span class="sig-name descname"><span class="pre">J_ominus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose3D.J_ominus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the inverse pose compounding operation (<a class="reference internal" href="#equation-eq-oplus3dof">(8)</a>) with respect the pose <em>AxB</em> (the self object):</p>
+<div class="math notranslate nohighlight" id="equation-eq-jominus3dof">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-jominus3dof" title="Link to this equation">¶</a></span>\[\begin{split}J_{\ominus}=\frac{\partial  \ominus ^Ax_B}{\partial ^Ax_B} =
+\begin{bmatrix}
+    -\cos(^A\psi_B) &amp; -\sin(^A\psi_B) &amp;  ^Ax_B \sin(^A\psi_B) - ^Ay_B \cos(^A\psi_B) \\
+    \sin(^A\psi_B) &amp; -\cos(^A\psi_B) &amp;  ^Ax_B \cos(^A\psi_B) + ^Ay_B \sin(^A\psi_B) \\
+    0 &amp; 0 &amp; -1
+\end{bmatrix}\end{split}\]</div>
+<p>Returns the numerical matrix containing the evaluation of the Jacobian for the pose <em>AxB</em> (the self object).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Evaluation of the <span class="math notranslate nohighlight">\(J_{\ominus}\)</span> Jacobian of the inverse pose compounding operation with respect to the pose (eq. <a class="reference internal" href="#equation-eq-jominus3dof">(12)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pose-4dof">
+<h2>Pose 4DOF<a class="headerlink" href="#pose-4dof" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Pose4D.png"><img alt="Pose4D Class Diagram" src="_images/Pose4D.png" style="width: 252.0px; height: 1426.5px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="Pose.Pose4D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Pose.</span></span><span class="sig-name descname"><span class="pre">Pose4D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Pose.Pose" title="Pose.Pose"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pose</span></code></a></p>
+<p>Definition of a robot pose in 4 DOF (x, y, yaw). The class inherits from a ndarray.
+This class extends the ndarray with the <span class="math notranslate nohighlight">\(oplus\)</span> and :math:<a href="#id3"><span class="problematic" id="id4">`</span></a>ominus operators and the corresponding Jacobians.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose4D.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose4D.oplus">
+<span class="sig-name descname"><span class="pre">oplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxC</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D.oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Given a Pose3D object <em>AxB</em> (the self object) and a Pose3D object <em>BxC</em>, it returns the Pose4D object <em>AxC</em>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-oplus4dof">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-oplus4dof" title="Link to this equation">¶</a></span>\[\begin{split}^Ax_B &amp;= \begin{bmatrix} ^Ax_B &amp; ^Ay_B &amp; ^Az_B &amp; ^A\psi_B \end{bmatrix}^T \\
+^Bx_C &amp;= \begin{bmatrix} ^Bx_C &amp; ^By_C &amp; ^Bz_C &amp; ^B\psi_C \end{bmatrix}^T \\
+^Ax_C &amp;= ^Ax_B \oplus ^Bx_C =
+\begin{bmatrix}
+    ^Ax_B + ^Bx_C  \cos(^A\psi_B) - ^By_C  \sin(^A\psi_B) \\
+    ^Ay_B + ^Bx_C  \sin(^A\psi_B) + ^By_C  \cos(^A\psi_B) \\
+    ^Az_B + ^Bz_C \\
+    ^A\psi_B + ^B\psi_C
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>BxC</strong> – C-Frame pose expressed in B-Frame coordinates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>C-Frame pose expressed in A-Frame coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose4D.J_1oplus">
+<span class="sig-name descname"><span class="pre">J_1oplus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BxC</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D.J_1oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose compounding operation (eq. <a class="reference internal" href="#equation-eq-oplus4dof">(13)</a>) with respect to the first pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j1oplus4dof">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-j1oplus4dof" title="Link to this equation">¶</a></span>\[\begin{split}J_{1\oplus}=\frac{\partial  ^Ax_B \oplus ^Bx_C}{\partial ^Ax_B} =
+\begin{bmatrix}
+    1 &amp; 0 &amp; 0 &amp; -^Bx_C \sin(^A\psi_B) - ^By_C \cos(^A\psi_B) \\
+    0 &amp; 1 &amp; 0 &amp; ^Bx_C \cos(^A\psi_B) - ^By_C \sin(^A\psi_B) \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>AxB</strong> – first pose</p></li>
+<li><p><strong>BxC</strong> – 2nd pose</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(J_{1\oplus}\)</span> Jacobian of the pose compounding operation with respect to the first pose (eq. <a class="reference internal" href="#equation-eq-j1oplus4dof">(14)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose4D.J_2oplus">
+<span class="sig-name descname"><span class="pre">J_2oplus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D.J_2oplus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the pose compounding operation (<a class="reference internal" href="#equation-eq-oplus4dof">(13)</a>) with respect to the second pose:</p>
+<div class="math notranslate nohighlight" id="equation-eq-j2oplus4dof">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-j2oplus4dof" title="Link to this equation">¶</a></span>\[\begin{split}J_{2\oplus}=\frac{\partial  ^Ax_B \oplus ^Bx_C}{\partial ^Bx_C} =
+\begin{bmatrix}
+    \cos(^A\psi_B) &amp; -\sin(^A\psi_B) &amp; 0 &amp; 0 \\
+    \sin(^A\psi_B) &amp; \cos(^A\psi_B) &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AxB</strong> – first pose</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(J_{2\oplus}\)</span> Jacobian of the pose compounding operation with respect to the second pose (eq. <a class="reference internal" href="#equation-eq-j2oplus4dof">(15)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose4D.ominus">
+<span class="sig-name descname"><span class="pre">ominus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D.ominus" title="Link to this definition">¶</a></dt>
+<dd><p>Inverse pose compounding of the <em>AxB</em> pose (the self object):</p>
+<div class="math notranslate nohighlight" id="equation-eq-ominus4dof">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-ominus4dof" title="Link to this equation">¶</a></span>\[\begin{split}^Bx_A = \ominus ^Ax_B =
+\begin{bmatrix}
+    -^Ax_B \cos(^A\psi_B) - ^Ay_B \sin(^A\psi_B) \\
+    ^Ax_B \sin(^A\psi_B) - ^Ay_B \cos(^A\psi_B) \\
+    -^Az_B \\
+    -^A\psi_B
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AxB</strong> – B-Frame pose expressed in A-Frame coordinates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A-Frame pose expressed in B-Frame coordinates (eq. <a class="reference internal" href="#equation-eq-ominus4dof">(16)</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Pose.Pose4D.J_ominus">
+<span class="sig-name descname"><span class="pre">J_ominus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Pose.Pose4D.J_ominus" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the inverse pose compounding operation (<a class="reference internal" href="#equation-eq-oplus4dof">(13)</a>) with respect the pose <em>AxB</em> (the self object):</p>
+<div class="math notranslate nohighlight" id="equation-eq-jominus4dof">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-jominus4dof" title="Link to this equation">¶</a></span>\[\begin{split}J_{\ominus}=\frac{\partial  \ominus ^Ax_B}{\partial ^Ax_B} =
+\begin{bmatrix}
+    -\cos(^A\psi_B) &amp; -\sin(^A\psi_B) &amp; 0 &amp; ^Ax_B \sin(^A\psi_B) - ^Ay_B \cos(^A\psi_B) \\
+    \sin(^A\psi_B) &amp; -\cos(^A\psi_B) &amp; 0 &amp; ^Ax_B \cos(^A\psi_B) + ^Ay_B \sin(^A\psi_B) \\
+    0 &amp; 0 &amp; -1 &amp; ^Az_B \\
+    0 &amp; 0 &amp; 0 &amp; -1
+\end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AxB</strong> – B-Fram pose expressed in A-Frame coordinates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math notranslate nohighlight">\(J_{\ominus}\)</span> Jacobian of the inverse pose compounding operation with respect to the pose (eq. <a class="reference internal" href="#equation-eq-jominus4dof">(17)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Pose Representation</a><ul>
+<li><a class="reference internal" href="#pose">Pose</a><ul>
+<li><a class="reference internal" href="#Pose.Pose"><code class="docutils literal notranslate"><span class="pre">Pose</span></code></a><ul>
+<li><a class="reference internal" href="#Pose.Pose.oplus"><code class="docutils literal notranslate"><span class="pre">Pose.oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.J_1oplus"><code class="docutils literal notranslate"><span class="pre">Pose.J_1oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.J_2oplus"><code class="docutils literal notranslate"><span class="pre">Pose.J_2oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.ominus"><code class="docutils literal notranslate"><span class="pre">Pose.ominus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.J_ominus"><code class="docutils literal notranslate"><span class="pre">Pose.J_ominus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.boxplus"><code class="docutils literal notranslate"><span class="pre">Pose.boxplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.J_1boxplus"><code class="docutils literal notranslate"><span class="pre">Pose.J_1boxplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose.J_2boxplus"><code class="docutils literal notranslate"><span class="pre">Pose.J_2boxplus()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pose-3dof">Pose 3DOF</a><ul>
+<li><a class="reference internal" href="#Pose.Pose3D"><code class="docutils literal notranslate"><span class="pre">Pose3D</span></code></a><ul>
+<li><a class="reference internal" href="#Pose.Pose3D.__init__"><code class="docutils literal notranslate"><span class="pre">Pose3D.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose3D.oplus"><code class="docutils literal notranslate"><span class="pre">Pose3D.oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose3D.J_1oplus"><code class="docutils literal notranslate"><span class="pre">Pose3D.J_1oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose3D.J_2oplus"><code class="docutils literal notranslate"><span class="pre">Pose3D.J_2oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose3D.ominus"><code class="docutils literal notranslate"><span class="pre">Pose3D.ominus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose3D.J_ominus"><code class="docutils literal notranslate"><span class="pre">Pose3D.J_ominus()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pose-4dof">Pose 4DOF</a><ul>
+<li><a class="reference internal" href="#Pose.Pose4D"><code class="docutils literal notranslate"><span class="pre">Pose4D</span></code></a><ul>
+<li><a class="reference internal" href="#Pose.Pose4D.__init__"><code class="docutils literal notranslate"><span class="pre">Pose4D.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose4D.oplus"><code class="docutils literal notranslate"><span class="pre">Pose4D.oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose4D.J_1oplus"><code class="docutils literal notranslate"><span class="pre">Pose4D.J_1oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose4D.J_2oplus"><code class="docutils literal notranslate"><span class="pre">Pose4D.J_2oplus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose4D.ominus"><code class="docutils literal notranslate"><span class="pre">Pose4D.ominus()</span></code></a></li>
+<li><a class="reference internal" href="#Pose.Pose4D.J_ominus"><code class="docutils literal notranslate"><span class="pre">Pose4D.J_ominus()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Welcome to Probabilistic Robot Localization package documentation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="robot_simulation.html"
+                          title="next chapter">Robot Simulation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/compounding.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="robot_simulation.html" title="Robot Simulation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Probabilistic Robot Localization package documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pose Representation</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>

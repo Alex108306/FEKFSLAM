@@ -1,0 +1,199 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Gaussian Filter &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Kalman Filter" href="KF.html" />
+    <link rel="prev" title="Particle Filter" href="PF.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="KF.html" title="Kalman Filter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="PF.html" title="Particle Filter"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Filters.html" accesskey="U">Filters</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Gaussian Filter</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="gaussian-filter">
+<h1>Gaussian Filter<a class="headerlink" href="#gaussian-filter" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/GaussianFilter.png"><img alt="Gaussian Filter Class Diagram" src="_images/GaussianFilter.png" style="width: 198.0px; height: 132.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="GaussianFilter.GaussianFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GaussianFilter.</span></span><span class="sig-name descname"><span class="pre">GaussianFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GaussianFilter.GaussianFilter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Gaussian Filter Interface</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="GaussianFilter.GaussianFilter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GaussianFilter.GaussianFilter.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the GaussianFilter class.</p>
+<p><strong>Attributes</strong>:</p>
+<ul class="simple">
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">xk</span></code>: mean of the state vector at time step k</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Pk</span></code>: covariance of the state vector at time step k</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">xk_1</span></code>: mean of the state vector at time step k-1</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">Pk_1</span></code>: covariance of the state vector at time step k-1</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x0</strong> – initial mean state vector</p></li>
+<li><p><strong>P0</strong> – initial covariance matrix</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GaussianFilter.GaussianFilter.Prediction">
+<span class="sig-name descname"><span class="pre">Prediction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Qk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GaussianFilter.GaussianFilter.Prediction" title="Link to this definition">¶</a></dt>
+<dd><p>Prediction step of the Gaussian Filter to be overwritten by the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uk</strong> – input vector</p></li>
+<li><p><strong>Qk</strong> – covariance matrix of the motion model noise</p></li>
+<li><p><strong>xk_1</strong> – previous mean state vector</p></li>
+<li><p><strong>Pk_1</strong> – previous covariance matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return xk_bar, Pk_bar<span class="colon">:</span></dt>
+<dd class="field-even"><p>current mean state vector and covariance matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="GaussianFilter.GaussianFilter.Update">
+<span class="sig-name descname"><span class="pre">Update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xk_bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pk_bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#GaussianFilter.GaussianFilter.Update" title="Link to this definition">¶</a></dt>
+<dd><p>Update step of the Gaussian Filter to be overwritten by the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zk</strong> – observation vector</p></li>
+<li><p><strong>Rk</strong> – covariance of the observation model noise</p></li>
+<li><p><strong>xk_bar</strong> – mean of the predicted state</p></li>
+<li><p><strong>Pk_bar</strong> – covariance  of the predicted state</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>xk, Pk: current mean state vector and covariance matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Gaussian Filter</a><ul>
+<li><a class="reference internal" href="#GaussianFilter.GaussianFilter"><code class="docutils literal notranslate"><span class="pre">GaussianFilter</span></code></a><ul>
+<li><a class="reference internal" href="#GaussianFilter.GaussianFilter.__init__"><code class="docutils literal notranslate"><span class="pre">GaussianFilter.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#GaussianFilter.GaussianFilter.Prediction"><code class="docutils literal notranslate"><span class="pre">GaussianFilter.Prediction()</span></code></a></li>
+<li><a class="reference internal" href="#GaussianFilter.GaussianFilter.Update"><code class="docutils literal notranslate"><span class="pre">GaussianFilter.Update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="PF.html"
+                          title="previous chapter">Particle Filter</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="KF.html"
+                          title="next chapter">Kalman Filter</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/GF.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="KF.html" title="Kalman Filter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="PF.html" title="Particle Filter"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Filters.html" >Filters</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Gaussian Filter</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>

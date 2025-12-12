@@ -1,0 +1,251 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4 DOF AUV Dead REckoning using DVL and Gyro &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Grid Localization" href="GridLocalization.html" />
+    <link rel="prev" title="Robot Localization" href="Localization.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="GridLocalization.html" title="Grid Localization"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Localization.html" title="Robot Localization"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" accesskey="U">Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">4 DOF AUV Dead REckoning using DVL and Gyro</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="dof-auv-dead-reckoning-using-dvl-and-gyro">
+<h1>4 DOF AUV Dead REckoning using DVL and Gyro<a class="headerlink" href="#dof-auv-dead-reckoning-using-dvl-and-gyro" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/DR_4DOFAUV_DVLGyro.png"><img alt="DR_4DOFAUV_DVLGyro Class Diagram" src="_images/DR_4DOFAUV_DVLGyro.png" style="width: 329.25px; height: 521.25px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DR_4DOFAUV_DVLGyro.</span></span><span class="sig-name descname"><span class="pre">DR_4DOFAUV_DVLGyro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Localization.html#Localization.Localization" title="Localization.Localization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Localization</span></code></a></p>
+<p>Dead Reckoning Localization for a 4DOF AUV with DVL and Gyro sensors</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the DR_4DOFAUV_DVLGyro class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Rest of arguments to be passed to the parent constructor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.Localize">
+<span class="sig-name descname"><span class="pre">Localize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.Localize" title="Link to this definition">¶</a></dt>
+<dd><p>Motion model for the 4DOF (<span class="math notranslate nohighlight">\([x_{k}~y_{k}~z_{k}~\psi_{k}]^T\)</span>) AUV using as input the lineal velocity read from the DVL senosr and angular velocity read from the Gyro sensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk_1</strong> – previous robot pose estimate (<span class="math notranslate nohighlight">\([x_{k-1}~y_{k-1}~z_{k-1}~\psi_{k-1}]^T\)</span>)</p></li>
+<li><p><strong>uk</strong> – input vector (<span class="math notranslate nohighlight">\([u_{k}~v_{k}~w_{k}~r_{k}]^T\)</span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return xk<span class="colon">:</span></dt>
+<dd class="field-even"><p>current robot pose estimate (<span class="math notranslate nohighlight">\([x_{k}~y_{k}~z_{k}~\psi_{k}]^T\)</span>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.GetInput">
+<span class="sig-name descname"><span class="pre">GetInput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.GetInput" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the input vector and the input noise covariance matrix from the robot. The input vector contains the linear read from the DVL and angular velocity read from the Gyro of the robot.</p>
+<div class="math notranslate nohighlight" id="equation-eq-uk-ekf-4dofauv-velocitymm-dvldepthyawom">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-uk-ekf-4dofauv-velocitymm-dvldepthyawom" title="Link to this equation">¶</a></span>\[\begin{split}u_k &amp;= \begin{bmatrix} \nu_{DVL}^T &amp; r_{Gyro}^T \end{bmatrix}^T= \begin{bmatrix} u_{DVL} &amp; v_{DVL} &amp; w_{DVL} &amp; r_{Gyro} \end{bmatrix}^T\\
+Q_k &amp;= \begin{bmatrix} Q_{DVL} &amp; 0 \\ 0 &amp; \sigma_{Gyro}^2 \end{bmatrix} \quad \text{where} \quad Q_{DVL} = \begin{bmatrix} \sigma_{u_{DVL}}^2 &amp; \sigma_{{uv}_{DVL}} &amp; \sigma_{{uw}_{DVL}} \\ \sigma_{{vu}_{DVL}} &amp; \sigma_{v_{DVL}}^2 &amp;  \sigma_{{vw}_{DVL}} \\ \sigma_{{wu}_{DVL}} &amp; \sigma_{{wv}_{DVL}} &amp; \sigma_{w_{DVL}}^2   \end{bmatrix}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>input vector <span class="math notranslate nohighlight">\(u_k\)</span> and input noise covariance matrix <span class="math notranslate nohighlight">\(Q_k\)</span> defined in eq. <a class="reference internal" href="#equation-eq-uk-ekf-4dofauv-velocitymm-dvldepthyawom">(1)</a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dof-differential-drive-mobile-robot-example">
+<h1>3 DOF Differential Drive Mobile Robot Example<a class="headerlink" href="#dof-differential-drive-mobile-robot-example" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/DR_3DOFDifferentialDrive.png"><img alt="DR_3DOFDifferentialDrive Class Diagram" src="_images/DR_3DOFDifferentialDrive.png" style="width: 333.75px; height: 507.0px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DR_3DOFDifferentialDrive.</span></span><span class="sig-name descname"><span class="pre">DR_3DOFDifferentialDrive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Localization.html#Localization.Localization" title="Localization.Localization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Localization</span></code></a></p>
+<p>Dead Reckoning Localization for a Differential Drive Mobile Robot.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kSteps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">robot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the <a class="reference internal" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive" title="DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive"><code class="xref py py-class docutils literal notranslate"><span class="pre">DR_3DOFDifferentialDrive</span></code></a> class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Rest of arguments to be passed to the parent constructor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.Localize">
+<span class="sig-name descname"><span class="pre">Localize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.Localize" title="Link to this definition">¶</a></dt>
+<dd><p>Motion model for the 3DOF (<span class="math notranslate nohighlight">\(x_k=[x_{k}~y_{k}~\psi_{k}]^T\)</span>) Differential Drive Mobile robot using as input the readings of the wheel encoders (<span class="math notranslate nohighlight">\(u_k=[n_L~n_R]^T\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk_1</strong> – previous robot pose estimate (<span class="math notranslate nohighlight">\(x_{k-1}=[x_{k-1}~y_{k-1}~\psi_{k-1}]^T\)</span>)</p></li>
+<li><p><strong>uk</strong> – input vector (<span class="math notranslate nohighlight">\(u_k=[u_{k}~v_{k}~r_{k}]^T\)</span>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>xk</strong> current robot pose estimate (<span class="math notranslate nohighlight">\([x_{k}~y_{k}~\psi_{k}]^T\)</span>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.GetInput">
+<span class="sig-name descname"><span class="pre">GetInput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.GetInput" title="Link to this definition">¶</a></dt>
+<dd><p>Get the input for the motion model. In this case, the input is the robot displacement computed from the left and
+right wheel encoders pulses using.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>uk:</strong>  input vector (<span class="math notranslate nohighlight">\(u_k={}^B[\Delta x~\Delta y]^T\)</span>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">4 DOF AUV Dead REckoning using DVL and Gyro</a><ul>
+<li><a class="reference internal" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro"><code class="docutils literal notranslate"><span class="pre">DR_4DOFAUV_DVLGyro</span></code></a><ul>
+<li><a class="reference internal" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.__init__"><code class="docutils literal notranslate"><span class="pre">DR_4DOFAUV_DVLGyro.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.Localize"><code class="docutils literal notranslate"><span class="pre">DR_4DOFAUV_DVLGyro.Localize()</span></code></a></li>
+<li><a class="reference internal" href="#DR_4DOFAUV_DVLGyro.DR_4DOFAUV_DVLGyro.GetInput"><code class="docutils literal notranslate"><span class="pre">DR_4DOFAUV_DVLGyro.GetInput()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dof-differential-drive-mobile-robot-example">3 DOF Differential Drive Mobile Robot Example</a><ul>
+<li><a class="reference internal" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive"><code class="docutils literal notranslate"><span class="pre">DR_3DOFDifferentialDrive</span></code></a><ul>
+<li><a class="reference internal" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.__init__"><code class="docutils literal notranslate"><span class="pre">DR_3DOFDifferentialDrive.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.Localize"><code class="docutils literal notranslate"><span class="pre">DR_3DOFDifferentialDrive.Localize()</span></code></a></li>
+<li><a class="reference internal" href="#DR_3DOFDifferentialDrive.DR_3DOFDifferentialDrive.GetInput"><code class="docutils literal notranslate"><span class="pre">DR_3DOFDifferentialDrive.GetInput()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="Localization.html"
+                          title="previous chapter">Robot Localization</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="GridLocalization.html"
+                          title="next chapter">Grid Localization</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/DRLocalization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="GridLocalization.html" title="Grid Localization"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Localization.html" title="Robot Localization"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" >Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">4 DOF AUV Dead REckoning using DVL and Gyro</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1142 @@
+
+
+<!doctype html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feature Map based EKF Localization &#8212; prpy: Probabilistic Robot Localization Python Library 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=fd69843b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Feature based EKF Simultaneous Localization And Mapping" href="FEKFSLAMLocalization.html" />
+    <link rel="prev" title="Gaussian Filter Localization" href="GFLocalization.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="FEKFSLAMLocalization.html" title="Feature based EKF Simultaneous Localization And Mapping"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="GFLocalization.html" title="Gaussian Filter Localization"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" accesskey="U">Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Feature Map based EKF Localization</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="feature-map-based-ekf-localization">
+<h1>Feature Map based EKF Localization<a class="headerlink" href="#feature-map-based-ekf-localization" title="Link to this heading">¶</a></h1>
+</section>
+<section id="map-feature">
+<h1>Map Feature<a class="headerlink" href="#map-feature" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MapFeature.png"><img alt="MapFeature Diagram" src="_images/MapFeature.png" style="width: 159.75px; height: 248.25px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MapFeature.MapFeature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MapFeature.</span></span><span class="sig-name descname"><span class="pre">MapFeature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class provides the functionality required to use Map Features for Robot     Localization. It has methods for reading
+the feature pose using the robot the sensors (<a class="reference internal" href="#MapFeature.MapFeature.GetFeatures" title="MapFeature.MapFeature.GetFeatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetFeatures()</span></code></a>), as well as for computing its:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>observation model  (<a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hf()</span></code></a>),</p></li>
+<li><p>inverse observation model (<a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a>)</p></li>
+<li><p>and all the required Jacobians (<a class="reference internal" href="#MapFeature.MapFeature.Jhfx" title="MapFeature.MapFeature.Jhfx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Jhfx()</span></code></a>, <a class="reference internal" href="#MapFeature.MapFeature.Jhfv" title="MapFeature.MapFeature.Jhfv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Jhfv()</span></code></a>, <a class="reference internal" href="#MapFeature.MapFeature.Jgx" title="MapFeature.MapFeature.Jgx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Jgx()</span></code></a> and <a class="reference internal" href="#MapFeature.MapFeature.Jgv" title="MapFeature.MapFeature.Jgv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Jgv()</span></code></a>).</p></li>
+</ul>
+</div></blockquote>
+<p>When mapped, a feature may involve 2 different representations:</p>
+<ul class="simple">
+<li><p><strong>The observation representation:</strong> which is the representation used by the sensors to observe the feature.</p></li>
+<li><p><strong>The storage representation:</strong> which is the representation used to store the feature in the map within the state vector.</p></li>
+</ul>
+<p>For instance, a feature may be observed in polar coordinates but stored in Cartesian coordinates. In this case, the
+observation representation is the Polar coordinates and the storage representation is the Cartesian coordinates. The
+class provides methods to convert from one representation to the other (<a class="reference internal" href="#MapFeature.MapFeature.s2o" title="MapFeature.MapFeature.s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">s2o()</span></code></a> and <a class="reference internal" href="#MapFeature.MapFeature.o2s" title="MapFeature.MapFeature.o2s"><code class="xref py py-meth docutils literal notranslate"><span class="pre">o2s()</span></code></a>) and their corresponding
+Jacobians (<a class="reference internal" href="#MapFeature.MapFeature.J_s2o" title="MapFeature.MapFeature.J_s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">J_s2o()</span></code></a> and <a class="reference internal" href="#MapFeature.MapFeature.J_o2s" title="MapFeature.MapFeature.J_o2s"><code class="xref py py-meth docutils literal notranslate"><span class="pre">J_o2s()</span></code></a>). By default, the observation representation is the same as the storage representation,
+but this behaviour may be overriden in child classes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.GetFeatures">
+<span class="sig-name descname"><span class="pre">GetFeatures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.GetFeatures" title="Link to this definition">¶</a></dt>
+<dd><p>Reads the Feature observations from the sensors. For all features within the field of view of the sensor, the
+method returns the list of robot-related poses, the covariance of their corresponding observation noise, the
+corresponding observation matrix and the noise Jacobian matrix.
+<strong>This is a pure virtual method that must be overriden in child classes</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>vector of features observations in the B-Frame and the covariance of their corresponding noise.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z_k=[^Bx_{F_i}^T \cdots ^Bx_{F_j}^T \cdots ^Bx_{F_k}^T]^T\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R_k=block\_diag([R_{F_i} \cdots R_{F_j} \cdots R_{F_k}])\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_k=block\_diag([H_{F_i} \cdots H_{F_j} \cdots H_{F_k}])\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(V_K=I_{z_{nf} \times z_{nf}}\)</span></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.s2o">
+<span class="sig-name descname"><span class="pre">s2o</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.s2o" title="Link to this definition">¶</a></dt>
+<dd><p>Conversion function from the storage representation to the observation representation.
+By default, it returns the same vector as the one provided as input, assuming that the observation representation is the same as the storage representation.
+In case it is not, this method must be overriden in the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – vector in the storage representation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vector in the observation representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.o2s">
+<span class="sig-name descname"><span class="pre">o2s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.o2s" title="Link to this definition">¶</a></dt>
+<dd><p>Conversion function from the observation representation to the storage representation. By default, it returns the
+same vector as the one provided as input, assuming that the observation representation is the same as the storage representation.
+In case it is not, this method must be overriden in child classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – vector in the observation representation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vector in the storage representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.J_s2o">
+<span class="sig-name descname"><span class="pre">J_s2o</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.J_s2o" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the conversion function from the storage representation to the observation representation.
+By default, it returns the identity matrix, assuming that the observation representation is the same as the storage representation.
+In case it is not, this method must be overriden in the derived class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – vector in the storage representation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the conversion function from the storage representation to the observation representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.J_o2s">
+<span class="sig-name descname"><span class="pre">J_o2s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.J_o2s" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the conversion function from the observation representation to the storage representation.
+By default, it returns the identity matrix, assuming that the observation representation is the same as the storage representation.
+In case it is not, this method must be overriden in the derived class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – vector in the observation representation</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the conversion function from the observation representation to the storage representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.hf">
+<span class="sig-name descname"><span class="pre">hf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.hf" title="Link to this definition">¶</a></dt>
+<dd><p>This is the direct observation model, implementing the feature observation equation for the data
+association hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>, the features observation vector <span class="math notranslate nohighlight">\(z_f, the state vector :math:`x_k\)</span>,
+and the observation noise <span class="math notranslate nohighlight">\(v_k\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-hf">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-hf" title="Link to this equation">¶</a></span>\[\begin{split}\mathcal{H}&amp;=[F_a~\cdots~F_b~\cdots~F_c]\\
+z_f&amp;=[z_{f_1}^T~\cdots~z_{f_i}^T~\cdots~z_{f_{n_{zf}}}^T]^T\\
+x_k&amp;=[^Nx_B^T~x_{rest}^T]^T\\
+v_k&amp;=[v_{f1_k}^T~\cdots~v_{fi_k}^T~\cdots~v_{fn_{zf_k}}^T]^T\\            z_f&amp;=h_f(x_k,v_k) \\\end{split}\]</div>
+<p>which may be expanded as follows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-hf-element-wise">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-hf-element-wise" title="Link to this equation">¶</a></span>\[\begin{split}\begin{bmatrix} z_{f_1} \\ \vdots  \\ z_{f_i} \\ \vdots \\ z_{n_{zf}} \end{bmatrix} = \begin{bmatrix} h_{F_a}(x_k,v_k) \\ \vdots \\ h_{F_b}(x_k,v_k) \\ \vdots \\ h_{Fc}(x_k,v_k) \end{bmatrix}
+= \begin{bmatrix} s2o(\ominus ^Nx_B \boxplus^Nx_{F_{a}})+ v_{f1_k}\\ \vdots \\  s2o(\ominus ^Nx_B \boxplus^Nx_{F_{b}})+ v_{fi_k}\\ \vdots \\ s2o(\ominus ^Nx_B \boxplus ^Nx_{F_{c}}) + v_{fn_{zf}}\end{bmatrix}\end{split}\]</div>
+<p>being <span class="math notranslate nohighlight">\(h_{F_j}(\cdot)\)</span> (<a class="reference internal" href="#MapFeature.MapFeature.hfj" title="MapFeature.MapFeature.hfj"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hfj()</span></code></a>) the observation function (eq. <a class="reference internal" href="#equation-eq-hfj">(5)</a>) for the data association hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> and  <a class="reference internal" href="#MapFeature.MapFeature.s2o" title="MapFeature.MapFeature.s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">s2o()</span></code></a> the conversion
+function from the storage representation to the observation one.</p>
+<p>The method computes the expected observations <span class="math notranslate nohighlight">\(h_{f}\)</span> for the observed features contained within the <span class="math notranslate nohighlight">\(z_{f}\)</span> features observation vector.
+To do it, it iterates over each feature observation <span class="math notranslate nohighlight">\(z_{f_i}\)</span> calling the method <a class="reference internal" href="#MapFeature.MapFeature.hfj" title="MapFeature.MapFeature.hfj"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hfj()</span></code></a> for its corresponding associated feature <span class="math notranslate nohighlight">\(\mathcal{H}_i=F_j\)</span>
+to compute the expected observation <span class="math notranslate nohighlight">\(h_{F_j}\)</span>, collecting all them in the returned vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk</strong> – state vector mean <span class="math notranslate nohighlight">\(\hat x_k\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vector of expected features observations corresponding to the vector of observed features <span class="math notranslate nohighlight">\(z_f\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.Jhfx">
+<span class="sig-name descname"><span class="pre">Jhfx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.Jhfx" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the Jacobian of the feature observation function <a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hf()</span></code></a> (eq. <a class="reference internal" href="#equation-eq-hf">(1)</a>), with respect to the state vector <span class="math notranslate nohighlight">\(\bar{x}_k\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jhfx">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-jhfx" title="Link to this equation">¶</a></span>\[\begin{split}J_{hfx}=\frac{\partial h_f(x_k,v_k)}{\partial x_k}=\begin{bmatrix} \frac{\partial h_{F_{a}}(x_k,v_k)}{\partial x_k} \\ \vdots \\ \frac{\partial h_{F_{b}}(x_k,v_k)}{\partial x_k} \\ \vdots \\ \frac{\partial h_{F_{c}}(x_k,v_k)}{\partial x_k} \end{bmatrix}
+=\begin{bmatrix} J_{h_{F_a}} \\ \vdots \\ J_{h_{F_b}} \\ \vdots \\ J_{h_{F_c}} \end{bmatrix}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(J_{h_{F_j}}\)</span> is the Jacobian of the observation function <a class="reference internal" href="#MapFeature.MapFeature.hfj" title="MapFeature.MapFeature.hfj"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hfj()</span></code></a> (eq. <a class="reference internal" href="#equation-eq-jhfjx">(6)</a>) for the feature <span class="math notranslate nohighlight">\(F_j`and observation :math:`z_{f_i}\)</span>.
+To do it, given a vector of observations <span class="math notranslate nohighlight">\(z_f=[z_{f_1}~\cdots~z_{f_i}~\cdots~z_{f_{n_{zf}}}]\)</span> this method iterates over each feature observation <span class="math notranslate nohighlight">\(z_{f_i}\)</span> calling the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">Jhfj()</span></code> to compute
+the Jacobian of the observation function for each feature observation (<span class="math notranslate nohighlight">\(J_{hfj}\)</span>), collecting all them in the returned Jacobian matrix <span class="math notranslate nohighlight">\(J_{hfx}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk</strong> – state vector mean <span class="math notranslate nohighlight">\(\hat x_k\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the observation function <a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hf()</span></code></a> with respect ro the robot pose <span class="math notranslate nohighlight">\(J_{hfx}=\frac{\partial h_f(\bar{x}_k,v_{f_k})}{\bar{x}_k}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.Jhfv">
+<span class="sig-name descname"><span class="pre">Jhfv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.Jhfv" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the Jacobian of the observation function <a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hf()</span></code></a> (eq. <a class="reference internal" href="#equation-eq-hf">(1)</a>) with respect to the observation noise <span class="math notranslate nohighlight">\(v_k\)</span>.
+Normally, the observation noise in the observation B-Frame is linear (see eq. <a class="reference internal" href="#equation-eq-hf-element-wise">(2)</a>) so the Jacobian is the identity matrix.</p>
+<div class="math notranslate nohighlight" id="equation-eq-jhfv">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-jhfv" title="Link to this equation">¶</a></span>\[\begin{split}J_{hfv}&amp;=\frac{\partial h_f(x_k,v_k)}{\partial v_k}\\
+&amp;=\begin{bmatrix} \frac{\partial h_{F_a}(x_k,v_k)}{\partial v_k} \\ \vdots \\ \frac{\partial h_{F_b}(x_k,v_k)}{\partial v_k} \\ \vdots \\ \frac{\partial h_{F_c}(x_k,v_k)}{\partial v_k} \end{bmatrix}
+=\begin{bmatrix}
+    \frac{\partial h_{F_a}(x_k,v_k)}{\partial v_{f1_k}} &amp;  \cdots &amp; 0 &amp; 0 &amp; 0  &amp; \cdots &amp; 0 \\
+    \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    0 &amp; \cdots &amp;  0 &amp; \frac{\partial h_{F_b}(x_k,v_k)}{\partial v_{fi_k}} &amp;  0 &amp; \cdots &amp; 0 \\
+    \vdots &amp; \ddots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    0 &amp; \cdots &amp; 0 &amp; 0 &amp; 0 &amp; \frac{\partial h_{F_c}(x_k,v_k)}{\partial v_{fn_{zf_k}}}  \\
+\end{bmatrix}= I_{n_{zf}\times n_{zf}}\end{split}\]</div>
+<p>If it is not the case, this method must be overriden.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk</strong> – state vector mean <span class="math notranslate nohighlight">\(\hat x_k\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the observation function <a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hf()</span></code></a> with respect ro the observation noise <span class="math notranslate nohighlight">\(v_k\)</span> <span class="math notranslate nohighlight">\(J_{hfv}=I_{n_{zf}\times n_{zf}}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.hfj">
+<span class="sig-name descname"><span class="pre">hfj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_bar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Fj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.hfj" title="Link to this definition">¶</a></dt>
+<dd><p>This is the direct observation model for a single feature observation  <span class="math notranslate nohighlight">\(z_{f_i}\)</span> , so it implements its related
+observation function (see eq. <a class="reference internal" href="#equation-eq-hfj">(5)</a>). For a single feature observation <span class="math notranslate nohighlight">\(z_{f_i}\)</span> of the feature <span class="math notranslate nohighlight">\(^Nx_{F_{H_i}}\)</span> the method computes its
+expected observation from the current robot pose <span class="math notranslate nohighlight">\(^Nx_B\)</span>.
+This function uses a generic implementation through the following equation:</p>
+<div class="math notranslate nohighlight" id="equation-eq-hfj">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-hfj" title="Link to this equation">¶</a></span>\[z_{f_i}=h_{F_j}(x_k,v_k)=s2o(\ominus ^Nx_B \boxplus ^Nx_{F_{j}}) + v_{fi_k}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(^Nx_B\)</span> is the robot pose included within the state vector (<span class="math notranslate nohighlight">\(x_k=[^Nx_B^T~x_{rest}^T]^T\)</span>)  and <a class="reference internal" href="#MapFeature.MapFeature.s2o" title="MapFeature.MapFeature.s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">s2o()</span></code></a> is a conversion
+function from the store representation to the observation representation.</p>
+<p>The method is called by <a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hf()</span></code></a> to compute the expected observation for each feature
+observation contained in the observation vector <span class="math notranslate nohighlight">\(z_f=[z_{f_1}^T~\cdots~z_{f_i}^T~\cdots~z_{f_{n_zf}}^T]^T\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk_bar</strong> – mean of the predicted state vector</p></li>
+<li><p><strong>Fj</strong> – map index of the observed feature: <span class="math notranslate nohighlight">\(^Nx_{F_j}=self.M[Fj]\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>expected observation of the feature <span class="math notranslate nohighlight">\(^Nx_{F_j}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.Jhfjx">
+<span class="sig-name descname"><span class="pre">Jhfjx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Fj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.Jhfjx" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the single feature direct observation model <a class="reference internal" href="#MapFeature.MapFeature.hfj" title="MapFeature.MapFeature.hfj"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hfj()</span></code></a> (eq. <a class="reference internal" href="#equation-eq-hfj">(5)</a>)  with respect to the state vector <span class="math notranslate nohighlight">\(\bar{x}_k\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jhfjx">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-jhfjx" title="Link to this equation">¶</a></span>\[\begin{split}x_k&amp;=[^Nx_B^T~x_{rest}^T]^T\\
+^Nx_B&amp;= F \cdot x_k ; F=\begin{bmatrix} I_{p\times p} &amp; 0_{p\times np} \end{bmatrix}\\
+J_{hfjx}&amp;=\frac{\partial h_{F_j}({x}_k,v_k)}{\partial {x}_k}=
+\frac{\partial s2o(\ominus F \cdot x_k \boxplus ^Nx_{F_j})+v_{fi_k}}{\partial {x}_k}\\&amp;=
+ J_{s2o}(\ominus ^Nx_B \boxplus^Nx_{F_{j}}) J_{1\boxplus}(\ominus ^Nx_B,^Nx_{F_{j}} ) J_{\ominus}(^Nx_B ) F\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p\)</span> is the dimension of the robot pose <span class="math notranslate nohighlight">\(^Nx_B\)</span> and <span class="math notranslate nohighlight">\(np\)</span> is the dimension of the rest of the state vector <span class="math notranslate nohighlight">\(x_{rest}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk</strong> – state vector mean</p></li>
+<li><p><strong>Fj</strong> – map index of the observed feature</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian matrix defined in eq. <a class="reference internal" href="#equation-eq-jhfjx">(6)</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.g">
+<span class="sig-name descname"><span class="pre">g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BxFj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.g" title="Link to this definition">¶</a></dt>
+<dd><p>This method provides a generic implementation of the inverse observation model. It computes the feature pose in the N-Frame <span class="math notranslate nohighlight">\(^Nx_{F_j}\)</span> by compounding the robot pose <span class="math notranslate nohighlight">\(^Nx_B\)</span>, from where the observation was taken, with the  B-Frame referenced feature
+observation <span class="math notranslate nohighlight">\(^Bx_{F_j}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-g">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-g" title="Link to this equation">¶</a></span>\[^Nx_{F_j} = ^Nx_B \boxplus o2s(^Bx_{F_j} +v_k)\]</div>
+<p>In this case, <a class="reference internal" href="#MapFeature.MapFeature.o2s" title="MapFeature.MapFeature.o2s"><code class="xref py py-meth docutils literal notranslate"><span class="pre">o2s()</span></code></a> is the conversion function converting from the observation space to the representation one.
+It is worth noting that the robot pose <span class="math notranslate nohighlight">\(^Nx_B\)</span> is included within the state vector <span class="math notranslate nohighlight">\(x_k\)</span> but might not be the whole state vector.
+For instance, in some cases the state vector may include as well the robot velocity <span class="math notranslate nohighlight">\(x_k=[^Nx_B^T~^B\nu_k^T]^T\)</span>.
+Note that the <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a> works with a single feature observation, instead than with a vector of feature observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk</strong> – mean state vector containing the robot pose <span class="math notranslate nohighlight">\(^Nx_B\)</span> from where the observation was taken</p></li>
+<li><p><strong>BxFj</strong> – feature observation in the B-Frame <span class="math notranslate nohighlight">\(^Bx_{F_j}\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>mean feature pose in the N-Frame <span class="math notranslate nohighlight">\(^Nx_{F_j}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.Jgx">
+<span class="sig-name descname"><span class="pre">Jgx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BxFj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.Jgx" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the inverse observation model <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a>, with respect to the state vector <span class="math notranslate nohighlight">\(x_k\)</span>.
+According to the generic implementation of the inverse observation model <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a> eq. <a class="reference internal" href="#equation-eq-g">(7)</a>, the Jacobian is computed as follows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jgx">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-jgx" title="Link to this equation">¶</a></span>\[J_{gx}=\frac{\partial g(^Nx_B,^Bx_{F_j},v_k)}{\partial x_k}=\begin{bmatrix} J_{1\boxplus}(^Nx_B,o2s(^Bx_{F_j})) &amp; 0  \end{bmatrix}\]</div>
+<p>The zero submatrix, if present, corresponds to the derivate with respect to the non-positional elements of the
+state vector, for instance the robot velocity <span class="math notranslate nohighlight">\(^B\nu_k\)</span>, in case this was included within the state vector.
+If the state vector only containes the pose, then the 0 submatix vanishes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk_bar</strong> – predicted state vector</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the inverse observation model <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a> with respect to the state vector (eq. <a class="reference internal" href="#equation-eq-jgx">(8)</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.MapFeature.Jgv">
+<span class="sig-name descname"><span class="pre">Jgv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BxFj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.MapFeature.Jgv" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the inverse observation model <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a>, with respect to the observation noise <span class="math notranslate nohighlight">\(v_k\)</span>.
+According to the generic implementation of the inverse observation model <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a> eq. <a class="reference internal" href="#equation-eq-g">(7)</a>, the Jacobian is computed as follows:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jgv">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-jgv" title="Link to this equation">¶</a></span>\[J_{gv}=\frac{\partial g(^Nx_k,^Bx_{F_j},v_k)}{\partial v_k}=J_{2\boxplus}(^Nx_B,o2s(^Bx_{F_j})) J_{o2s}(^Bx_{F_j})\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk</strong> – state vector containing the robot pose <span class="math notranslate nohighlight">\(^Nx_B\)</span> from where the observation was taken</p></li>
+<li><p><strong>BxFj</strong> – feature observation in the B-Frame <span class="math notranslate nohighlight">\(^Bx_{F_j}\)</span></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the inverse observation model <a class="reference internal" href="#MapFeature.MapFeature.g" title="MapFeature.MapFeature.g"><code class="xref py py-meth docutils literal notranslate"><span class="pre">g()</span></code></a> with respect to the observation noise <span class="math notranslate nohighlight">\(J_{gv}\)</span> (see eq. <a class="reference internal" href="#equation-eq-jgv">(9)</a>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="cartesian-map-feature">
+<h1>Cartesian Map Feature<a class="headerlink" href="#cartesian-map-feature" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Cartesian2DMapFeature.png"><img alt="Cartesian2DMapFeature Diagram" src="_images/Cartesian2DMapFeature.png" style="width: 227.25px; height: 354.0px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DMapFeature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MapFeature.</span></span><span class="sig-name descname"><span class="pre">Cartesian2DMapFeature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DMapFeature" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#MapFeature.MapFeature" title="MapFeature.MapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapFeature</span></code></a></p>
+<p>This class inherits from the <a class="reference internal" href="#MapFeature.MapFeature" title="MapFeature.MapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapFeature</span></code></a> and implements a 2D Cartesian feature model for the MBL problem. The Cartesian coordinates are used for both,
+observing the feature and for its storage within the map. This class overrides the <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature.GetFeatures" title="MapFeature.Cartesian2DMapFeature.GetFeatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetFeatures()</span></code></a> method to read
+the 2D Cartesian Features from the robot.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DMapFeature.GetFeatures">
+<span class="sig-name descname"><span class="pre">GetFeatures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DMapFeature.GetFeatures" title="Link to this definition">¶</a></dt>
+<dd><p>Reads the Features observations from the sensors. For all features within the field of view of the sensor, the
+method returns the list of robot-related poses and the covariance of their corresponding observation noise in <strong>2D Cartesian coordinates</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return zk, Rk<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Cartesian features observations in the B-Frame and the covariance of their corresponding observation noise:
+* <span class="math notranslate nohighlight">\(z_k=[^Bx_{F_i}^T \cdots ^Bx_{F_j}^T \cdots ^Bx_{F_k}^T]^T\)</span>
+* <span class="math notranslate nohighlight">\(R_k=block\_diag([R_{F_i} \cdots R_{F_j} \cdots R_{F_k}])\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="cartesian-map-feature-observed-in-polar-coordinates">
+<h1>Cartesian Map Feature Observed in Polar Coordinates<a class="headerlink" href="#cartesian-map-feature-observed-in-polar-coordinates" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/Cartesian2DStoredPolarObservedMapFeature.png"><img alt="Cartesian2DStoredPolarObservedMapFeature Diagram" src="_images/Cartesian2DStoredPolarObservedMapFeature.png" style="width: 342.75px; height: 516.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DStoredPolarObservedMapFeature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MapFeature.</span></span><span class="sig-name descname"><span class="pre">Cartesian2DStoredPolarObservedMapFeature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature" title="MapFeature.Cartesian2DMapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code></a></p>
+<p>This class implements the <a class="reference internal" href="#MapFeature.MapFeature" title="MapFeature.MapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapFeature</span></code></a> interface for landmarks observed in polar coordinates and stored in Cartesian coordinates.
+It inherits from <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature" title="MapFeature.Cartesian2DMapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code></a> which provides the <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature.GetFeatures" title="MapFeature.Cartesian2DMapFeature.GetFeatures"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Cartesian2DMapFeature.GetFeatures()</span></code></a> in charge of reading the 2D
+Cartesian Features from the robot and overrides the <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s"><code class="xref py py-meth docutils literal notranslate"><span class="pre">o2s()</span></code></a> and <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">s2o()</span></code></a> methods to allow the conversion between the observation and storage representations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DStoredPolarObservedMapFeature.GetFeatures">
+<span class="sig-name descname"><span class="pre">GetFeatures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.GetFeatures" title="Link to this definition">¶</a></dt>
+<dd><p>Reads the Features observations from the sensors. For all features within the field of view of the sensor, the
+method returns the list of robot-related poses and the covariance of their corresponding observation noise in <strong>2D Cartesian coordinates</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return zk, Rk<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of features observations in the B-Frame and the covariance of their corresponding observation noise:
+* <span class="math notranslate nohighlight">\(z_k=[^Bx_{F_i}^T \cdots ^Bx_{F_j}^T \cdots ^Bx_{F_k}^T]^T\)</span>
+* <span class="math notranslate nohighlight">\(R_k=block\_diag([R_{F_i} \cdots R_{F_j} \cdots R_{F_k}])\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s">
+<span class="sig-name descname"><span class="pre">o2s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the feature from Polar (observation)  to Cartesian (storage) coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p</strong> – feature in the Polar (observation) coordinates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>feature in the Cartesian (storage) frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o">
+<span class="sig-name descname"><span class="pre">s2o</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o" title="Link to this definition">¶</a></dt>
+<dd><p>Converts the feature from Cartesian (storage) to Polar (observation) coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>c</strong> – feature in the Cartesian (storage) frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>feature in the Polar (observation) coordinates</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DStoredPolarObservedMapFeature.J_o2s">
+<span class="sig-name descname"><span class="pre">J_o2s</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.J_o2s" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s"><code class="xref py py-meth docutils literal notranslate"><span class="pre">o2s()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>p</strong> – feature in the observation frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s"><code class="xref py py-meth docutils literal notranslate"><span class="pre">o2s()</span></code></a> function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MapFeature.Cartesian2DStoredPolarObservedMapFeature.J_s2o">
+<span class="sig-name descname"><span class="pre">J_s2o</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.J_s2o" title="Link to this definition">¶</a></dt>
+<dd><p>Jacobian of the <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">s2o()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>c</strong> – feature in the sensor frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Jacobian of the <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o"><code class="xref py py-meth docutils literal notranslate"><span class="pre">s2o()</span></code></a> function</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id1">
+<h1>Feature Map based EKF Localization<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/FEKFMBL.png"><img alt="FEKFMBL Diagram" src="_images/FEKFMBL.png" style="width: 474.0px; height: 1281.0px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FEKFMBL.</span></span><span class="sig-name descname"><span class="pre">FEKFMBL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="GFLocalization.html#GFLocalization.GFLocalization" title="GFLocalization.GFLocalization"><code class="xref py py-class docutils literal notranslate"><span class="pre">GFLocalization</span></code></a>, <a class="reference internal" href="#MapFeature.MapFeature" title="MapFeature.MapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapFeature</span></code></a></p>
+<p>Feature Extended Kalman Filter Map based Localization class. Inherits from <a class="reference internal" href="GFLocalization.html#GFLocalization.GFLocalization" title="GFLocalization.GFLocalization"><code class="xref py py-class docutils literal notranslate"><span class="pre">GFLocalization.GFLocalization</span></code></a> and <a class="reference internal" href="#MapFeature.MapFeature" title="MapFeature.MapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapFeature.MapFeature</span></code></a>.
+The first one provides the basic functionality of a localization algorithm, while the second one provides the basic functionality required to use features.
+<a class="reference internal" href="#FEKFMBL.FEKFMBL" title="FEKFMBL.FEKFMBL"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL.FEKFMBL</span></code></a> extends those classes by adding functionality to use a map based on features.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.xB">
+<span class="sig-name descname"><span class="pre">xB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-2</span></em><a class="headerlink" href="#FEKFMBL.FEKFMBL.xB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.x_eta">
+<span class="sig-name descname"><span class="pre">x_eta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#FEKFMBL.FEKFMBL.x_eta" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the FEKFMBL class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – Feature Based Map <span class="math notranslate nohighlight">\(M =[^Nx_{F_1}^T~...~^Nx_{F_{n_f}}^T]^T\)</span></p></li>
+<li><p><strong>alpha</strong> – Chi2 tail probability. Confidence interaval of the individual compatibility test</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the EKFLocalization constructor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.h">
+<span class="sig-name descname"><span class="pre">h</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.h" title="Link to this definition">¶</a></dt>
+<dd><p>We do differenciate two types of observations:</p>
+<ul class="simple">
+<li><p>Measurements: :math:<a href="#id2"><span class="problematic" id="id3">`</span></a>z_m`corresponds to observations of the state vector (position, velocity, etc…)</p></li>
+<li><p>Feature Observations: <span class="math notranslate nohighlight">\(z_f\)</span> correspond to observations of the features (CartesianFeature, PolarFeature, SphericalFeature, etc…).</p></li>
+</ul>
+<p>This method implements the full direct observation model including the measurements and feature observations:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mblh">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-mblh" title="Link to this equation">¶</a></span>\[\begin{split}z_k = h(x_k,v_k) \Rightarrow \begin{bmatrix} z_m \\ z_f \end{bmatrix} = \begin{bmatrix} h_m(x_k,v_m) \\ h_f(x_k,v_f) \end{bmatrix} ~;~ v_k=[v_m^T ~v_f^T]^T\end{split}\]</div>
+<p>This method calls <code class="xref py py-meth docutils literal notranslate"><span class="pre">h_m()</span></code> to compute the expected measurements and  the <a class="reference internal" href="#MapFeature.MapFeature.hf" title="MapFeature.MapFeature.hf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MapFeature.MapFeature.hf()</span></code></a> method to compute the expected feature observations.
+The method returns a stacked vector of expected measurements and feature observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk</strong> – mean state vector used as linearization point</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Joint stacked vector of the expected measurement and feature observations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.hm">
+<span class="sig-name descname"><span class="pre">hm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.hm" title="Link to this definition">¶</a></dt>
+<dd><p>Measurement observation model. This method computes the expected measurements <span class="math notranslate nohighlight">\(h_m(x_k,v_m)\)</span> given the
+mean state vector <span class="math notranslate nohighlight">\(x_k\)</span> and the measurement noise <span class="math notranslate nohighlight">\(v_m\)</span>. It is implemented by calling to the ancestor
+class <a class="reference internal" href="EKF.html#EKF.EKF.h" title="EKF.EKF.h"><code class="xref py py-meth docutils literal notranslate"><span class="pre">EKF.EKF.h()</span></code></a> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xk</strong> – mean state vector.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>expected measruments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.SquaredMahalanobisDistance">
+<span class="sig-name descname"><span class="pre">SquaredMahalanobisDistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hfj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pfj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zfi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rfi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.SquaredMahalanobisDistance" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the squared Mahalanobis distance between the expected feature observation <span class="math notranslate nohighlight">\(hf_j\)</span> and the feature observation <span class="math notranslate nohighlight">\(z_{f_i}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hfj</strong> – expected feature observation</p></li>
+<li><p><strong>Pfj</strong> – expected feature observation covariance</p></li>
+<li><p><strong>zfi</strong> – feature observation</p></li>
+<li><p><strong>Rfi</strong> – feature observation covariance</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Squared Mahalanobis distance between the expected feature observation <span class="math notranslate nohighlight">\(hf_j\)</span> and the feature observation <span class="math notranslate nohighlight">\(z_{f_i}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.IndividualCompatibility">
+<span class="sig-name descname"><span class="pre">IndividualCompatibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D2_ij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.IndividualCompatibility" title="Link to this definition">¶</a></dt>
+<dd><p>Computes the individual compatibility test for the squared Mahalanobis distance <span class="math notranslate nohighlight">\(D^2_{ij}\)</span>. The test is performed using the Chi-Square distribution with <span class="math notranslate nohighlight">\(dof\)</span> degrees of freedom and a significance level <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D2_ij</strong> – squared Mahalanobis distance</p></li>
+<li><p><strong>dof</strong> – number of degrees of freedom</p></li>
+<li><p><strong>alpha</strong> – confidence level</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bolean value indicating if the Mahalanobis distance is smaller than the threshold defined by the confidence level</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.ICNN">
+<span class="sig-name descname"><span class="pre">ICNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.ICNN" title="Link to this definition">¶</a></dt>
+<dd><p>Individual Compatibility Nearest Neighbor (ICNN) data association algorithm. Given a set of expected feature
+observations <span class="math notranslate nohighlight">\(h_f\)</span> and a set of feature observations <span class="math notranslate nohighlight">\(z_f\)</span>, the algorithm returns a pairing hypothesis
+<span class="math notranslate nohighlight">\(H\)</span> that associates each feature observation <span class="math notranslate nohighlight">\(z_{f_i}\)</span> with the expected feature observation
+<span class="math notranslate nohighlight">\(h_{f_j}\)</span> that minimizes the Mahalanobis distance <span class="math notranslate nohighlight">\(D^2_{ij}\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hf</strong> – vector of expected feature observations</p></li>
+<li><p><strong>Phf</strong> – Covariance matrix of the expected feature observations</p></li>
+<li><p><strong>zf</strong> – vector of feature observations</p></li>
+<li><p><strong>Rf</strong> – Covariance matrix of the feature observations</p></li>
+<li><p><strong>dim</strong> – feature dimensionality</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The vector of asociation hypothesiss</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.DataAssociation">
+<span class="sig-name descname"><span class="pre">DataAssociation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.DataAssociation" title="Link to this definition">¶</a></dt>
+<dd><p>Data association algorithm. Given state vector (<span class="math notranslate nohighlight">\(x_k\)</span> and <span class="math notranslate nohighlight">\(P_k\)</span>) including the robot pose and a set of feature observations
+<span class="math notranslate nohighlight">\(z_f\)</span> and its covariance matrices <span class="math notranslate nohighlight">\(R_f\)</span>,  the algorithm  computes the expected feature
+observations <span class="math notranslate nohighlight">\(h_f\)</span> and its covariance matrices <span class="math notranslate nohighlight">\(P_f\)</span>. Then it calls an association algorithms like
+<a class="reference internal" href="#FEKFMBL.FEKFMBL.ICNN" title="FEKFMBL.FEKFMBL.ICNN"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ICNN()</span></code></a> (JCBB, etc.) to build a pairing hypothesis associating the observed features <span class="math notranslate nohighlight">\(z_f\)</span>
+with the expected features observations <span class="math notranslate nohighlight">\(h_f\)</span>.</p>
+<p>The vector of association hypothesis <span class="math notranslate nohighlight">\(H\)</span> is stored in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">H</span></code> attribute and its dimension is the
+number of observed features within <span class="math notranslate nohighlight">\(z_f\)</span>. Given the <span class="math notranslate nohighlight">\(j^{th}\)</span> feature observation <span class="math notranslate nohighlight">\(z_{f_j}\)</span>, <em>self.H[j]=i</em>
+means that <span class="math notranslate nohighlight">\(z_{f_j}\)</span> has been associated with the <span class="math notranslate nohighlight">\(i^{th}\)</span> feature . If <em>self.H[j]=None</em> means that <span class="math notranslate nohighlight">\(z_{f_j}\)</span>
+has not been associated either because it is a new observed feature or because it is an outlier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk</strong> – mean state vector including the robot pose</p></li>
+<li><p><strong>Pk</strong> – covariance matrix of the state vector</p></li>
+<li><p><strong>zf</strong> – vector of feature observations</p></li>
+<li><p><strong>Rf</strong> – Covariance matrix of the feature observations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The vector of asociation hypothesiss</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.Localize">
+<span class="sig-name descname"><span class="pre">Localize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xk_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pk_1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.Localize" title="Link to this definition">¶</a></dt>
+<dd><p>Localization iteration. Reads the input of the motion model, performs the prediction step (<a class="reference internal" href="EKF.html#EKF.EKF.Prediction" title="EKF.EKF.Prediction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">EKF.EKF.Prediction()</span></code></a>), reads the measurements
+and the features, solves the data association calling <a class="reference internal" href="#FEKFMBL.FEKFMBL.DataAssociation" title="FEKFMBL.FEKFMBL.DataAssociation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataAssociation()</span></code></a> and the performs the update step (<a class="reference internal" href="EKF.html#EKF.EKF.Update" title="EKF.EKF.Update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">EKF.EKF.Update()</span></code></a>) and logs the results.
+The method also plots the uncertainty ellipse (<a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="FEKFMBL.FEKFMBL.PlotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PlotUncertainty()</span></code></a>) of the robot pose, the feature observations and the expected feature observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xk_1</strong> – previous state vector</p></li>
+<li><p><strong>Pk_1</strong> – previous covariance matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return xk, Pk<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated state vector and covariance matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.StackMeasurementsAndFeatures">
+<span class="sig-name descname"><span class="pre">StackMeasurementsAndFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.StackMeasurementsAndFeatures" title="Link to this definition">¶</a></dt>
+<dd><p>Given the vector of  measurements observations <span class="math notranslate nohighlight">\(z_m\)</span> together with their covariance matrix <span class="math notranslate nohighlight">\(R_m\)</span>,
+the vector of feature observations <span class="math notranslate nohighlight">\(z_f\)</span> together with their covariance matrix <span class="math notranslate nohighlight">\(R_f\)</span>, The measurement observation matrix <span class="math notranslate nohighlight">\(H_m\)</span>, the
+measurement observation noise matrix <span class="math notranslate nohighlight">\(V_m\)</span> and the vector of feature associations <span class="math notranslate nohighlight">\(H\)</span>, this method
+returns the joint observation vector <span class="math notranslate nohighlight">\(z_k\)</span>, its related covariance matrix <span class="math notranslate nohighlight">\(R_k\)</span>, the stacked
+Observation matrix <span class="math notranslate nohighlight">\(H_k\)</span>, the stacked noise observation matrix <span class="math notranslate nohighlight">\(V_k\)</span>, the vector of non-paired features
+<span class="math notranslate nohighlight">\(z_{np}\)</span> and its noise covariance matrix <span class="math notranslate nohighlight">\(R_{np}\)</span>.
+It is assumed that the measurements and the features observations are independent, therefore the covariance matrix
+of the joint observation vector is a block diagonal matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zm</strong> – measurement observations vector</p></li>
+<li><p><strong>Rm</strong> – covariance matrix of the measurement observations</p></li>
+<li><p><strong>Hm</strong> – measurement observation matrix</p></li>
+<li><p><strong>Vm</strong> – measurement observation noise matrix</p></li>
+<li><p><strong>zf</strong> – feature observations vector</p></li>
+<li><p><strong>Rf</strong> – covariance matrix of the feature observations</p></li>
+<li><p><strong>H</strong> – features associations vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vector of joint measurement and feature observations <span class="math notranslate nohighlight">\(z_k\)</span> and its covariance matrix <span class="math notranslate nohighlight">\(R_k\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.SplitFeatures">
+<span class="sig-name descname"><span class="pre">SplitFeatures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.SplitFeatures" title="Link to this definition">¶</a></dt>
+<dd><p>Given the vector of feature observations <span class="math notranslate nohighlight">\(z_f\)</span> and their covariance matrix <span class="math notranslate nohighlight">\(R_f\)</span>, and the vector of
+feature associations <span class="math notranslate nohighlight">\(H\)</span>, this function returns the vector of paired feature observations <span class="math notranslate nohighlight">\(z_p\)</span> together with
+its covariance matrix <span class="math notranslate nohighlight">\(R_p\)</span>, and the vector of non-paired feature observations <span class="math notranslate nohighlight">\(z_{np}\)</span> together with its covariance matrix <span class="math notranslate nohighlight">\(R_{np}\)</span>.
+The paired observations will be used to update the filter, while the non-paired ones will be considered as outliers.
+In the case of SLAM, they become new feature candidates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zf</strong> – vector of feature observations</p></li>
+<li><p><strong>Rf</strong> – covariance matrix of feature observations</p></li>
+<li><p><strong>H</strong> – hypothesis of feature associations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vector of paired feature observations <span class="math notranslate nohighlight">\(z_p\)</span>, covariance matrix of paired feature observations <span class="math notranslate nohighlight">\(R_p\)</span>, vector of non-paired feature observations <span class="math notranslate nohighlight">\(z_{np}\)</span>, covariance matrix of non-paired feature observations <span class="math notranslate nohighlight">\(R_{np}\)</span>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.PlotFeatureObservationUncertainty">
+<span class="sig-name descname"><span class="pre">PlotFeatureObservationUncertainty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.PlotFeatureObservationUncertainty" title="Link to this definition">¶</a></dt>
+<dd><p>Plots the uncertainty ellipse of the feature observations. This method is called by <a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="FEKFMBL.FEKFMBL.PlotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">FEKFMBL.PlotUncertainty()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zf</strong> – vector of feature observations</p></li>
+<li><p><strong>Rf</strong> – covariance matrix of the feature observations</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.PlotExpectedFeaturesObservationsUncertainty">
+<span class="sig-name descname"><span class="pre">PlotExpectedFeaturesObservationsUncertainty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.PlotExpectedFeaturesObservationsUncertainty" title="Link to this definition">¶</a></dt>
+<dd><p>For all features in the map, this method plots the uncertainty ellipse of the expected feature observations. This method is called by <a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="FEKFMBL.FEKFMBL.PlotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">FEKFMBL.PlotUncertainty()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.PlotSampleObservationSpace">
+<span class="sig-name descname"><span class="pre">PlotSampleObservationSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NxB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BxFj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BPFj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.PlotSampleObservationSpace" title="Link to this definition">¶</a></dt>
+<dd><p>Plots n samples from a Gaussian distribution with mean <span class="math notranslate nohighlight">\(x\)</span> and covariance <span class="math notranslate nohighlight">\(P\)</span>. This method is called by <a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="FEKFMBL.FEKFMBL.PlotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">FEKFMBL.PlotUncertainty()</span></code></a>.
+This is a method for testing. It can be used to compare the uncertainty ellipse with the samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – mean of the Gaussian distribution</p></li>
+<li><p><strong>P</strong> – covariance of the Gaussian distribution</p></li>
+<li><p><strong>n</strong> – number of samples</p></li>
+<li><p><strong>color</strong> – color of the samples</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.PlotSample">
+<span class="sig-name descname"><span class="pre">PlotSample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.PlotSample" title="Link to this definition">¶</a></dt>
+<dd><p>Plots n samples from a Gaussian distribution with mean <span class="math notranslate nohighlight">\(x\)</span> and covariance <span class="math notranslate nohighlight">\(P\)</span>. This method is called by <a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="FEKFMBL.FEKFMBL.PlotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">FEKFMBL.PlotUncertainty()</span></code></a>.
+This is a method for testing. It can be used to compare the uncertainty ellipse with the samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – mean of the Gaussian distribution</p></li>
+<li><p><strong>P</strong> – covariance of the Gaussian distribution</p></li>
+<li><p><strong>n</strong> – number of samples</p></li>
+<li><p><strong>color</strong> – color of the samples</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.PlotRobotUncertainty">
+<span class="sig-name descname"><span class="pre">PlotRobotUncertainty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.PlotRobotUncertainty" title="Link to this definition">¶</a></dt>
+<dd><p>Plots the robot trajectory and its uncertainty ellipse. This method is called by <a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="FEKFMBL.FEKFMBL.PlotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">FEKFMBL.PlotUncertainty()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.PlotUncertainty">
+<span class="sig-name descname"><span class="pre">PlotUncertainty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.PlotUncertainty" title="Link to this definition">¶</a></dt>
+<dd><p>Plots the uncertainty ellipses of the robot pose (<a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotRobotUncertainty" title="FEKFMBL.FEKFMBL.PlotRobotUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PlotRobotUncertainty()</span></code></a>), the feature observations
+(<a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotFeatureObservationUncertainty" title="FEKFMBL.FEKFMBL.PlotFeatureObservationUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PlotFeatureObservationUncertainty()</span></code></a>) and the expected feature observations (<a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotExpectedFeaturesObservationsUncertainty" title="FEKFMBL.FEKFMBL.PlotExpectedFeaturesObservationsUncertainty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PlotExpectedFeaturesObservationsUncertainty()</span></code></a>).
+This method is called by <a class="reference internal" href="#FEKFMBL.FEKFMBL.Localize" title="FEKFMBL.FEKFMBL.Localize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">FEKFMBL.Localize()</span></code></a> at the end of a localization iteration in order to update
+the online  visualization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zf</strong> – vector of feature observations</p></li>
+<li><p><strong>Rf</strong> – covariance matrix of the feature observations</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEKFMBL.FEKFMBL.GetRobotPoseCovariance">
+<span class="sig-name descname"><span class="pre">GetRobotPoseCovariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Pk</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEKFMBL.FEKFMBL.GetRobotPoseCovariance" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the robot pose covariance from the state covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Pk</strong> – state vector covariance matrix <span class="math notranslate nohighlight">\(P_k\)</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>robot pose covariance <span class="math notranslate nohighlight">\(P_{B_k}\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="dof-auv">
+<h1>4 DOF AUV<a class="headerlink" href="#dof-auv" title="Link to this heading">¶</a></h1>
+<section id="dof-auv-map-based-ekf-localization-using-an-input-velocity-motion-model-with-depht-yaw-and-linear-velocity-measurements-and-a-2d-cartesian-feature-observation-model">
+<h2>4 DOF AUV Map based EKF Localization using an Input Velocity Motion Model with Depht, Yaw and Linear Velocity Measurements, and  a 2D Cartesian Feature Observation Model<a class="headerlink" href="#dof-auv-map-based-ekf-localization-using-an-input-velocity-motion-model-with-depht-yaw-and-linear-velocity-measurements-and-a-2d-cartesian-feature-observation-model" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.png"><img alt="MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM Diagram" src="_images/MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.png" style="width: 1277.25px; height: 1398.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.</span></span><span class="sig-name descname"><span class="pre">MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature" title="MapFeature.Cartesian2DMapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code></a>, <a class="reference internal" href="#FEKFMBL.FEKFMBL" title="FEKFMBL.FEKFMBL"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code></a>, <a class="reference internal" href="GFLocalization.html#EKF_4DOFAUV_InputVelocityMM_DVLDepthYawOM.EKF_4DOFAUV_InputVelocityMM_DVLDepthYawOM" title="EKF_4DOFAUV_InputVelocityMM_DVLDepthYawOM.EKF_4DOFAUV_InputVelocityMM_DVLDepthYawOM"><code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_4DOFAUV_InputVelocityMM_DVLDepthYawOM</span></code></a></p>
+<p>Feature EKF Map based Localization of a 4 DOF AUV (<span class="math notranslate nohighlight">\(x_k=[^Nx_{B_k} ~^Ny_{B_k} ~^Nz_{B_k} ~^N\psi_{B_k} ~]^T\)</span>) using a 2D Cartesian feature map (<span class="math notranslate nohighlight">\(M=[[^Nx_{F_1} ~^Ny_{F_1}] ~[x_{F_2} ~^Ny_{F_2}] ~... ~[^Nx_{F_n} ~^Ny_{F_n}]]^T\)</span>),
+and an input velocity motion model (<span class="math notranslate nohighlight">\(u_k=[^Bu_k ~^Bv_k ~^Bw_k ~^Br_k]^T\)</span>). The linear velocity is measured by a DVL (<span class="math notranslate nohighlight">\(z_k=[^Bv_k ~^Bw_k]^T\)</span>), the depth is measured by a depth sensor (<span class="math notranslate nohighlight">\(z_k=[^Nz_{B_k}]^T\)</span>), and the yaw is measured by a compass (<span class="math notranslate nohighlight">\(z_k=[^N\psi_{B_k}]^T\)</span>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the FEKFMBL class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – Feature Based Map <span class="math notranslate nohighlight">\(M =[^Nx_{F_1}^T~...~^Nx_{F_{n_f}}^T]^T\)</span></p></li>
+<li><p><strong>alpha</strong> – Chi2 tail probability. Confidence interaval of the individual compatibility test</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the EKFLocalization constructor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="dof-differential-drive-mobile-robot">
+<h1>3 DOF Differential Drive Mobile Robot<a class="headerlink" href="#dof-differential-drive-mobile-robot" title="Link to this heading">¶</a></h1>
+<section id="differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-cartesian-feature-observation-model">
+<h2>Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Cartesian Feature Observation Model<a class="headerlink" href="#differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-cartesian-feature-observation-model" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.png"><img alt="MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM Diagram" src="_images/MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.png" style="width: 1219.5px; height: 1398.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.</span></span><span class="sig-name descname"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature" title="MapFeature.Cartesian2DMapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code></a>, <a class="reference internal" href="#FEKFMBL.FEKFMBL" title="FEKFMBL.FEKFMBL"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code></a>, <a class="reference internal" href="GFLocalization.html#EKF_3DOFDifferentialDriveInputDisplacement.EKF_3DOFDifferentialDriveInputDisplacement" title="EKF_3DOFDifferentialDriveInputDisplacement.EKF_3DOFDifferentialDriveInputDisplacement"><code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveInputDisplacement</span></code></a></p>
+<p>Feature EKF Map based Localization of a 3 DOF Differential Drive Mobile Robot (<span class="math notranslate nohighlight">\(x_k=[^Nx_{B_k} ~^Ny_{B_k} ~^N\psi_{B_k} ~]^T\)</span>) using a 2D Cartesian feature map (<span class="math notranslate nohighlight">\(M=[[^Nx_{F_1} ~^Ny_{F_1}] ~[x_{F_2} ~^Ny_{F_2}] ~... ~[^Nx_{F_n} ~^Ny_{F_n}]]^T\)</span>),
+and an input displacement motion model (<span class="math notranslate nohighlight">\(u_k=[^B\Delta x_k ~^B\Delta y_k ^B\Delta z_k ~^B\Delta \psi_k]^T\)</span>). The class inherits from the following classes:
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code>: 2D Cartesian MapFeature using the Catesian coordinates for both, storage and landmark observations.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code>: Feature EKF Map based Localization class.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveInputDisplacement</span></code>: EKF for 3 DOF Differential Drive Mobile Robot with input displacement motion model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the FEKFMBL class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – Feature Based Map <span class="math notranslate nohighlight">\(M =[^Nx_{F_1}^T~...~^Nx_{F_{n_f}}^T]^T\)</span></p></li>
+<li><p><strong>alpha</strong> – Chi2 tail probability. Confidence interaval of the individual compatibility test</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the EKFLocalization constructor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-feature-store-in-cartesina-and-observed-in-polar-coordinates">
+<h2>Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Feature Store in Cartesina and Observed in Polar Coordinates<a class="headerlink" href="#differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-feature-store-in-cartesina-and-observed-in-polar-coordinates" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.png"><img alt="MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM Diagram" src="_images/MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.png" style="width: 1324.5px; height: 1398.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.</span></span><span class="sig-name descname"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature" title="MapFeature.Cartesian2DStoredPolarObservedMapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature</span></code></a>, <a class="reference internal" href="#FEKFMBL.FEKFMBL" title="FEKFMBL.FEKFMBL"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code></a>, <a class="reference internal" href="GFLocalization.html#EKF_3DOFDifferentialDriveInputDisplacement.EKF_3DOFDifferentialDriveInputDisplacement" title="EKF_3DOFDifferentialDriveInputDisplacement.EKF_3DOFDifferentialDriveInputDisplacement"><code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveInputDisplacement</span></code></a></p>
+<p>Feature EKF Map based Localization of a 3 DOF Differential Drive Mobile Robot (<span class="math notranslate nohighlight">\(x_k=[^Nx_{B_k} ~^Ny_{B_k} ~^N\psi_{B_k} ~]^T\)</span>) using a 2D Cartesian feature map (<span class="math notranslate nohighlight">\(M=[[^Nx_{F_1} ~^Ny_{F_1}] ~[x_{F_2} ~^Ny_{F_2}] ~... ~[^Nx_{F_n} ~^Ny_{F_n}]]^T\)</span>),
+and an input displacement motion model (<span class="math notranslate nohighlight">\(u_k=[^B\Delta x_k~ ^B\Delta y_k ~^B\Delta z_k ~^B\Delta\psi_k]^T\)</span>). The class inherits from the following classes:
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature</span></code>: 2D Cartesian MapFeature using the Catesian coordinates for storage and polar coordinates for landmark observations.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code>: Feature EKF Map based Localization class.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveInputDisplacement</span></code>: EKF for 3 DOF Differential Drive Mobile Robot with input displacement motion model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the FEKFMBL class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – Feature Based Map <span class="math notranslate nohighlight">\(M =[^Nx_{F_1}^T~...~^Nx_{F_{n_f}}^T]^T\)</span></p></li>
+<li><p><strong>alpha</strong> – Chi2 tail probability. Confidence interaval of the individual compatibility test</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the EKFLocalization constructor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-polar-feature-observation-model">
+<h2>Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Polar Feature Observation Model<a class="headerlink" href="#differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-polar-feature-observation-model" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.png"><img alt="MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM Diagram" src="_images/MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.png" style="width: 1179.75px; height: 1398.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.</span></span><span class="sig-name descname"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PolarMapFeature</span></code>, <a class="reference internal" href="#FEKFMBL.FEKFMBL" title="FEKFMBL.FEKFMBL"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code></a>, <a class="reference internal" href="GFLocalization.html#EKF_3DOFDifferentialDriveInputDisplacement.EKF_3DOFDifferentialDriveInputDisplacement" title="EKF_3DOFDifferentialDriveInputDisplacement.EKF_3DOFDifferentialDriveInputDisplacement"><code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveInputDisplacement</span></code></a></p>
+<p>Feature EKF Map based Localization of a 3 DOF Differential Drive Mobile Robot (<span class="math notranslate nohighlight">\(x_k=[^Nx_{B_k} ~^Ny_{B_k} ~^N\psi_{B_k} ~]^T\)</span>) using a 2D Cartesian feature map (<span class="math notranslate nohighlight">\(M=[[^Nx_{F_1} ~^Ny_{F_1}] ~[x_{F_2} ~^Ny_{F_2}] ~... ~[^Nx_{F_n} ~^Ny_{F_n}]]^T\)</span>),
+and an input displacement motion model (<span class="math notranslate nohighlight">\(u_k=[^B\Delta x_k ~^B\Delta y_k ~^B\Delta z_k ~ ^B\Delta \psi_k]^T\)</span>). The class inherits from the following classes:
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code>: 2D Cartesian MapFeature using the Catesian coordinates for both, storage and landmark observations.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code>: Feature EKF Map based Localization class.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveInputDisplacement</span></code>: EKF for 3 DOF Differential Drive Mobile Robot with input displacement motion model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the FEKFMBL class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – Feature Based Map <span class="math notranslate nohighlight">\(M =[^Nx_{F_1}^T~...~^Nx_{F_{n_f}}^T]^T\)</span></p></li>
+<li><p><strong>alpha</strong> – Chi2 tail probability. Confidence interaval of the individual compatibility test</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the EKFLocalization constructor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="differential-drive-ekf-map-based-localization-ekf-using-a-ct-velocity-motion-model-and-2d-cartesian-feature-observation-model">
+<h2>Differential Drive EKF Map Based Localization EKF Using a Ct Velocity Motion Model and 2D Cartesian Feature Observation Model<a class="headerlink" href="#differential-drive-ekf-map-based-localization-ekf-using-a-ct-velocity-motion-model-and-2d-cartesian-feature-observation-model" title="Link to this heading">¶</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.png"><img alt="MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM Diagram" src="_images/MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.png" style="width: 1196.25px; height: 1398.75px;" /></a>
+</figure>
+<dl class="py class">
+<dt class="sig sig-object py" id="MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.</span></span><span class="sig-name descname"><span class="pre">MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#MapFeature.Cartesian2DMapFeature" title="MapFeature.Cartesian2DMapFeature"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code></a>, <a class="reference internal" href="#FEKFMBL.FEKFMBL" title="FEKFMBL.FEKFMBL"><code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code></a>, <a class="reference internal" href="GFLocalization.html#EKF_3DOFDifferentialDriveCtVelocity.EKF_3DOFDifferentialDriveCtVelocity" title="EKF_3DOFDifferentialDriveCtVelocity.EKF_3DOFDifferentialDriveCtVelocity"><code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveCtVelocity</span></code></a></p>
+<p>Feature EKF Map based Localization of a 3 DOF Differential Drive Mobile Robot (<span class="math notranslate nohighlight">\(x_k=[^Nx_{B_k} ~^Ny_{B_k} ~^N\psi_{B_k} ~]^T\)</span>) using a 2D Cartesian feature map (<span class="math notranslate nohighlight">\(M=[[^Nx_{F_1} ~^Ny_{F_1}] ~[x_{F_2} ~^Ny_{F_2}] ~... ~[^Nx_{F_n} ~^Ny_{F_n}]]^T\)</span>),
+and a Constant Velocity Motion model with encoder readings. The class inherits from the following classes:
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code>: 2D Cartesian MapFeature using the Catesian coordinates for both, storage and landmark observations.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">FEKFMBL</span></code>: Feature EKF Map based Localization class.
+* <code class="xref py py-class docutils literal notranslate"><span class="pre">EKF_3DOFDifferentialDriveCtVelocity</span></code>: EKF for 3 DOF Differential Drive Mobile Robot with Constant Velocity Motion Model and encoder readings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Constructor of the FEKFMBL class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – Feature Based Map <span class="math notranslate nohighlight">\(M =[^Nx_{F_1}^T~...~^Nx_{F_{n_f}}^T]^T\)</span></p></li>
+<li><p><strong>alpha</strong> – Chi2 tail probability. Confidence interaval of the individual compatibility test</p></li>
+<li><p><strong>args</strong> – arguments to be passed to the EKFLocalization constructor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Feature Map based EKF Localization</a></li>
+<li><a class="reference internal" href="#map-feature">Map Feature</a><ul>
+<li><a class="reference internal" href="#MapFeature.MapFeature"><code class="docutils literal notranslate"><span class="pre">MapFeature</span></code></a><ul>
+<li><a class="reference internal" href="#MapFeature.MapFeature.__init__"><code class="docutils literal notranslate"><span class="pre">MapFeature.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.GetFeatures"><code class="docutils literal notranslate"><span class="pre">MapFeature.GetFeatures()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.s2o"><code class="docutils literal notranslate"><span class="pre">MapFeature.s2o()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.o2s"><code class="docutils literal notranslate"><span class="pre">MapFeature.o2s()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.J_s2o"><code class="docutils literal notranslate"><span class="pre">MapFeature.J_s2o()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.J_o2s"><code class="docutils literal notranslate"><span class="pre">MapFeature.J_o2s()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.hf"><code class="docutils literal notranslate"><span class="pre">MapFeature.hf()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.Jhfx"><code class="docutils literal notranslate"><span class="pre">MapFeature.Jhfx()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.Jhfv"><code class="docutils literal notranslate"><span class="pre">MapFeature.Jhfv()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.hfj"><code class="docutils literal notranslate"><span class="pre">MapFeature.hfj()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.Jhfjx"><code class="docutils literal notranslate"><span class="pre">MapFeature.Jhfjx()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.g"><code class="docutils literal notranslate"><span class="pre">MapFeature.g()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.Jgx"><code class="docutils literal notranslate"><span class="pre">MapFeature.Jgx()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.MapFeature.Jgv"><code class="docutils literal notranslate"><span class="pre">MapFeature.Jgv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cartesian-map-feature">Cartesian Map Feature</a><ul>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DMapFeature"><code class="docutils literal notranslate"><span class="pre">Cartesian2DMapFeature</span></code></a><ul>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DMapFeature.GetFeatures"><code class="docutils literal notranslate"><span class="pre">Cartesian2DMapFeature.GetFeatures()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cartesian-map-feature-observed-in-polar-coordinates">Cartesian Map Feature Observed in Polar Coordinates</a><ul>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature"><code class="docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature</span></code></a><ul>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.GetFeatures"><code class="docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature.GetFeatures()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.o2s"><code class="docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature.o2s()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.s2o"><code class="docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature.s2o()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.J_o2s"><code class="docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature.J_o2s()</span></code></a></li>
+<li><a class="reference internal" href="#MapFeature.Cartesian2DStoredPolarObservedMapFeature.J_s2o"><code class="docutils literal notranslate"><span class="pre">Cartesian2DStoredPolarObservedMapFeature.J_s2o()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Feature Map based EKF Localization</a><ul>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL"><code class="docutils literal notranslate"><span class="pre">FEKFMBL</span></code></a><ul>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.xB"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.xB</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.x_eta"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.x_eta</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.__init__"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.h"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.h()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.hm"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.hm()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.SquaredMahalanobisDistance"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.SquaredMahalanobisDistance()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.IndividualCompatibility"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.IndividualCompatibility()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.ICNN"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.ICNN()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.DataAssociation"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.DataAssociation()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.Localize"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.Localize()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.StackMeasurementsAndFeatures"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.StackMeasurementsAndFeatures()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.SplitFeatures"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.SplitFeatures()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotFeatureObservationUncertainty"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.PlotFeatureObservationUncertainty()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotExpectedFeaturesObservationsUncertainty"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.PlotExpectedFeaturesObservationsUncertainty()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotSampleObservationSpace"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.PlotSampleObservationSpace()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotSample"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.PlotSample()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotRobotUncertainty"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.PlotRobotUncertainty()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.PlotUncertainty"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.PlotUncertainty()</span></code></a></li>
+<li><a class="reference internal" href="#FEKFMBL.FEKFMBL.GetRobotPoseCovariance"><code class="docutils literal notranslate"><span class="pre">FEKFMBL.GetRobotPoseCovariance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dof-auv">4 DOF AUV</a><ul>
+<li><a class="reference internal" href="#dof-auv-map-based-ekf-localization-using-an-input-velocity-motion-model-with-depht-yaw-and-linear-velocity-measurements-and-a-2d-cartesian-feature-observation-model">4 DOF AUV Map based EKF Localization using an Input Velocity Motion Model with Depht, Yaw and Linear Velocity Measurements, and  a 2D Cartesian Feature Observation Model</a><ul>
+<li><a class="reference internal" href="#MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM"><code class="docutils literal notranslate"><span class="pre">MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM</span></code></a><ul>
+<li><a class="reference internal" href="#MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.__init__"><code class="docutils literal notranslate"><span class="pre">MBL_4DOFAUV_InputVelocityMM_2DCartesianFeatureOM.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dof-differential-drive-mobile-robot">3 DOF Differential Drive Mobile Robot</a><ul>
+<li><a class="reference internal" href="#differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-cartesian-feature-observation-model">Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Cartesian Feature Observation Model</a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM</span></code></a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.__init__"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeatureOM.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-feature-store-in-cartesina-and-observed-in-polar-coordinates">Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Feature Store in Cartesina and Observed in Polar Coordinates</a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM</span></code></a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.__init__"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DCartesianFeaturePolarObservedOM.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#differential-drive-ekf-map-based-localization-ekf-using-an-input-displacement-motion-model-and-2d-polar-feature-observation-model">Differential Drive EKF Map Based Localization EKF Using an Input displacement Motion Model and 2D Polar Feature Observation Model</a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM</span></code></a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.__init__"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDInputDisplacementMM_2DPolarFeatureOM.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#differential-drive-ekf-map-based-localization-ekf-using-a-ct-velocity-motion-model-and-2d-cartesian-feature-observation-model">Differential Drive EKF Map Based Localization EKF Using a Ct Velocity Motion Model and 2D Cartesian Feature Observation Model</a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM</span></code></a><ul>
+<li><a class="reference internal" href="#MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.__init__"><code class="docutils literal notranslate"><span class="pre">MBL_3DOFDDCtVelocityMM_2DCartesianFeatureOM.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="GFLocalization.html"
+                          title="previous chapter">Gaussian Filter Localization</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="FEKFSLAMLocalization.html"
+                          title="next chapter">Feature based EKF Simultaneous Localization And Mapping</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/FEKFMBLocalization.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="FEKFSLAMLocalization.html" title="Feature based EKF Simultaneous Localization And Mapping"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="GFLocalization.html" title="Gaussian Filter Localization"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">prpy: Probabilistic Robot Localization Python Library 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="Localization_index.html" >Localization</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Feature Map based EKF Localization</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Pere Ridao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.3.
+    </div>
+  </body>
+</html>
