@@ -133,8 +133,7 @@ class EKF_3DOFDifferentialDriveInputDisplacement(
             var_right = float(Qk[1][1])
             var_left = float(Qk[0][0])
             var_input_dist = var_matrix @ np.array([[var_right], [var_left]])
-            # Qk = np.diag(var_input_dist.T[0])
-            Qk = pulse_to_displacement_matrix @ Qk @ pulse_to_displacement_matrix.T
+            Qk = np.diag(var_input_dist.T[0])
 
         return uk, Qk
 
