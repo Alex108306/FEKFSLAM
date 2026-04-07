@@ -5,6 +5,9 @@ from GetEllipse import GetEllipse
 import numpy as np
 
 from Pose import Pose3D
+import gtsam
+from gtsam.symbol_shorthand import L, X
+
 class GFLocalization(Localization,GaussianFilter):
     """
     Map-less localization using a Gaussian filter.
@@ -116,9 +119,21 @@ class GFLocalization(Localization,GaussianFilter):
         Pk_1 = P0
         xk_bar = x0
         zk = None
-        zf, Rf = self.GetFeatures()  
-        if len(zf) > 0:
-            xk_1, Pk_1 = self.AddNewFeatures(xk_1,Pk_1, zf, Rf)  # initialize the map with the first observation
+        # zf, Rf = self.GetFeatures()
+
+        # Initialize the graph-SLAM
+        self.isam2 = gtsam.ISAM2()
+        self.graph = gtsam.NonlinearFactorGraph()
+        PriorNoise = gtsam.noiseModel.Diagonal.Sigmas(np.zeros(3))
+        self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(x0[0,0], x0[1,0], x0[2,0]), PriorNoise))
+        self.initial = gtsam.Values()
+        self.initial.insert(0, gtsam.Pose2(x0[0,0], x0[1,0], x0[2,0]))
+
+        self.xk_prev = x0
+        self.Pk_prev = P0
+
+        # if len(zf) > 0:
+        #     xk_1, Pk_1 = self.AddNewFeatures(xk_1,Pk_1, zf, Rf)  # initialize the map with the first observation
 
         xsk_1 = self.robot.xsk_1
         # self.kSteps +=1  # to include the last step in the loop
