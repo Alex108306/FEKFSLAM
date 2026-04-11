@@ -283,6 +283,7 @@ class GraphSLAM(FEKFMBL):
             self.i = 0
             self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]), gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.Pk)))))
             self.initial.insert(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]))
+            self.initialize = False
 
         return self.xk, self.Pk
 

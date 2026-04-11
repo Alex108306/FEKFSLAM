@@ -124,7 +124,7 @@ class GFLocalization(Localization,GaussianFilter):
         # Initialize the graph-SLAM
         self.isam2 = gtsam.ISAM2()
         self.graph = gtsam.NonlinearFactorGraph()
-        PriorNoise = gtsam.noiseModel.Diagonal.Sigmas(np.zeros(3))
+        PriorNoise = gtsam.noiseModel.Diagonal.Sigmas(np.zeros(3) + 1e-5)  # very small noise for the prior factor to fix the gauge freedom
         self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(x0[0,0], x0[1,0], x0[2,0]), PriorNoise))
         self.initial = gtsam.Values()
         self.initial.insert(0, gtsam.Pose2(x0[0,0], x0[1,0], x0[2,0]))
@@ -202,6 +202,11 @@ class GFLocalization(Localization,GaussianFilter):
                 axs[s, 1].set_title('error', fontstyle='italic')
                 e = self.log_xs[self.index[s].simulation, 0:self.kSteps] - self.log_x[s,
                                                                            0:self.kSteps]  # error = simulated - estimated
+                if self.index[s].simulation == 2:
+                    e = np.arctan2(np.sin(e), np.cos(e))  # wrap the angle error to [-pi, pi]
+                if self.index[s].simulation == 1:
+                    if self.log_sigma[s, 0:self.kSteps].max() > 1.0:
+                        print(np.where(self.log_sigma[s, 0:self.kSteps] > 1.0)[0])
                 axs[s, 1].plot(e, ls='-', c='blue')
                 axs[s, 1].plot(+3 * self.log_sigma[s, 0:self.kSteps], ls='-', c='green')
                 axs[s, 1].plot(-3 * self.log_sigma[s, 0:self.kSteps], ls='-', c='green')
