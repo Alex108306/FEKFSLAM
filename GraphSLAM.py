@@ -24,6 +24,7 @@ class GraphSLAM(FEKFMBL):
         # self.xk_1 # state vector mean at time step k-1 inherited from FEKFMBL
         self.i = 0
         self.initialize = False
+        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # covariance of the odometry readings
 
         self.nzm = 0  # number of measurements observed
         self.nzf = 0  # number of features observed
@@ -225,6 +226,8 @@ class GraphSLAM(FEKFMBL):
         F1k = block_diag(*[Jfx, *[np.eye(self.xF_dim)] * number_of_feature_states])
         F2k = np.vstack((Jfw, *[np.zeros((self.xF_dim, number_of_robot_states))] * number_of_feature_states))
         Pk_bar = F1k @ Pk_1 @ F1k.T + F2k @ Qk @ F2k.T
+
+        self.odom_cov = Jfx @ self.odom_cov @ Jfx.T + Jfw @ Qk @ Jfw.T
         
         return xk_bar, Pk_bar
     
@@ -250,7 +253,7 @@ class GraphSLAM(FEKFMBL):
 
         relative_pose = gtsam.Pose2(self.xk_prev[0,0], self.xk_prev[1,0], self.xk_prev[2,0]).between(gtsam.Pose2(xk_bar[0,0], xk_bar[1,0], xk_bar[2,0]))
 
-        OdometryNoise = gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(Qk)))
+        OdometryNoise = gtsam.noiseModel.Gaussian.Covariance(self.odom_cov)
 
         sigma_heading = float(np.sqrt(Rk[0, 0]))
 
@@ -284,6 +287,8 @@ class GraphSLAM(FEKFMBL):
             self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]), gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.Pk)))))
             self.initial.insert(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]))
             self.initialize = False
+        
+        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # reset the odometry covariance after each update
 
         return self.xk, self.Pk
 
