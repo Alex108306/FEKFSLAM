@@ -30,7 +30,11 @@ class GraphSLAM(FEKFMBL):
         self.nzf = 0  # number of features observed
 
         self.H = None  # Data Association Hypothesis
-        self.nf = 0  # number of features in the state vector
+        # self.nf = 0  # number of features in the state vector
+        self.nf = len(self.robot.M)  # number of features
+
+        self.compass_update = False  # whether the compass measurement
+        self.feature_update = False  # whether the feature measurement is used for the update step
 
         self.plt_MappedFeaturesEllipses = []
 
@@ -231,7 +235,7 @@ class GraphSLAM(FEKFMBL):
         
         return xk_bar, Pk_bar
     
-    def Update(self, zk, Rk, xk_bar, Qk):
+    def Update(self, zk, Rk, xk_bar):
         """
         Update step of the graph-SLAM. It calls the observation model and its Jacobians to update the state vector and its covariance matrix.
 
@@ -259,9 +263,28 @@ class GraphSLAM(FEKFMBL):
 
         self.graph.add(gtsam.BetweenFactorPose2(self.i-1, self.i, relative_pose, OdometryNoise))
 
-        self.graph.add(gtsam.PoseRotationPrior2D(self.i, gtsam.Rot2(zk[0,0]), gtsam.noiseModel.Isotropic.Sigma(1, sigma_heading)))
+        if self.compass_update == True:
+            self.graph.add(gtsam.PoseRotationPrior2D(self.i, gtsam.Rot2(zk[0,0]), gtsam.noiseModel.Isotropic.Sigma(1, sigma_heading)))
 
         self.initial.insert(self.i, gtsam.Pose2(xk_bar[0,0], xk_bar[1,0], xk_bar[2,0]))
+
+        k = 0
+        if self.feature_update == True:
+            for j in range(len(self.H)):
+                if self.H[j] != None:
+                    feature_key = gtsam.symbol('L', self.H[j])
+                    if self.compass_update == True:
+                        _range = np.linalg.norm(zk[1+self.zfi_dim*k:1+self.zfi_dim*k+2, 0])
+                        J_r = np.array([[zk[1+self.zfi_dim*k, 0]/ _range, zk[1+self.zfi_dim*k+1, 0]/ _range]])
+                        range_noise = J_r @ Rk[1+self.zfi_dim*k:1+self.zfi_dim*k+2, 1+self.zfi_dim*k:1+self.zfi_dim*k+2] @ J_r.T
+                        range_noise = gtsam.noiseModel.Isotropic.Sigma(1, np.sqrt(range_noise[0,0]))
+                    else:
+                        _range = np.linalg.norm(zk[self.zfi_dim*k:self.zfi_dim*k+2, 0])
+                        J_r = np.array([[zk[self.zfi_dim*k, 0]/ _range, zk[self.zfi_dim*k+1, 0]/ _range]])
+                        range_noise = J_r @ Rk[self.zfi_dim*k:self.zfi_dim*k+2, self.zfi_dim*k:self.zfi_dim*k+2] @ J_r.T
+                        range_noise = gtsam.noiseModel.Isotropic.Sigma(1, np.sqrt(range_noise[0,0]))
+                    k += 1
+                    self.graph.add(gtsam.RangeFactor2D(self.i, feature_key, _range, range_noise))
 
         if self.initialize == False:
                 optimizer = gtsam.LevenbergMarquardtOptimizer(self.graph, self.initial)
@@ -277,7 +300,9 @@ class GraphSLAM(FEKFMBL):
 
         self.initial.clear()
 
-        self.xk_prev = self.xk
+        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # reset the odometry covariance after each update
+        self.compass_update = False
+        self.feature_update = False
 
         if self.i == 50:
             self.graph = gtsam.NonlinearFactorGraph()
@@ -286,9 +311,20 @@ class GraphSLAM(FEKFMBL):
             self.i = 0
             self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]), gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.Pk)))))
             self.initial.insert(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]))
-            self.initialize = False
+
+            for i in range(len(self.robot.M)):
+                landmark_key = gtsam.symbol('L', i)
+                noise_model = gtsam.noiseModel.Gaussian.Covariance(self.robot.Rxy)
+                self.initial.insert(landmark_key, gtsam.Point2(self.robot.M[i][0,0], self.robot.M[i][1,0]))
+                self.graph.add(gtsam.PriorFactorPoint2(landmark_key, gtsam.Point2(self.robot.M[i][0,0], self.robot.M[i][1,0]), noise_model))
+
+            self.initialize = False    
+
+        for i in range(len(self.robot.M)):
+            self.xk = np.vstack((self.xk, self.robot.M[i]))
+            self.Pk = block_diag(self.Pk, self.robot.Rxy)
         
-        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # reset the odometry covariance after each update
+        self.xk_prev = self.xk.copy()
 
         return self.xk, self.Pk
 
@@ -305,7 +341,7 @@ class GraphSLAM(FEKFMBL):
         """
 
         ## To be completed by the student
-        self.nf = int((len(xk_1) - self.xB_dim)/self.zfi_dim)
+        # self.nf = int((len(xk_1) - self.xB_dim)/self.zfi_dim)
 
         uk, Qk = self.GetInput()
         xk_bar, Pk_bar = self.Prediction(uk, Qk, xk_1, Pk_1)
@@ -315,13 +351,19 @@ class GraphSLAM(FEKFMBL):
             Rm = []
             Hm = []
             Vm = []
-        self.zm= zm
+        self.zm=zm
         if len(Hm) != 0:
             Hm_temp = np.zeros((1, self.xB_dim + self.nf*self.zfi_dim))
             Hm_temp[0, 0:self.xB_dim] = Hm
             Hm = Hm_temp
 
+        if len(zm) != 0:
+            self.compass_update = True
+
         zf, Rf = self.GetFeatures()
+        if len(zf) != 0:
+            self.feature_update = True
+
         self.H = self.DataAssociation(xk_bar, Pk_bar, zf, Rf)
         zk, Rk, Hk, Vk, znp, Rnp = self.StackMeasurementsAndFeatures(xk_bar,zm, Rm, Hm, Vm, zf, Rf, self.H)
 
@@ -329,10 +371,10 @@ class GraphSLAM(FEKFMBL):
             xk = xk_bar
             Pk = Pk_bar
         else:
-            xk, Pk = self.Update(zk, Rk, xk_bar, Qk)
+            xk, Pk = self.Update(zk, Rk, xk_bar)
         
-        if len(znp) > 0:
-            xk, Pk = self.AddNewFeatures(xk, Pk, znp, Rnp)
+        # if len(znp) > 0:
+        #     xk, Pk = self.AddNewFeatures(xk, Pk, znp, Rnp)
         
         self.xk = xk
         self.Pk = Pk
