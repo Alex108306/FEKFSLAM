@@ -77,7 +77,7 @@ class DifferentialDriveSimulatedRobot(SimulatedRobot):
         self.Rxy = np.diag(np.array([0.5 ** 2, 1 ** 2])) # Covariance of XY feature readings
 
         self.yaw_reading_frequency = 10  # frequency of Yaw readings
-        self.v_yaw_std = np.deg2rad(2)  # std deviation of simulated heading noise
+        self.v_yaw_std = np.deg2rad(5)  # std deviation of simulated heading noise
 
     def fs(self, xsk_1, usk):  # input velocity motion model with velocity noise
         """ Motion model used to simulate the robot motion. Computes the current robot state :math:`x_k` given the previous robot state :math:`x_{k-1}` and the input :math:`u_k`:

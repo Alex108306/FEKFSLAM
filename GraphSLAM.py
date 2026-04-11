@@ -24,6 +24,7 @@ class GraphSLAM(FEKFMBL):
         # self.xk_1 # state vector mean at time step k-1 inherited from FEKFMBL
         self.i = 0
         self.initialize = False
+        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # covariance of the odometry measurements (used as between factors in the graph)
 
         self.nzm = 0  # number of measurements observed
         self.nzf = 0  # number of features observed
@@ -225,10 +226,12 @@ class GraphSLAM(FEKFMBL):
         F1k = block_diag(*[Jfx, *[np.eye(self.xF_dim)] * number_of_feature_states])
         F2k = np.vstack((Jfw, *[np.zeros((self.xF_dim, number_of_robot_states))] * number_of_feature_states))
         Pk_bar = F1k @ Pk_1 @ F1k.T + F2k @ Qk @ F2k.T
+
+        self.odom_cov = Jfx @ self.odom_cov @ Jfx.T + Jfw @ Qk @ Jfw.T
         
         return xk_bar, Pk_bar
     
-    def Update(self, zk, Rk, xk_bar, Qk):
+    def Update(self, zk, Rk, xk_bar, Pk_bar, Qk):
         """
         Update step of the graph-SLAM. It calls the observation model and its Jacobians to update the state vector and its covariance matrix.
 
@@ -250,7 +253,7 @@ class GraphSLAM(FEKFMBL):
 
         relative_pose = gtsam.Pose2(self.xk_prev[0,0], self.xk_prev[1,0], self.xk_prev[2,0]).between(gtsam.Pose2(xk_bar[0,0], xk_bar[1,0], xk_bar[2,0]))
 
-        OdometryNoise = gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(Qk)))
+        OdometryNoise = gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.odom_cov)))  # use the predicted covariance of the robot pose as odometry noise
 
         sigma_heading = float(np.sqrt(Rk[0, 0]))
 
@@ -275,6 +278,7 @@ class GraphSLAM(FEKFMBL):
         self.initial.clear()
 
         self.xk_prev = self.xk
+        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # reset the odometry covariance after each update
 
         if self.i == 50:
             self.graph = gtsam.NonlinearFactorGraph()
@@ -324,7 +328,7 @@ class GraphSLAM(FEKFMBL):
             xk = xk_bar
             Pk = Pk_bar
         else:
-            xk, Pk = self.Update(zk, Rk, xk_bar, Qk)
+            xk, Pk = self.Update(zk, Rk, xk_bar, Pk_bar, Qk)
         
         if len(znp) > 0:
             xk, Pk = self.AddNewFeatures(xk, Pk, znp, Rnp)

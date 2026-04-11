@@ -124,7 +124,7 @@ class GFLocalization(Localization,GaussianFilter):
         # Initialize the graph-SLAM
         self.isam2 = gtsam.ISAM2()
         self.graph = gtsam.NonlinearFactorGraph()
-        PriorNoise = gtsam.noiseModel.Diagonal.Sigmas(np.zeros(3) + 1e-5)  # very small noise for the prior factor to fix the gauge freedom
+        PriorNoise = gtsam.noiseModel.Diagonal.Sigmas(np.zeros(3) + 1e-6)  # very small noise for the prior factor to fix the gauge freedom
         self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(x0[0,0], x0[1,0], x0[2,0]), PriorNoise))
         self.initial = gtsam.Values()
         self.initial.insert(0, gtsam.Pose2(x0[0,0], x0[1,0], x0[2,0]))
