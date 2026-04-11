@@ -253,7 +253,7 @@ class GraphSLAM(FEKFMBL):
 
         relative_pose = gtsam.Pose2(self.xk_prev[0,0], self.xk_prev[1,0], self.xk_prev[2,0]).between(gtsam.Pose2(xk_bar[0,0], xk_bar[1,0], xk_bar[2,0]))
 
-        OdometryNoise = gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.odom_cov)))  # use the predicted covariance of the robot pose as odometry noise
+        OdometryNoise = gtsam.noiseModel.Gaussian.Covariance(self.odom_cov)
 
         sigma_heading = float(np.sqrt(Rk[0, 0]))
 
