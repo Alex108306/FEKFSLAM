@@ -132,14 +132,6 @@ class GFLocalization(Localization,GaussianFilter):
 
         self.xk_prev = x0
         self.Pk_prev = P0
-        # Initialize the robot state with all features add it into the graph as a prior factor
-        for i in range(len(self.robot.M)):
-            landmark_key = gtsam.symbol('L', i)
-            xk_1 = np.vstack((xk_1, self.robot.M[i]))
-            Pk_1 = block_diag(Pk_1, self.robot.Rxy)
-            noise_model = gtsam.noiseModel.Gaussian.Covariance(self.robot.Rxy)
-            self.initial.insert(landmark_key, gtsam.Point2(self.robot.M[i][0,0], self.robot.M[i][1,0]))
-            self.graph.add(gtsam.PriorFactorPoint2(landmark_key, gtsam.Point2(self.robot.M[i][0,0], self.robot.M[i][1,0]), noise_model))
 
         # if len(zf) > 0:
         #     xk_1, Pk_1 = self.AddNewFeatures(xk_1,Pk_1, zf, Rf)  # initialize the map with the first observation
