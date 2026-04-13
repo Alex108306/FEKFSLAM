@@ -24,7 +24,8 @@ class GraphSLAM(FEKFMBL):
         # self.xk_1 # state vector mean at time step k-1 inherited from FEKFMBL
         self.i = 0
         self.initialize = False
-        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # covariance of the odometry measurements (used as between factors in the graph)
+        self.rel_disp = np.zeros((self.xB_dim, 1))  # relative displacement between two consecutive poses
+        self.rel_cov = np.zeros((self.xB_dim, self.xB_dim))  # covariance of the relative displacement
 
         self.nzm = 0  # number of measurements observed
         self.nzf = 0  # number of features observed
@@ -227,7 +228,11 @@ class GraphSLAM(FEKFMBL):
         F2k = np.vstack((Jfw, *[np.zeros((self.xF_dim, number_of_robot_states))] * number_of_feature_states))
         Pk_bar = F1k @ Pk_1 @ F1k.T + F2k @ Qk @ F2k.T
 
-        self.odom_cov = Jfx @ self.odom_cov @ Jfx.T + Jfw @ Qk @ Jfw.T
+        rel_pose = Pose3D(self.rel_disp)
+        self.rel_disp = rel_pose.oplus(uk)
+        J1_rel = rel_pose.J_1oplus(uk)
+        J2_rel = rel_pose.J_2oplus()
+        self.rel_cov = J1_rel @ self.rel_cov @ J1_rel.T + J2_rel @ Qk @ J2_rel.T
         
         return xk_bar, Pk_bar
     
@@ -251,9 +256,9 @@ class GraphSLAM(FEKFMBL):
         # KF equations begin here
         self.i += 1
 
-        relative_pose = gtsam.Pose2(self.xk_prev[0,0], self.xk_prev[1,0], self.xk_prev[2,0]).between(gtsam.Pose2(xk_bar[0,0], xk_bar[1,0], xk_bar[2,0]))
+        relative_pose = gtsam.Pose2(self.rel_disp[0,0], self.rel_disp[1,0], self.rel_disp[2,0])
 
-        OdometryNoise = gtsam.noiseModel.Gaussian.Covariance(self.odom_cov)
+        OdometryNoise = gtsam.noiseModel.Gaussian.Covariance(self.rel_cov + np.eye(self.xB_dim)*1e-6)  # add a small noise to avoid singularity
 
         sigma_heading = float(np.sqrt(Rk[0, 0]))
 
@@ -269,25 +274,27 @@ class GraphSLAM(FEKFMBL):
                 self.initialize = True
 
         self.isam2.update(self.graph, self.initial)
+
+        # Clear the graph and initial values for the next iteration
+        self.graph = gtsam.NonlinearFactorGraph()
+        self.initial = gtsam.Values()
+
+        # Get the full graph to get the covariance of the robot pose.
+        full_graph = self.isam2.getFactorsUnsafe()
+
         results = self.isam2.calculateEstimate()
         pose = results.atPose2(self.i)
         self.xk = np.array([[pose.x()], [pose.y()], [WrapAngle(pose.theta())]])
-        marginals = gtsam.Marginals(self.graph, results)
-        self.Pk = marginals.marginalCovariance(self.i)
+        marginals = gtsam.Marginals(full_graph, results)
 
-        self.initial.clear()
+        all_keys = gtsam.KeyVector()
+        all_keys.append(self.i)
 
-        self.xk_prev = self.xk
-        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # reset the odometry covariance after each update
+        self.Pk = marginals.jointMarginalCovariance(all_keys).fullMatrix()
 
-        if self.i == 50:
-            self.graph = gtsam.NonlinearFactorGraph()
-            self.isam2 = gtsam.ISAM2()
-            self.initial = gtsam.Values()
-            self.i = 0
-            self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]), gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.Pk)))))
-            self.initial.insert(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]))
-            self.initialize = False
+        self.rel_disp = np.zeros((self.xB_dim, 1))
+        self.rel_cov = np.zeros((self.xB_dim, self.xB_dim))
+        self.xk_prev = self.xk.copy()
 
         return self.xk, self.Pk
 
