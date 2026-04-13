@@ -24,7 +24,8 @@ class GraphSLAM(FEKFMBL):
         # self.xk_1 # state vector mean at time step k-1 inherited from FEKFMBL
         self.i = 0
         self.initialize = False
-        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # covariance of the odometry readings
+        self.rel_disp = np.zeros((self.xB_dim, 1))  # relative displacement between two consecutive poses
+        self.rel_cov = np.zeros((self.xB_dim, self.xB_dim))  # covariance of the relative displacement
 
         self.nzm = 0  # number of measurements observed
         self.nzf = 0  # number of features observed
@@ -231,7 +232,11 @@ class GraphSLAM(FEKFMBL):
         F2k = np.vstack((Jfw, *[np.zeros((self.xF_dim, number_of_robot_states))] * number_of_feature_states))
         Pk_bar = F1k @ Pk_1 @ F1k.T + F2k @ Qk @ F2k.T
 
-        self.odom_cov = Jfx @ self.odom_cov @ Jfx.T + Jfw @ Qk @ Jfw.T
+        rel_pose = Pose3D(self.rel_disp)
+        self.rel_disp = rel_pose.oplus(uk)
+        J1_rel = rel_pose.J_1oplus(uk)
+        J2_rel = rel_pose.J_2oplus()
+        self.rel_cov = J1_rel @ self.rel_cov @ J1_rel.T + J2_rel @ Qk @ J2_rel.T
         
         return xk_bar, Pk_bar
     
@@ -255,9 +260,9 @@ class GraphSLAM(FEKFMBL):
         # KF equations begin here
         self.i += 1
 
-        relative_pose = gtsam.Pose2(self.xk_prev[0,0], self.xk_prev[1,0], self.xk_prev[2,0]).between(gtsam.Pose2(xk_bar[0,0], xk_bar[1,0], xk_bar[2,0]))
+        relative_pose = gtsam.Pose2(self.rel_disp[0,0], self.rel_disp[1,0], self.rel_disp[2,0])
 
-        OdometryNoise = gtsam.noiseModel.Gaussian.Covariance(self.odom_cov)
+        OdometryNoise = gtsam.noiseModel.Gaussian.Covariance(self.rel_cov + np.eye(self.xB_dim)*1e-6)  # add a small noise to avoid singularity
 
         sigma_heading = float(np.sqrt(Rk[0, 0]))
 
@@ -273,18 +278,26 @@ class GraphSLAM(FEKFMBL):
             for j in range(len(self.H)):
                 if self.H[j] != None:
                     feature_key = gtsam.symbol('L', self.H[j])
+                    self.nzf += 1
+                    self.nzf = np.minimum(self.nzf, self.nf)
                     if self.compass_update == True:
+                        angle = WrapAngle(np.arctan2(zk[1+self.zfi_dim*k+1, 0], zk[1+self.zfi_dim*k, 0]))
                         _range = np.linalg.norm(zk[1+self.zfi_dim*k:1+self.zfi_dim*k+2, 0])
                         J_r = np.array([[zk[1+self.zfi_dim*k, 0]/ _range, zk[1+self.zfi_dim*k+1, 0]/ _range]])
-                        range_noise = J_r @ Rk[1+self.zfi_dim*k:1+self.zfi_dim*k+2, 1+self.zfi_dim*k:1+self.zfi_dim*k+2] @ J_r.T
-                        range_noise = gtsam.noiseModel.Isotropic.Sigma(1, np.sqrt(range_noise[0,0]))
+                        J_g = np.array([[-zk[1+self.zfi_dim*k+1, 0] / (_range**2), zk[1+self.zfi_dim*k, 0] / (_range**2)]])
+                        J_full = np.vstack((J_g, J_r))
+                        R_cart = Rk[1+self.zfi_dim*k:1+self.zfi_dim*k+2, 1+self.zfi_dim*k:1+self.zfi_dim*k+2]
+                        model_noise = gtsam.noiseModel.Gaussian.Covariance(J_full @ R_cart @ J_full.T + np.eye(2) * 1e-6)
                     else:
+                        angle = WrapAngle(np.arctan2(zk[self.zfi_dim*k+1, 0], zk[self.zfi_dim*k, 0]))
                         _range = np.linalg.norm(zk[self.zfi_dim*k:self.zfi_dim*k+2, 0])
                         J_r = np.array([[zk[self.zfi_dim*k, 0]/ _range, zk[self.zfi_dim*k+1, 0]/ _range]])
-                        range_noise = J_r @ Rk[self.zfi_dim*k:self.zfi_dim*k+2, self.zfi_dim*k:self.zfi_dim*k+2] @ J_r.T
-                        range_noise = gtsam.noiseModel.Isotropic.Sigma(1, np.sqrt(range_noise[0,0]))
+                        J_g = np.array([[-zk[self.zfi_dim*k+1, 0] / (_range**2), zk[self.zfi_dim*k, 0] / (_range**2)]])
+                        J_full = np.vstack((J_g, J_r))
+                        R_cart = Rk[self.zfi_dim*k:self.zfi_dim*k+2, self.zfi_dim*k:self.zfi_dim*k+2]
+                        model_noise = gtsam.noiseModel.Gaussian.Covariance(J_full @ R_cart @ J_full.T + np.eye(2) * 1e-6)
                     k += 1
-                    self.graph.add(gtsam.RangeFactor2D(self.i, feature_key, _range, range_noise))
+                    self.graph.add(gtsam.BearingRangeFactor2D(self.i, feature_key, gtsam.Rot2(angle), _range, model_noise))
 
         if self.initialize == False:
                 optimizer = gtsam.LevenbergMarquardtOptimizer(self.graph, self.initial)
@@ -292,37 +305,34 @@ class GraphSLAM(FEKFMBL):
                 self.initialize = True
 
         self.isam2.update(self.graph, self.initial)
+
+        self.graph = gtsam.NonlinearFactorGraph()
+        self.initial = gtsam.Values()
+
         results = self.isam2.calculateEstimate()
         pose = results.atPose2(self.i)
-        self.xk = np.array([[pose.x()], [pose.y()], [WrapAngle(pose.theta())]])
-        marginals = gtsam.Marginals(self.graph, results)
-        self.Pk = marginals.marginalCovariance(self.i)
+        self.xk[0, 0] = pose.x()
+        self.xk[1, 0] = pose.y()
+        self.xk[2, 0] = WrapAngle(pose.theta())
 
-        self.initial.clear()
+        full_graph = self.isam2.getFactorsUnsafe()
+        marginals = gtsam.Marginals(full_graph, results)
 
-        self.odom_cov = np.zeros((self.xB_dim, self.xB_dim))  # reset the odometry covariance after each update
+        all_keys = gtsam.KeyVector()
+        all_keys.append(self.i)
+
+        # for i in range(self.nzf):
+        #     all_keys.append(gtsam.symbol('L', i))
+        
+        joint_cov = marginals.jointMarginalCovariance(all_keys).fullMatrix()
+
+        state_dim = self.xB_dim #+ self.nzf * self.xF_dim
+        self.Pk[0:state_dim, 0:state_dim] = joint_cov
+
+        self.rel_disp = np.zeros((self.xB_dim, 1))
+        self.rel_cov = np.zeros((self.xB_dim, self.xB_dim))
         self.compass_update = False
         self.feature_update = False
-
-        if self.i == 50:
-            self.graph = gtsam.NonlinearFactorGraph()
-            self.isam2 = gtsam.ISAM2()
-            self.initial = gtsam.Values()
-            self.i = 0
-            self.graph.add(gtsam.PriorFactorPose2(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]), gtsam.noiseModel.Diagonal.Sigmas(np.sqrt(np.diag(self.Pk)))))
-            self.initial.insert(0, gtsam.Pose2(self.xk[0,0], self.xk[1,0], self.xk[2,0]))
-
-            for i in range(len(self.robot.M)):
-                landmark_key = gtsam.symbol('L', i)
-                noise_model = gtsam.noiseModel.Gaussian.Covariance(self.robot.Rxy)
-                self.initial.insert(landmark_key, gtsam.Point2(self.robot.M[i][0,0], self.robot.M[i][1,0]))
-                self.graph.add(gtsam.PriorFactorPoint2(landmark_key, gtsam.Point2(self.robot.M[i][0,0], self.robot.M[i][1,0]), noise_model))
-
-            self.initialize = False    
-
-        for i in range(len(self.robot.M)):
-            self.xk = np.vstack((self.xk, self.robot.M[i]))
-            self.Pk = block_diag(self.Pk, self.robot.Rxy)
         
         self.xk_prev = self.xk.copy()
 
@@ -372,9 +382,6 @@ class GraphSLAM(FEKFMBL):
             Pk = Pk_bar
         else:
             xk, Pk = self.Update(zk, Rk, xk_bar)
-        
-        # if len(znp) > 0:
-        #     xk, Pk = self.AddNewFeatures(xk, Pk, znp, Rnp)
         
         self.xk = xk
         self.Pk = Pk

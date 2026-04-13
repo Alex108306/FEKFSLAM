@@ -76,7 +76,7 @@ class DifferentialDriveSimulatedRobot(SimulatedRobot):
         self.xy_max_range = 50  # maximum XY range, used to simulate the field of view
         self.Rxy = np.diag(np.array([0.5 ** 2, 1 ** 2])) # Covariance of XY feature readings
 
-        self.yaw_reading_frequency = 10  # frequency of Yaw readings
+        self.yaw_reading_frequency = 100000000000  # frequency of Yaw readings
         self.v_yaw_std = np.deg2rad(5)  # std deviation of simulated heading noise
 
     def fs(self, xsk_1, usk):  # input velocity motion model with velocity noise
